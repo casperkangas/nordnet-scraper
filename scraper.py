@@ -221,3 +221,7 @@ styled_df = final_df.style.background_gradient(
 styled_df.to_excel(output_filename, index=False, engine='openpyxl')
 
 print(f"Success! The database has been updated and formatted in {output_filename}.")
+
+# --- NEW: AUTO-OPEN EXCEL ON MAC ---
+print("Opening the dashboard...")
+os.system(f"open '{output_filename}'")
