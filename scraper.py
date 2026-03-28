@@ -4,6 +4,7 @@ import time  # New import to control the speed of our script
 import pandas as pd
 from datetime import date
 import os
+import numpy as np
 
 # 1. Create the Master List to hold all stocks
 all_stocks_data = []
@@ -77,13 +78,13 @@ for line in lines:
         # 7. Add this completed stock dictionary to the Master List
         all_stocks_data.append(stock_data)
         
-        # Be polite to the server: wait 3 seconds before requesting the next URL
-        time.sleep(3)
+        # Be polite to the server: wait 1 seconds before requesting the next URL
+        time.sleep(1)
         
     else:
         print(f"Failed to retrieve {ticker}. Status code: {response.status_code}")
 
-# 8. Print the final Master List to verify
+# DEBUG. Print the final Master List to verify
 # print("\n--- All Scraping Complete ---")
 # for data in all_stocks_data:
 #     print(data)
@@ -97,24 +98,103 @@ df = pd.DataFrame(all_stocks_data)
 
 output_filename = "Stock_Analysis_Master.xlsx"
 
+# --- NEW: INTEGRATE MANUAL ANALYST RATINGS ---
+manual_file = "Manual_Analyst_Ratings.xlsx"
+
+# Check if your manual file exists in the folder
+if os.path.exists(manual_file):
+    print(f"Found {manual_file}. Merging analyst scores...")
+    
+    # Read your manual Excel file into a pandas table
+    manual_df = pd.read_excel(manual_file)
+    
+    # Merge the manual data into the scraped data
+    df = pd.merge(df, manual_df, on="Ticker", how="left")
+    
+    # --- NEW: CALCULATE NORMALIZED ANALYST SCORE ---
+    print("Calculating normalized analyst scores...")
+    
+    # 1. Calculate the Total Analysts
+    df["Total Analysts"] = df["Buy"] + df["Hold"] + df["Sell"]
+    
+    # 2. Calculate the raw total points using the 1-to-5 scale
+    df["Total Points"] = (df["Buy"] * 5) + (df["Hold"] * 3) + (df["Sell"] * 1)
+    
+    # 3. Calculate the Final Score, safely handling division by zero
+    df["Analyst Rating"] = np.where(
+        df["Total Analysts"] > 0, 
+        df["Total Points"] / df["Total Analysts"], 
+        None
+    )
+    
+    # 4. Delete the temporary "Total Points" column to keep the Excel file clean
+    df = df.drop(columns=["Total Points"])
+    
+else:
+    print(f"Notice: {manual_file} not found. Skipping analyst scores.")
+    
+# --- NEW: CALCULATE PERCENTILE SCORES ---
+print("Calculating quantitative percentile scores...")
+
+# 1. Force all scraped metrics to be recognized as math numbers
+# (errors='coerce' turns any accidental text like "Ei käytettävissä" safely into NaN)
+for col in metrics_to_keep:
+    if col in df.columns:
+        df[col] = pd.to_numeric(df[col], errors='coerce')
+
+# 2. Metrics where HIGHER is better (Ascending = True)
+higher_is_better = ["EPS", "Osinkotuotto", "Liikevaihto", "EBIT", "Omistajia Nordnetissä*", "Analyst Rating"]
+
+for metric in higher_is_better:
+    if metric in df.columns:
+        # Ranks from 0.0 (Worst/Lowest) to 1.0 (Best/Highest)
+        df[f"{metric} Score"] = df[metric].rank(ascending=True, pct=True)
+
+# 3. Metrics where LOWER is better (Ascending = False)
+lower_is_better = ["P/E", "P/B", "PEG", "P/S"]
+
+for metric in lower_is_better:
+    if metric in df.columns:
+        # Ranks from 0.0 (Worst/Highest) to 1.0 (Best/Lowest)
+        df[f"{metric} Score"] = df[metric].rank(ascending=False, pct=True)
+
+# 4. Calculate the Final Master Score
+# Gather all the newly created columns that end with the word " Score"
+score_columns = [col for col in df.columns if col.endswith(" Score")]
+
+# Calculate the average of all available percentile scores for each stock
+# Multiplying by 100 turns the 0.0-1.0 scale into an easy-to-read 0-100 scale
+df["Total Value Score"] = df[score_columns].mean(axis=1) * 100
+
+# Optional: Round the final score to 2 decimal places for a clean Excel file
+df["Total Value Score"] = df["Total Value Score"].round(2)
+
 # 6. Check if the master file already exists from a previous run
 if os.path.exists(output_filename):
     print(f"Found existing {output_filename}. Appending new data...")
-    
-    # Read the historical data
     historical_df = pd.read_excel(output_filename)
     
-    # Glue the new data to the bottom of the historical data
-    # (ignore_index=True keeps the row numbers sequential)
-    combined_df = pd.concat([historical_df, df], ignore_index=True)
-    
-    # Overwrite the file with the combined dataset
-    combined_df.to_excel(output_filename, index=False)
-    
+    # Glue and drop duplicates
+    final_df = pd.concat([historical_df, df], ignore_index=True)
+    final_df = final_df.drop_duplicates(subset=['Date', 'Ticker'], keep='last')
 else:
     print(f"No existing file found. Creating a fresh {output_filename}...")
-    
-    # Save just the new data since there is no history yet
-    df.to_excel(output_filename, index=False)
+    final_df = df
 
-print("Success! The database has been updated.")
+# --- NEW: EXCEL FORMATTING AND EXPORT ---
+print("Applying color codes and saving...")
+
+# 7. Apply the visual styling
+# 'RdYlGn' stands for Red-Yellow-Green. 
+# vmin and vmax lock the colors strictly to our 0-to-100 scale.
+styled_df = final_df.style.background_gradient(
+    cmap='RdYlGn', 
+    subset=['Total Value Score'],
+    vmin=0, 
+    vmax=100
+)
+
+# 8. Save the styled table directly to Excel
+styled_df.to_excel(output_filename, index=False, engine='openpyxl')
+
+print(f"Success! The database has been updated and formatted in {output_filename}.")
