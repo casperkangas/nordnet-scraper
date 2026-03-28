@@ -1,4 +1,2 @@
-NDA FI,https://www.nordnet.fi/osakkeet/kurssit/nordea-bank-nda-fi-xhel?details
 KEMPOWR,https://www.nordnet.fi/osakkeet/kurssit/kempower-kempowr-xhel?details
-NOKIA,https://www.nordnet.fi/osakkeet/kurssit/nokia-xhel?details
 POSTI,https://www.nordnet.fi/osakkeet/kurssit/posti-group-posti-xhel?details

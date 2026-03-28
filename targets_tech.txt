@@ -1,0 +1,2 @@
+NOKIA,https://www.nordnet.fi/osakkeet/kurssit/nokia-xhel?details
+QTCOM,https://www.nordnet.fi/osakkeet/kurssit/qt-group-qtcom-xhel?details

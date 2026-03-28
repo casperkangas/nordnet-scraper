@@ -1,0 +1,4 @@
+NDA FI,https://www.nordnet.fi/osakkeet/kurssit/nordea-bank-nda-fi-xhel?details
+AKTIA,https://www.nordnet.fi/osakkeet/kurssit/aktia-pankki-aktia-xhel?details
+OMASP,https://www.nordnet.fi/osakkeet/kurssit/oma-saastopankki-omasp-xhel?details
+MANTA,https://www.nordnet.fi/osakkeet/kurssit/mandatum-manta-xhel?details

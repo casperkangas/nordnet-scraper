@@ -5,6 +5,7 @@ import pandas as pd
 from datetime import date
 import os
 import numpy as np
+import glob
 
 # 1. Create the Master List to hold all stocks
 all_stocks_data = []
@@ -20,74 +21,92 @@ headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 }
 
-# 3. Open and read the targets.txt file
-with open("targets.txt", "r", encoding="utf-8") as file:
-    # This reads the whole file and stores each line as an item in a list
-    lines = file.readlines()
+# 3. Use glob to find all text files that start with "targets_"
+target_files = glob.glob("targets_*.txt")
 
-# 4. The Master Loop: Go through each line in the text file
-for line in lines:
-    # Clean up the line (remove hidden newline characters)
-    clean_line = line.strip()
+# --- DEBUGGING LINES ---
+print(f"DEBUG: Found these files: {target_files}")
+# -----------------------
+
+if not target_files:
+    print("No target files found! Make sure they are named like 'targets_finance.txt'")
+
+# 4. The Outer Loop: Go through every text file found
+for file_path in target_files:
     
-    # If the line is empty (e.g., an accidental blank line at the end of the file), skip it
-    if not clean_line:
-        continue 
+    # Extract the industry name from the filename
+    # Example: "targets_finance.txt" becomes "Finance"
+    filename = os.path.basename(file_path)
+    industry_name = filename.replace("targets_", "").replace(".txt", "").capitalize()
+    
+    print(f"\n--- Processing Industry: {industry_name} ---")
+    
+    with open(file_path, "r", encoding="utf-8") as file:
+        lines = file.readlines()
         
-    # Split the line at the comma to separate the Ticker from the URL
-    parts = clean_line.split(",")
-    ticker = parts[0].strip()
-    url = parts[1].strip()
-    
-    print(f"Scraping data for: {ticker}...")
-    
-    # 5. Fetch the web page for this specific stock
-    response = requests.get(url, headers=headers)
-    
-    if response.status_code == 200:
-        soup = BeautifulSoup(response.text, 'html.parser')
-        buttons = soup.find_all('button')
+        # --- DEBUGGING LINE ---
+        print(f"DEBUG: Found {len(lines)} lines inside {filename}")
+        # ----------------------
+
+    # 4. The Master Loop: Go through each line in the text file
+    for line in lines:
+        # Clean up the line (remove hidden newline characters)
+        clean_line = line.strip()
         
-        # Create a fresh dictionary for THIS specific stock
-        stock_data = {}
-        stock_data["Ticker"] = ticker
-        stock_data["Date"] = str(date.today())
-        
-        # 6. The Inner Loop: Extract the metrics
-        for button in buttons:
-            aria_label = button.get('aria-label')
+        # If the line is empty (e.g., an accidental blank line at the end of the file), skip it
+        if not clean_line:
+            continue 
             
-            if aria_label and ":" in aria_label:
-                label_parts = aria_label.split(":")
-                metric_name = label_parts[0].strip()
+        # Split the line at the comma to separate the Ticker from the URL
+        parts = clean_line.split(",")
+        ticker = parts[0].strip()
+        url = parts[1].strip()
+        
+        print(f"Scraping data for: {ticker}...")
+        
+        # 5. Fetch the web page for this specific stock
+        response = requests.get(url, headers=headers)
+        
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.text, 'html.parser')
+            buttons = soup.find_all('button')
+            
+            # Create a fresh dictionary for THIS specific stock
+            stock_data = {}
+            stock_data["Ticker"] = ticker
+            stock_data["Date"] = str(date.today())
+            stock_data["Industry"] = industry_name
+            
+            # 6. The Inner Loop: Extract the metrics
+            for button in buttons:
+                aria_label = button.get('aria-label')
                 
-                if metric_name in metrics_to_keep:
-                    raw_value = label_parts[1].strip()
+                if aria_label and ":" in aria_label:
+                    label_parts = aria_label.split(":")
+                    metric_name = label_parts[0].strip()
                     
-                    if "Ei käytettävissä" in raw_value:
-                        clean_value = None 
-                    else:
-                        clean_text = raw_value.replace("EUR", "").replace("%", "").strip()
-                        try:
-                            clean_value = float(clean_text)
-                        except ValueError:
-                            clean_value = clean_text 
-                    
-                    stock_data[metric_name] = clean_value
-        
-        # 7. Add this completed stock dictionary to the Master List
-        all_stocks_data.append(stock_data)
-        
-        # Be polite to the server: wait 1 seconds before requesting the next URL
-        time.sleep(1)
-        
-    else:
-        print(f"Failed to retrieve {ticker}. Status code: {response.status_code}")
-
-# DEBUG. Print the final Master List to verify
-# print("\n--- All Scraping Complete ---")
-# for data in all_stocks_data:
-#     print(data)
+                    if metric_name in metrics_to_keep:
+                        raw_value = label_parts[1].strip()
+                        
+                        if "Ei käytettävissä" in raw_value:
+                            clean_value = None 
+                        else:
+                            clean_text = raw_value.replace("EUR", "").replace("%", "").strip()
+                            try:
+                                clean_value = float(clean_text)
+                            except ValueError:
+                                clean_value = clean_text 
+                        
+                        stock_data[metric_name] = clean_value
+            
+            # 7. Add this completed stock dictionary to the Master List
+            all_stocks_data.append(stock_data)
+            
+            # Be polite to the server: wait 1 seconds before requesting the next URL
+            time.sleep(1)
+            
+        else:
+            print(f"Failed to retrieve {ticker}. Status code: {response.status_code}")
     
 # --- NEW EXCEL EXPORT LOGIC ---
 
@@ -133,41 +152,45 @@ if os.path.exists(manual_file):
 else:
     print(f"Notice: {manual_file} not found. Skipping analyst scores.")
     
-# --- NEW: CALCULATE PERCENTILE SCORES ---
-print("Calculating quantitative percentile scores...")
+# --- NEW: CALCULATE TWO-TIER PERCENTILE SCORES ---
+print("Calculating Total and Industry percentile scores...")
 
-# 1. Force all scraped metrics to be recognized as math numbers
-# (errors='coerce' turns any accidental text like "Ei käytettävissä" safely into NaN)
 for col in metrics_to_keep:
     if col in df.columns:
         df[col] = pd.to_numeric(df[col], errors='coerce')
 
-# 2. Metrics where HIGHER is better (Ascending = True)
 higher_is_better = ["EPS", "Osinkotuotto", "Liikevaihto", "EBIT", "Omistajia Nordnetissä*", "Analyst Rating"]
-
-for metric in higher_is_better:
-    if metric in df.columns:
-        # Ranks from 0.0 (Worst/Lowest) to 1.0 (Best/Highest)
-        df[f"{metric} Score"] = df[metric].rank(ascending=True, pct=True)
-
-# 3. Metrics where LOWER is better (Ascending = False)
 lower_is_better = ["P/E", "P/B", "PEG", "P/S"]
 
+# 1. Calculate TOTAL Percentiles (Relative to ALL stocks)
+total_score_cols = []
+for metric in higher_is_better:
+    if metric in df.columns:
+        df[f"{metric}_Total_Rank"] = df[metric].rank(ascending=True, pct=True)
+        total_score_cols.append(f"{metric}_Total_Rank")
 for metric in lower_is_better:
     if metric in df.columns:
-        # Ranks from 0.0 (Worst/Highest) to 1.0 (Best/Lowest)
-        df[f"{metric} Score"] = df[metric].rank(ascending=False, pct=True)
+        df[f"{metric}_Total_Rank"] = df[metric].rank(ascending=False, pct=True)
+        total_score_cols.append(f"{metric}_Total_Rank")
 
-# 4. Calculate the Final Master Score
-# Gather all the newly created columns that end with the word " Score"
-score_columns = [col for col in df.columns if col.endswith(" Score")]
+df["Total Value Score"] = (df[total_score_cols].mean(axis=1) * 100).round(2)
 
-# Calculate the average of all available percentile scores for each stock
-# Multiplying by 100 turns the 0.0-1.0 scale into an easy-to-read 0-100 scale
-df["Total Value Score"] = df[score_columns].mean(axis=1) * 100
+# 2. Calculate INDUSTRY Percentiles (Relative ONLY to peers)
+ind_score_cols = []
+for metric in higher_is_better:
+    if metric in df.columns:
+        df[f"{metric}_Ind_Rank"] = df.groupby('Industry')[metric].rank(ascending=True, pct=True)
+        ind_score_cols.append(f"{metric}_Ind_Rank")
+for metric in lower_is_better:
+    if metric in df.columns:
+        df[f"{metric}_Ind_Rank"] = df.groupby('Industry')[metric].rank(ascending=False, pct=True)
+        ind_score_cols.append(f"{metric}_Ind_Rank")
 
-# Optional: Round the final score to 2 decimal places for a clean Excel file
-df["Total Value Score"] = df["Total Value Score"].round(2)
+df["Industry Value Score"] = (df[ind_score_cols].mean(axis=1) * 100).round(2)
+
+# 3. Clean up the temporary ranking columns so the Excel file stays neat
+df = df.drop(columns=total_score_cols + ind_score_cols)
+# ----------------------------------------
 
 # 6. Check if the master file already exists from a previous run
 if os.path.exists(output_filename):
@@ -189,7 +212,7 @@ print("Applying color codes and saving...")
 # vmin and vmax lock the colors strictly to our 0-to-100 scale.
 styled_df = final_df.style.background_gradient(
     cmap='RdYlGn', 
-    subset=['Total Value Score'],
+    subset=['Total Value Score', 'Industry Value Score'],
     vmin=0, 
     vmax=100
 )
