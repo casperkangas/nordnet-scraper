@@ -1,6 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 import time  # New import to control the speed of our script
+import pandas as pd
+from datetime import date
+import os
 
 # 1. Create the Master List to hold all stocks
 all_stocks_data = []
@@ -80,6 +83,20 @@ for line in lines:
         print(f"Failed to retrieve {ticker}. Status code: {response.status_code}")
 
 # 8. Print the final Master List to verify
-print("\n--- All Scraping Complete ---")
-for data in all_stocks_data:
-    print(data)
+# print("\n--- All Scraping Complete ---")
+# for data in all_stocks_data:
+#     print(data)
+    
+# --- NEW EXCEL EXPORT LOGIC ---
+
+print("\nConverting data to a table...")
+
+# 5. Convert the Master List into a Pandas DataFrame
+df = pd.DataFrame(all_stocks_data)
+
+# 6. Export the table to an Excel file
+# The index=False command prevents pandas from adding an unnecessary column of row numbers (0, 1, 2...)
+output_filename = "Stock_Analysis_Master.xlsx"
+df.to_excel(output_filename, index=False)
+
+print(f"Success! Data has been saved to {output_filename} in your project folder.")
