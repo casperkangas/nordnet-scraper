@@ -49,7 +49,8 @@ for line in lines:
         
         # Create a fresh dictionary for THIS specific stock
         stock_data = {}
-        stock_data["Ticker"] = ticker 
+        stock_data["Ticker"] = ticker
+        stock_data["Date"] = str(date.today())
         
         # 6. The Inner Loop: Extract the metrics
         for button in buttons:
@@ -94,9 +95,26 @@ print("\nConverting data to a table...")
 # 5. Convert the Master List into a Pandas DataFrame
 df = pd.DataFrame(all_stocks_data)
 
-# 6. Export the table to an Excel file
-# The index=False command prevents pandas from adding an unnecessary column of row numbers (0, 1, 2...)
 output_filename = "Stock_Analysis_Master.xlsx"
-df.to_excel(output_filename, index=False)
 
-print(f"Success! Data has been saved to {output_filename} in your project folder.")
+# 6. Check if the master file already exists from a previous run
+if os.path.exists(output_filename):
+    print(f"Found existing {output_filename}. Appending new data...")
+    
+    # Read the historical data
+    historical_df = pd.read_excel(output_filename)
+    
+    # Glue the new data to the bottom of the historical data
+    # (ignore_index=True keeps the row numbers sequential)
+    combined_df = pd.concat([historical_df, df], ignore_index=True)
+    
+    # Overwrite the file with the combined dataset
+    combined_df.to_excel(output_filename, index=False)
+    
+else:
+    print(f"No existing file found. Creating a fresh {output_filename}...")
+    
+    # Save just the new data since there is no history yet
+    df.to_excel(output_filename, index=False)
+
+print("Success! The database has been updated.")
