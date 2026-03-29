@@ -6,8 +6,6 @@ from datetime import date
 import os
 import numpy as np
 import glob
-
-# --- NEW: Import your custom scoring engine ---
 from scoring_engine import apply_weighted_scoring
 
 # 1. Create the Master List to hold all stocks

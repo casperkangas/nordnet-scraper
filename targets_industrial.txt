@@ -1,2 +1,7 @@
 KEMPOWR,https://www.nordnet.fi/osakkeet/kurssit/kempower-kempowr-xhel?details
 POSTI,https://www.nordnet.fi/osakkeet/kurssit/posti-group-posti-xhel?details
+WRT1V,https://www.nordnet.fi/osakkeet/kurssit/wartsila-b-wrt1v-xhel?details
+KNEBV,https://www.nordnet.fi/osakkeet/kurssit/kone-b-knebv-xhel?details
+METSO,https://www.nordnet.fi/osakkeet/kurssit/metso-xhel?details
+UPM,https://www.nordnet.fi/osakkeet/kurssit/upm-kymmene-upm-xhel?details
+STERV,https://www.nordnet.fi/osakkeet/kurssit/stora-enso-r-sterv-xhel?details

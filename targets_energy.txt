@@ -1,0 +1,2 @@
+NESTE,https://www.nordnet.fi/osakkeet/kurssit/neste-xhel?details
+FORTUM,https://www.nordnet.fi/osakkeet/kurssit/fortum-xhel?details
