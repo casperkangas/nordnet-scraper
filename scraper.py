@@ -85,7 +85,7 @@ for file_path in target_files:
                         stock_data[metric_name] = clean_value
             
             all_stocks_data.append(stock_data)
-            time.sleep(1)
+            time.sleep(1)   # Let servers breathe and avoid getting blocked
             
         else:
             print(f"Failed to retrieve {ticker}. Status code: {response.status_code}")
