@@ -1,5 +1,4 @@
-import requests
-from bs4 import BeautifulSoup
+from playwright.sync_api import sync_playwright
 import time
 import pandas as pd
 from datetime import date
@@ -28,67 +27,88 @@ target_files = glob.glob("targets_*.txt")
 if not target_files:
     print("No target files found! Make sure they are named like 'targets_finance.txt'")
 
-# 4. The Outer Loop: Go through every text file found
-for file_path in target_files:
+# --- 3. LAUNCH PLAYWRIGHT BROWSER ---
+print("Starting Playwright Headless Browser...")
+with sync_playwright() as p:
+    headless=False # keeps it invisible. Set to False if you want to watch it work!
+    browser = p.chromium.launch(headless=True) 
     
-    filename = os.path.basename(file_path)
-    industry_name = filename.replace("targets_", "").replace(".txt", "").capitalize()
-    
-    print(f"\n--- Processing Industry: {industry_name} ---")
-    
-    with open(file_path, "r", encoding="utf-8") as file:
-        lines = file.readlines()
+    # Create a context that looks like a real Mac computer
+    context = browser.new_context(
+        user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    )
+    page = context.new_page()
 
-    # 5. The Inner Loop: Go through each line in the text file
-    for line in lines:
-        clean_line = line.strip()
+    # 4. The Outer Loop: Go through every text file found
+    for file_path in target_files:
         
-        if not clean_line:
-            continue 
+        filename = os.path.basename(file_path)
+        industry_name = filename.replace("targets_", "").replace(".txt", "").capitalize()
+        
+        print(f"\n--- Processing Industry: {industry_name} ---")
+        
+        with open(file_path, "r", encoding="utf-8") as file:
+            lines = file.readlines()
+
+        # 5. The Inner Loop: Go through each line in the text file
+        for line in lines:
+            clean_line = line.strip()
             
-        parts = clean_line.split(",")
-        ticker = parts[0].strip()
-        url = parts[1].strip()
-        
-        print(f"Scraping data for: {ticker}...")
-        
-        response = requests.get(url, headers=headers)
-        
-        if response.status_code == 200:
-            soup = BeautifulSoup(response.text, 'html.parser')
-            buttons = soup.find_all('button')
-            
-            stock_data = {}
-            stock_data["Ticker"] = ticker
-            stock_data["Date"] = str(date.today())
-            stock_data["Industry"] = industry_name
-            
-            for button in buttons:
-                aria_label = button.get('aria-label')
+            if not clean_line:
+                continue 
                 
-                if aria_label and ":" in aria_label:
-                    label_parts = aria_label.split(":")
-                    metric_name = label_parts[0].strip()
+            parts = clean_line.split(",")
+            ticker = parts[0].strip()
+            url = parts[1].strip()
+            
+            print(f"Scraping data for: {ticker}...")
+            
+            try:
+                # 1. Instruct the browser to go to the URL (Wait until the skeleton loads)
+                page.goto(url, wait_until="domcontentloaded", timeout=15000)
+                
+                # 2. THE HARD PAUSE: Tell the open browser to simply wait 3 seconds.
+                # This gives Nordnet's JavaScript plenty of time to paint the financial numbers.
+                page.wait_for_timeout(3000) 
+                
+                # 3. Grab ALL buttons immediately, whether they are hidden menus or financial data
+                buttons = page.query_selector_all('button')
+                
+                stock_data = {}
+                stock_data["Ticker"] = ticker
+                stock_data["Date"] = str(date.today())
+                stock_data["Industry"] = industry_name
+                
+                for button in buttons:
+                    # Playwright uses get_attribute instead of get
+                    aria_label = button.get_attribute('aria-label')
                     
-                    if metric_name in metrics_to_keep:
-                        raw_value = label_parts[1].strip()
+                    if aria_label and ":" in aria_label:
+                        label_parts = aria_label.split(":")
+                        metric_name = label_parts[0].strip()
                         
-                        if "Ei käytettävissä" in raw_value:
-                            clean_value = None 
-                        else:
-                            clean_text = raw_value.replace("EUR", "").replace("%", "").strip()
-                            try:
-                                clean_value = float(clean_text)
-                            except ValueError:
-                                clean_value = clean_text 
-                        
-                        stock_data[metric_name] = clean_value
-            
-            all_stocks_data.append(stock_data)
-            time.sleep(1)   # Let servers breathe and avoid getting blocked
-            
-        else:
-            print(f"Failed to retrieve {ticker}. Status code: {response.status_code}")
+                        if metric_name in metrics_to_keep:
+                            raw_value = label_parts[1].strip()
+                            
+                            if "Ei käytettävissä" in raw_value:
+                                clean_value = None 
+                            else:
+                                clean_text = raw_value.replace("EUR", "").replace("%", "").strip()
+                                try:
+                                    clean_value = float(clean_text)
+                                except ValueError:
+                                    clean_value = clean_text 
+                            
+                            stock_data[metric_name] = clean_value
+                
+                all_stocks_data.append(stock_data)
+                
+            except Exception as e:
+                print(f"Failed to retrieve {ticker}. Error: {e}")
+
+    # Close the browser safely when all files are finished
+    print("Closing browser...")
+    browser.close()
     
 # --- EXCEL EXPORT & MERGE LOGIC ---
 
