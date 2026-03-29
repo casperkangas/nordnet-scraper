@@ -1,5 +1,4 @@
 from playwright.sync_api import sync_playwright
-import time
 import pandas as pd
 from datetime import date
 import os
@@ -30,14 +29,20 @@ if not target_files:
 # --- 3. LAUNCH PLAYWRIGHT BROWSER ---
 print("Starting Playwright Headless Browser...")
 with sync_playwright() as p:
-    headless=False # keeps it invisible. Set to False if you want to watch it work!
-    browser = p.chromium.launch(headless=True) 
+    browser = p.chromium.launch(headless=True) # Set to False to see the browser in action, True for headless mode
     
     # Create a context that looks like a real Mac computer
     context = browser.new_context(
         user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     )
     page = context.new_page()
+    
+    # --- NEW: SPEED OPTIMIZATION (RESOURCE BLOCKING) ---
+    # Intercept all network requests. If it is an image, CSS, or font, block it.
+    page.route("**/*", lambda route: route.abort() 
+               if route.request.resource_type in ["image", "stylesheet", "font"] 
+               else route.continue_())
+    # ---------------------------------------------------
 
     # 4. The Outer Loop: Go through every text file found
     for file_path in target_files:
@@ -172,6 +177,10 @@ styled_df = final_df.style\
     .background_gradient(
         cmap='RdYlGn', 
         subset=['Expected Upside']
+    )\
+    .background_gradient(
+        cmap='RdYlGn', 
+        subset=['Risk Spread'],
     )
 
 # Save the styled table directly to Excel

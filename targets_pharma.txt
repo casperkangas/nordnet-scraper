@@ -1,1 +1,5 @@
 ORNBV,https://www.nordnet.fi/osakkeet/kurssit/orion-b-ornbv-xhel?details
+TTALO,https://www.nordnet.fi/osakkeet/kurssit/terveystalo-ttalo-xhel?details
+PIHLIS,https://www.nordnet.fi/osakkeet/kurssit/pihlajalinna-pihlis-xhel?details
+REG1V,https://www.nordnet.fi/osakkeet/kurssit/revenio-group-reg1v-xhel?details
+ORIOLA,https://www.nordnet.fi/osakkeet/kurssit/oriola-xhel?details

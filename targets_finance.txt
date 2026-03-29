@@ -3,3 +3,8 @@ AKTIA,https://www.nordnet.fi/osakkeet/kurssit/aktia-pankki-aktia-xhel?details
 OMASP,https://www.nordnet.fi/osakkeet/kurssit/oma-saastopankki-omasp-xhel?details
 MANTA,https://www.nordnet.fi/osakkeet/kurssit/mandatum-manta-xhel?details
 SAMPO,https://www.nordnet.fi/osakkeet/kurssit/sampo-oyj-a-sampo-xhel?details
+ALBAV,https://www.nordnet.fi/osakkeet/kurssit/alandsbanken-a-albav-xhel?details
+EVLI,https://www.nordnet.fi/osakkeet/kurssit/evli-xhel?details
+EQV1V,https://www.nordnet.fi/osakkeet/kurssit/e-q-eqv1v-xhel?details
+ENENTO,https://www.nordnet.fi/osakkeet/kurssit/enento-group-enento-xhel?details
+CAPMAN,https://www.nordnet.fi/osakkeet/kurssit/cap-man-capman-xhel?details

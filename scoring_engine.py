@@ -8,25 +8,34 @@ def apply_weighted_scoring(df):
     """
     print("Calculating weighted Total and Industry percentile scores...")
 
-    # 1. Force all scraped metrics to be recognized as numbers
     metrics_to_keep = [
         "P/E", "EPS", "Osinko/osake", "Osinkotuotto", 
         "P/B", "PEG", "P/S", "Liikevaihto", "EBIT", 
         "Omistajia Nordnetissä*", "Analyst Rating",
-        "Worst Case", "Probable Case", "Best Case" # Added the manual columns here
+        "Worst Case", "Probable Case", "Best Case"
     ]
     for col in metrics_to_keep:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors='coerce')
 
-    # Check if the manual risk columns exist before doing the math
+    # =========================================================
+    # 1. NEW: CALCULATE THE RISK METRICS & SPREAD
+    # =========================================================
     if "Worst Case" in df.columns and "Probable Case" in df.columns and "Best Case" in df.columns:
-        # PERT Formula: (Worst + 4*Probable + Best) / 6
+        
+        # Calculate Expected Upside using PERT
         df["Expected Upside"] = (df["Worst Case"] + (4 * df["Probable Case"]) + df["Best Case"]) / 6
+        
+        # SAFETY NET: If PERT fails because Worst/Best are blank, but Probable exists, use Probable.
+        df["Expected Upside"] = df["Expected Upside"].fillna(df["Probable Case"])
+        
+        # Calculate the Spread (Volatility). Higher spread = more risk.
+        df["Risk Spread"] = df["Best Case"] - df["Worst Case"]
+        
     else:
-        # If the user hasn't added the columns to Excel yet, create empty ones so the script doesn't crash
         df["Expected Upside"] = np.nan
         df["Worst Case"] = np.nan
+        df["Risk Spread"] = np.nan
 
     # =========================================================
     # 2. METRIC THEORY, TARGETS, AND MULTIPLIER WEIGHTS
@@ -37,23 +46,25 @@ def apply_weighted_scoring(df):
     }
 
     higher_metrics = {
-        "EPS": 0.30,          # 30% (The absolute engine of long-term stock prices)
-        "EBIT": 0.15,         # 15% (Proves the core business model works)
-        "Liikevaihto": 0.05,  # 5%  (Top-line growth)
+        "EPS": 0.30,          # 30% 
+        "EBIT": 0.15,         # 15% 
+        "Liikevaihto": 0.0,   # Removed weight, replaced by our specific risk cases
         
-        # --- THE RISK METRICS ---
-        "Expected Upside": 0.10, # 10% (Statistical likely return)
-        "Worst Case": 0.05,      # 5%  (Downside protection. -5% is better than -40%)
-        "Analyst Rating": 0.05,  # 5%  (Professional sentiment)
+        "Expected Upside": 0.10, # 10% 
+        "Worst Case": 0.05,      # 5% 
         
-        # --- IGNORED METRICS (Scraped, but 0 impact on score) ---
+        "Analyst Rating": 0.05,   # 5%
         "Osinkotuotto": 0.0, 
         "Omistajia Nordnetissä*": 0.0 
     }
 
     lower_metrics = {
-        "PEG": 0.15,  # Increased to 15% (The ultimate value-to-growth connector)
-        "P/B": 0.05   # 5%
+        "PEG": 0.15,  # 15% 
+        "P/B": 0.05,  # 5%
+        
+        # --- NEW SPREAD METRIC ---
+        # Ranked lower-is-better because a smaller spread means higher analyst certainty.
+        "Risk Spread": 0.05 # 5%
     }
 
     # =========================================================
