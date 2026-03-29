@@ -19,7 +19,6 @@ def apply_weighted_scoring(df):
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors='coerce')
 
-    # --- NEW: CALCULATE THE RISK METRICS ---
     # Check if the manual risk columns exist before doing the math
     if "Worst Case" in df.columns and "Probable Case" in df.columns and "Best Case" in df.columns:
         # PERT Formula: (Worst + 4*Probable + Best) / 6
@@ -34,23 +33,26 @@ def apply_weighted_scoring(df):
     # =========================================================
 
     target_metrics = {
-        "P/E": {"target": 15.0, "weight": 0.10}  # Adjusted to 10%
+        "P/E": {"target": 15.0, "weight": 0.10}  # 10%
     }
 
-    # Inside scoring_engine.py
     higher_metrics = {
-        "EPS": 0.30,          # Increased to 30% (The most important growth factor)
-        "EBIT": 0.15,         # Increased to 15% (Proves the business model works)
-        "Liikevaihto": 0.05,  # Lowered to 5%
-        "Osinkotuotto": 0.0,  # Zeroed out (Ignored)
-        "Analyst Rating": 0.05,  
-        "Omistajia Nordnetissä*": 0.05,  
-        "Expected Upside": 0.10, 
-        "Worst Case": 0.05 
+        "EPS": 0.30,          # 30% (The absolute engine of long-term stock prices)
+        "EBIT": 0.15,         # 15% (Proves the core business model works)
+        "Liikevaihto": 0.05,  # 5%  (Top-line growth)
+        
+        # --- THE RISK METRICS ---
+        "Expected Upside": 0.10, # 10% (Statistical likely return)
+        "Worst Case": 0.05,      # 5%  (Downside protection. -5% is better than -40%)
+        "Analyst Rating": 0.05,  # 5%  (Professional sentiment)
+        
+        # --- IGNORED METRICS (Scraped, but 0 impact on score) ---
+        "Osinkotuotto": 0.0, 
+        "Omistajia Nordnetissä*": 0.0 
     }
 
     lower_metrics = {
-        "PEG": 0.10,  # Adjusted to 10%
+        "PEG": 0.15,  # Increased to 15% (The ultimate value-to-growth connector)
         "P/B": 0.05   # 5%
     }
 

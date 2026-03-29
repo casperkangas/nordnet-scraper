@@ -155,16 +155,28 @@ else:
     final_df = df
 
 # 9. EXCEL FORMATTING AND EXPORT
-print("Applying color codes and saving...")
+print("Applying dynamic color codes and saving...")
 
-styled_df = final_df.style.background_gradient(
-    cmap='RdYlGn', 
-    subset=['Total Value Score', 'Industry Value Score'],
-    vmin=0, 
-    vmax=100
-)
+# Apply specific color gradients based on the unique scale of each metric
+styled_df = final_df.style\
+    .background_gradient(
+        cmap='RdYlGn', 
+        subset=['Total Value Score', 'Industry Value Score'], 
+        vmin=0, vmax=100
+    )\
+    .background_gradient(
+        cmap='RdYlGn', 
+        subset=['Analyst Rating'], 
+        vmin=1, vmax=5
+    )\
+    .background_gradient(
+        cmap='RdYlGn', 
+        subset=['Expected Upside']
+    )
 
+# Save the styled table directly to Excel
 styled_df.to_excel(output_filename, index=False, engine='openpyxl')
+
 print(f"Success! The database has been updated and formatted in {output_filename}.")
 
 # 10. AUTO-OPEN EXCEL ON MAC
