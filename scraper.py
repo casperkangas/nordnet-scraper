@@ -89,6 +89,26 @@ with sync_playwright() as p:
                 stock_data["Date"] = str(date.today())
                 stock_data["Industry"] = industry_name
                 
+                # ==========================================
+                # --- NEW: GRAB THE CURRENT PRICE ---
+                # ==========================================
+                try:
+                    # Use substring matching (*=) to ignore the dynamic hash!
+                    price_element = page.locator("span[class*='InstrumentPrice-styles__CurrentPriceTypography']").first
+                    
+                    # Grab the text inside the span (e.g., "55,80")
+                    raw_price = price_element.inner_text(timeout=2000)
+                    
+                    # Clean the European formatting (remove spaces, swap comma for dot)
+                    clean_price = raw_price.replace(" ", "").replace("\xa0", "").replace(",", ".")
+                    stock_data["Current Price"] = float(clean_price)
+                    # DEBUG: print(f"  -> Current Price for {ticker}: {stock_data['Current Price']} EUR")
+                    
+                except Exception as e:
+                    print(f"  -> Notice: Could not locate price for {ticker}. Error: {e}")
+                    stock_data["Current Price"] = None
+                # ==========================================
+                                
                 for button in buttons:
                     # Playwright uses get_attribute instead of get
                     aria_label = button.get_attribute('aria-label')
