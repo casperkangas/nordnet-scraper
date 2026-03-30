@@ -105,13 +105,29 @@ def apply_weighted_scoring(df):
             process_metric(t_rank, i_rank, weight)
 
     # =========================================================
-    # 4. FINAL CALCULATION
+    # 4. FINAL CALCULATION & DATA COVERAGE PENALTY
     # =========================================================
     
-    df["Total Value Score"] = np.where(total_weights > 0, (total_points / total_weights) * 100, np.nan)
-    df["Industry Value Score"] = np.where(ind_weights > 0, (ind_points / ind_weights) * 100, np.nan)
+    # 1. Calculate the raw base score (ignoring missing data)
+    raw_total_score = np.where(total_weights > 0, (total_points / total_weights) * 100, np.nan)
+    raw_ind_score = np.where(ind_weights > 0, (ind_points / ind_weights) * 100, np.nan)
     
-    df["Total Value Score"] = df["Total Value Score"].round(2)
-    df["Industry Value Score"] = df["Industry Value Score"].round(2)
+    # 2. Calculate the "Data Completeness" ratio dynamically
+    # We safely sum up all the weights you defined in your dictionaries above
+    max_target_weight = sum(config["weight"] for config in target_metrics.values())
+    max_higher_weight = sum(higher_metrics.values())
+    max_lower_weight = sum(lower_metrics.values())
+    
+    max_possible_weight = max_target_weight + max_higher_weight + max_lower_weight
+    
+    # Ratio will be exactly between 0.0 and 1.0
+    coverage_ratio = total_weights / max_possible_weight
+    
+    # 3. Apply the penalty multiplier
+    df["Total Value Score"] = (raw_total_score * coverage_ratio).round(2)
+    df["Industry Value Score"] = (raw_ind_score * coverage_ratio).round(2)
+    
+    # 4. Add a transparency column so you can see exactly how much data a stock had
+    df["Data Completeness %"] = (coverage_ratio * 100).round(0)
 
     return df

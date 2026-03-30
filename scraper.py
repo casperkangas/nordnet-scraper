@@ -5,6 +5,11 @@ import os
 import numpy as np
 import glob
 from scoring_engine import apply_weighted_scoring
+import time
+
+# --- NEW: START THE TIMER ---
+print("⏱️ Starting the scraping engine...")
+start_time = time.time()
 
 # 1. Create the Master List to hold all stocks
 all_stocks_data = []
@@ -179,8 +184,12 @@ styled_df = final_df.style\
         subset=['Expected Upside']
     )\
     .background_gradient(
-        cmap='RdYlGn', 
+        cmap='RdYlGn_r', 
         subset=['Risk Spread'],
+    )\
+    .background_gradient(
+        cmap='RdYlGn', 
+        subset=['Data Completeness %'],
     )
 
 # Save the styled table directly to Excel
@@ -191,3 +200,13 @@ print(f"Success! The database has been updated and formatted in {output_filename
 # 10. AUTO-OPEN EXCEL ON MAC
 print("Opening the dashboard...")
 os.system(f"open '{output_filename}'")
+
+# --- NEW: STOP THE TIMER AND PRINT ---
+end_time = time.time()
+execution_time = end_time - start_time
+
+# Calculate minutes and seconds for a clean output
+minutes = int(execution_time // 60)
+seconds = execution_time % 60
+
+print(f"\n✅ All tasks complete! Total execution time: {minutes} minutes and {seconds:.2f} seconds.")
