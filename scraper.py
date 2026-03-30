@@ -149,64 +149,113 @@ else:
     
 # =========================================================
 # 7. APPLY WEIGHTED SCORING ENGINE
-# =========================================================
-# This single line replaces all the old complex math!
 df = apply_weighted_scoring(df)
 # =========================================================
 
-# 8. Check if the master file already exists to append data
+# =========================================================
+# 8. HISTORY APPENDING & DASHBOARD SEPARATION
+# =========================================================
+
 if os.path.exists(output_filename):
     print(f"Found existing {output_filename}. Appending new data...")
-    historical_df = pd.read_excel(output_filename)
+    # Read the historical sheet to ensure we only append to the master record
+    historical_df = pd.read_excel(output_filename, sheet_name='Historical Database')
     final_df = pd.concat([historical_df, df], ignore_index=True)
     final_df = final_df.drop_duplicates(subset=['Date', 'Ticker'], keep='last')
 else:
     print(f"No existing file found. Creating a fresh {output_filename}...")
     final_df = df
 
-# 9. EXCEL FORMATTING AND EXPORT
-print("Applying dynamic color codes and saving...")
+# Separate ONLY today's data for the Snapshot dashboard
+today_str = str(date.today())
+today_df = final_df[final_df['Date'] == today_str].copy()
 
-# Apply specific color gradients based on the unique scale of each metric
-styled_df = final_df.style\
-    .background_gradient(
-        cmap='RdYlGn', 
-        subset=['Total Value Score', 'Industry Value Score'], 
-        vmin=0, vmax=100
-    )\
-    .background_gradient(
-        cmap='RdYlGn', 
-        subset=['Analyst Rating'], 
-        vmin=1, vmax=5
-    )\
-    .background_gradient(
-        cmap='RdYlGn', 
-        subset=['Expected Upside']
-    )\
-    .background_gradient(
-        cmap='RdYlGn_r', 
-        subset=['Risk Spread'],
-    )\
-    .background_gradient(
-        cmap='RdYlGn', 
-        subset=['Data Completeness %'],
-    )
+# --- NEW: AUTO-SORTING ---
+# Sort today's data so your absolute best stocks are always at the top
+today_df = today_df.sort_values(by="Total Value Score", ascending=False)
 
-# Save the styled table directly to Excel
-styled_df.to_excel(output_filename, index=False, engine='openpyxl')
+# =========================================================
+# 9. EXCEL FORMATTING, FILTERING, AND CHART GENERATION
+# =========================================================
+print("Applying dynamic color codes and generating the dashboard...")
+
+# Apply the green-to-red styles to both datasets
+def apply_styles(dataframe):
+    return dataframe.style\
+        .background_gradient(cmap='RdYlGn', subset=['Total Value Score', 'Industry Value Score'], vmin=0, vmax=100)\
+        .background_gradient(cmap='RdYlGn', subset=['Analyst Rating'], vmin=1, vmax=5)\
+        .background_gradient(cmap='RdYlGn', subset=['Expected Upside'])\
+        .background_gradient(cmap='RdYlGn_r', subset=['Risk Spread'])
+
+styled_today = apply_styles(today_df)
+styled_final = apply_styles(final_df)
+
+# Use XlsxWriter to create the file, add sheets, freeze panes, and draw the chart
+with pd.ExcelWriter(output_filename, engine='xlsxwriter') as writer:
+    
+    # 1. Write the two sheets
+    styled_today.to_excel(writer, sheet_name='Today Snapshot', index=False)
+    styled_final.to_excel(writer, sheet_name='Historical Database', index=False)
+    
+    # Access the Excel objects directly
+    workbook = writer.book
+    worksheet_today = writer.sheets['Today Snapshot']
+    worksheet_hist = writer.sheets['Historical Database']
+    
+    # 2. CREATE THE "TABLE" EXPERIENCE (AutoFilters & Frozen Headers)
+    max_col_idx = len(today_df.columns) - 1
+    
+    # Freeze the top row so headers stay visible when scrolling
+    worksheet_today.freeze_panes(1, 1)
+    worksheet_hist.freeze_panes(1, 1)
+    
+    # Add dropdown filter arrows to the top row
+    worksheet_today.autofilter(0, 0, len(today_df), max_col_idx)
+    worksheet_hist.autofilter(0, 0, len(final_df), max_col_idx)
+    
+    # 3. DRAW THE TOP 10 CHART
+    chart = workbook.add_chart({'type': 'column'})
+    
+    # Find the column index numbers so the chart knows where to look
+    ticker_col = today_df.columns.get_loc("Ticker")
+    total_col = today_df.columns.get_loc("Total Value Score")
+    upside_col = today_df.columns.get_loc("Expected Upside")
+    
+    # Determine how many stocks to chart (Up to 10)
+    chart_rows = min(len(today_df), 10)
+    
+    # Add Total Score bars
+    chart.add_series({
+        'name':       'Total Value Score',
+        'categories': ['Today Snapshot', 1, ticker_col, chart_rows, ticker_col],
+        'values':     ['Today Snapshot', 1, total_col, chart_rows, total_col],
+        'fill':       {'color': '#4CAF50'} # Clean Green
+    })
+    
+    # Add Expected Upside bars
+    chart.add_series({
+        'name':       'Expected Upside %',
+        'categories': ['Today Snapshot', 1, ticker_col, chart_rows, ticker_col],
+        'values':     ['Today Snapshot', 1, upside_col, chart_rows, upside_col],
+        'fill':       {'color': '#2196F3'} # Clean Blue
+    })
+    
+    # Format the Chart's visuals
+    chart.set_title({'name': f'Top {chart_rows} Actionable Stocks ({today_str})'})
+    chart.set_size({'width': 750, 'height': 400})
+    
+    # Insert the chart onto the Snapshot sheet, positioned nicely to the right of your data
+    worksheet_today.insert_chart(1, max_col_idx + 2, chart)
+
+# --- STOP TIMER ---
+end_time = time.time()
+execution_time = end_time - start_time
+minutes = int(execution_time // 60)
+seconds = execution_time % 60
 
 print(f"Success! The database has been updated and formatted in {output_filename}.")
+print(f"⏱️ Total execution time: {minutes} minutes and {seconds:.2f} seconds.")
 
 # 10. AUTO-OPEN EXCEL ON MAC
 print("Opening the dashboard...")
 os.system(f"open '{output_filename}'")
-
-# --- NEW: STOP THE TIMER AND PRINT ---
-end_time = time.time()
-execution_time = end_time - start_time
-
-# Calculate minutes and seconds for a clean output
-minutes = int(execution_time // 60)
-seconds = execution_time % 60
-
-print(f"\n✅ All tasks complete! Total execution time: {minutes} minutes and {seconds:.2f} seconds.")
