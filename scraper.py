@@ -188,71 +188,32 @@ else:
 # Separate ONLY today's data for the Snapshot dashboard
 today_str = str(date.today())
 today_df = final_df[final_df['Date'] == today_str].copy()
-
-# =========================================================
-# --- CALCULATE SCORE & PRICE MOMENTUM (TREND) ---
-# =========================================================
-print("Calculating score and price momentum against previous run...")
-
-past_dates = final_df[final_df['Date'] < today_str]['Date'].unique()
-
-if len(past_dates) > 0:
-    last_date = sorted(past_dates)[-1]
-    
-    # 1. Safely pull previous data
-    hist_cols = ['Ticker', 'Total Value Score']
-    if 'Current Price' in final_df.columns:
-        hist_cols.append('Current Price')
-        
-    last_run_df = final_df[final_df['Date'] == last_date][hist_cols].copy()
-    
-    # 2. Rename columns to avoid overlaps
-    last_run_df = last_run_df.rename(columns={
-        'Total Value Score': 'Previous Score', 
-        'Current Price': 'Previous Price'
-    })
-    
-    # 3. Merge previous data onto today's snapshot
-    today_df = pd.merge(today_df, last_run_df, on='Ticker', how='left')
-    
-    # 4. Calculate Score Momentum
-    today_df['Score Change'] = (today_df['Total Value Score'] - today_df['Previous Score']).round(2)
-    
-    # 5. Calculate Price Momentum
-    if 'Previous Price' in today_df.columns:
-        today_df['Price Change'] = (today_df['Current Price'] - today_df['Previous Price']).round(2)
-        today_df = today_df.drop(columns=['Previous Price'])
-    else:
-        today_df['Price Change'] = 0.0
-        
-    today_df = today_df.drop(columns=['Previous Score'])
-else:
-    # First run fallback
-    today_df['Score Change'] = 0.0
-    today_df['Price Change'] = 0.0
-
-# Sort today's data so your absolute best stocks are always at the top
 today_df = today_df.sort_values(by="Total Value Score", ascending=False)
+
+# Identify the historical dates for our comparisons
+past_dates = sorted(final_df[final_df['Date'] < today_str]['Date'].unique())
+last_date = past_dates[-1] if past_dates else None
 
 # =========================================================
 # --- GENERATE THE SCORE TREND MATRIX ---
 # =========================================================
 print("Generating the historical score matrix...")
 
-# Pivot the data using Total Value Score
+# Pivot the data
 trend_df = final_df.pivot(index='Ticker', columns='Date', values='Total Value Score').reset_index()
-date_columns = sorted([col for col in trend_df.columns if col != 'Ticker'])
-recent_dates = date_columns[-10:]
-trend_df = trend_df[['Ticker'] + recent_dates]
 
-# Attach today's Current Price from today_df so you have your price reference
-price_ref = today_df[['Ticker', 'Current Price']] if 'Current Price' in today_df.columns else pd.DataFrame(columns=['Ticker', 'Current Price'])
-trend_df = pd.merge(price_ref, trend_df, on='Ticker', how='right')
+# Rename today's column to 'Current Score'
+if today_str in trend_df.columns:
+    trend_df = trend_df.rename(columns={today_str: 'Current Score'})
+else:
+    trend_df['Current Score'] = np.nan
 
-# Sort by the most recent score
-latest_date_col = recent_dates[-1] if recent_dates else 'Ticker'
-if latest_date_col != 'Ticker':
-    trend_df = trend_df.sort_values(by=latest_date_col, ascending=False)
+# Organize columns: Ticker -> Current Score -> Historical Dates (Chronological)
+recent_past_dates = past_dates[-9:] # Keep up to 9 past runs to keep it clean
+trend_df = trend_df[['Ticker', 'Current Score'] + recent_past_dates]
+
+# Sort by the Current Score
+trend_df = trend_df.sort_values(by='Current Score', ascending=False)
 
 # =========================================================
 # --- GENERATE THE PRICE TREND MATRIX ---
@@ -260,62 +221,61 @@ if latest_date_col != 'Ticker':
 print("Generating the historical price matrix...")
 
 if 'Current Price' in final_df.columns:
-    # Pivot the data using Current Price
     price_trend_df = final_df.pivot(index='Ticker', columns='Date', values='Current Price').reset_index()
-    price_date_columns = sorted([col for col in price_trend_df.columns if col != 'Ticker'])
-    recent_price_dates = price_date_columns[-10:]
-    price_trend_df = price_trend_df[['Ticker'] + recent_price_dates]
     
-    # Sort by the most recent price
-    latest_price_col = recent_price_dates[-1] if recent_price_dates else 'Ticker'
-    if latest_price_col != 'Ticker':
-        price_trend_df = price_trend_df.sort_values(by=latest_price_col, ascending=False)
+    if today_str in price_trend_df.columns:
+        price_trend_df = price_trend_df.rename(columns={today_str: 'Current Price'})
+    else:
+        price_trend_df['Current Price'] = np.nan
+        
+    price_trend_df = price_trend_df[['Ticker', 'Current Price'] + recent_past_dates]
+    price_trend_df = price_trend_df.sort_values(by='Current Price', ascending=False)
 else:
-    # Fallback if no prices exist yet
-    price_trend_df = pd.DataFrame(columns=['Ticker', today_str])
-    recent_price_dates = []
+    price_trend_df = pd.DataFrame(columns=['Ticker', 'Current Price'])
 
 # =========================================================
 # 9. EXCEL FORMATTING, FILTERING, AND CHART GENERATION
 # =========================================================
 print("Applying dynamic color codes and generating the dashboard...")
 
+# 1. Core Styles for Snapshot and History
 def apply_styles(dataframe):
-    styler = dataframe.style\
+    return dataframe.style\
         .background_gradient(cmap='RdYlGn', subset=['Total Value Score', 'Industry Value Score'], vmin=0, vmax=100)\
         .background_gradient(cmap='RdYlGn', subset=['Analyst Rating'], vmin=1, vmax=5)\
         .background_gradient(cmap='RdYlGn', subset=['Expected Upside'])\
         .background_gradient(cmap='RdYlGn_r', subset=['Risk Spread'])
-        
-    if 'Score Change' in dataframe.columns:
-        styler = styler.background_gradient(cmap='RdYlGn', subset=['Score Change'], vmin=-10, vmax=10)
-    if 'Price Change' in dataframe.columns:
-        styler = styler.background_gradient(cmap='RdYlGn', subset=['Price Change'])
-        
-    return styler
 
 styled_today = apply_styles(today_df)
 styled_final = apply_styles(final_df)
 
-def apply_trend_styles(dataframe, date_cols):
-    styler = dataframe.style
-    for col in date_cols:
-        styler = styler.background_gradient(cmap='RdYlGn', subset=[col], vmin=0, vmax=100)
-    return styler
+# 2. Custom Logic to color the Current column based on the Previous column
+def highlight_comparison(data, current_col, prev_col):
+    # Create an empty styling grid that matches the dataframe
+    styles = pd.DataFrame('', index=data.index, columns=data.columns)
+    
+    if prev_col and prev_col in data.columns and current_col in data.columns:
+        diff = data[current_col] - data[prev_col]
+        
+        # Excel standard positive Green and negative Red
+        styles.loc[diff > 0, current_col] = 'background-color: #c6efce; color: #006100;'
+        styles.loc[diff < 0, current_col] = 'background-color: #ffc7ce; color: #9c0006;'
+        
+    return styles
 
-styled_trend = apply_trend_styles(trend_df, recent_dates)
+# Apply styles to Score Trend
+styled_trend = trend_df.style.apply(highlight_comparison, current_col='Current Score', prev_col=last_date, axis=None)
+for col in recent_past_dates:
+    styled_trend = styled_trend.background_gradient(cmap='RdYlGn', subset=[col], vmin=0, vmax=100)
 
-def apply_price_styles(dataframe, date_cols):
-    styler = dataframe.style
-    for col in date_cols:
-        styler = styler.background_gradient(cmap='Blues', subset=[col])
-    return styler
-
-styled_price_trend = apply_price_styles(price_trend_df, recent_price_dates) if recent_price_dates else price_trend_df.style
+# Apply styles to Price Trend
+styled_price_trend = price_trend_df.style.apply(highlight_comparison, current_col='Current Price', prev_col=last_date, axis=None)
+for col in recent_past_dates:
+    styled_price_trend = styled_price_trend.background_gradient(cmap='Blues', subset=[col])
 
 with pd.ExcelWriter(output_filename, engine='xlsxwriter') as writer:
     
-    # 1. Write the FOUR sheets
+    # Write the FOUR sheets
     styled_today.to_excel(writer, sheet_name='Today Snapshot', index=False)
     styled_trend.to_excel(writer, sheet_name='Score Trend', index=False) 
     styled_price_trend.to_excel(writer, sheet_name='Price Trend', index=False) 
@@ -327,22 +287,18 @@ with pd.ExcelWriter(output_filename, engine='xlsxwriter') as writer:
     worksheet_price = writer.sheets['Price Trend'] 
     worksheet_hist = writer.sheets['Historical Database']
     
-    max_col_today = len(today_df.columns) - 1
-    max_col_trend = len(trend_df.columns) - 1
-    max_col_price = len(price_trend_df.columns) - 1
-    
-    # 2. FREEZE PANES AND FILTERS
+    # FREEZE PANES AND FILTERS
     worksheet_today.freeze_panes(1, 1)
     worksheet_trend.freeze_panes(1, 1)
     worksheet_price.freeze_panes(1, 1) 
     worksheet_hist.freeze_panes(1, 1)
     
-    worksheet_today.autofilter(0, 0, len(today_df), max_col_today)
-    worksheet_trend.autofilter(0, 0, len(trend_df), max_col_trend)
-    worksheet_price.autofilter(0, 0, len(price_trend_df), max_col_price) 
+    worksheet_today.autofilter(0, 0, len(today_df), len(today_df.columns) - 1)
+    worksheet_trend.autofilter(0, 0, len(trend_df), len(trend_df.columns) - 1)
+    worksheet_price.autofilter(0, 0, len(price_trend_df), len(price_trend_df.columns) - 1) 
     worksheet_hist.autofilter(0, 0, len(final_df), len(final_df.columns) - 1)
     
-    # 3. AUTO-FIT COLUMN WIDTHS 
+    # AUTO-FIT COLUMN WIDTHS 
     for idx, col in enumerate(today_df.columns):
         data_max = today_df[col].astype(str).str.len().max()
         data_max = 0 if pd.isna(data_max) else data_max
@@ -362,7 +318,7 @@ with pd.ExcelWriter(output_filename, engine='xlsxwriter') as writer:
         max_len = int(max(data_max, len(str(col))) + 2)
         worksheet_price.set_column(idx, idx, max_len)
     
-    # 4. DRAW THE TOP 10 CHART
+    # DRAW THE TOP 10 CHART
     chart = workbook.add_chart({'type': 'column'})
     
     ticker_col = today_df.columns.get_loc("Ticker")
@@ -388,7 +344,7 @@ with pd.ExcelWriter(output_filename, engine='xlsxwriter') as writer:
     chart.set_title({'name': f'Top {chart_rows} Actionable Stocks ({today_str})'})
     chart.set_size({'width': 750, 'height': 400})
     
-    worksheet_today.insert_chart(1, max_col_today + 2, chart)
+    worksheet_today.insert_chart(1, len(today_df.columns) + 1, chart)
 
 # --- STOP TIMER ---
 end_time = time.time()
@@ -400,9 +356,17 @@ print(f"Success! The database has been updated and formatted in {output_filename
 print(f"⏱️ Total execution time: {minutes} minutes and {seconds:.2f} seconds.")
 
 # =========================================================
-# 10. QUIET MODE EXCEL OPENER
+# 10. BACKGROUND LOGGING & EXCEL OPENER
 # =========================================================
-QUIET_MODE = False  # Set to True when running automatically
+from datetime import datetime
+now = datetime.now()
+timestamp = now.strftime("%Y-%m-%d %H:%M:%S")
+log_message = f"[{timestamp}] SUCCESS | Scraped {len(today_df)} stocks | Time: {minutes}m {seconds:.2f}s\n"
+
+with open("scraper_log.txt", "a", encoding="utf-8") as log_file:
+    log_file.write(log_message)
+
+QUIET_MODE = False  # Set to True when running automatically in the background
 
 if not QUIET_MODE:
     print("Opening the dashboard...")
