@@ -170,7 +170,36 @@ else:
 today_str = str(date.today())
 today_df = final_df[final_df['Date'] == today_str].copy()
 
-# --- NEW: AUTO-SORTING ---
+# =========================================================
+# --- NEW: CALCULATE SCORE MOMENTUM (TREND) ---
+# =========================================================
+print("Calculating score momentum against previous run...")
+
+# 1. Find all dates in the database that are older than today
+past_dates = final_df[final_df['Date'] < today_str]['Date'].unique()
+
+if len(past_dates) > 0:
+    # 2. Grab the most recent date from that list
+    last_date = sorted(past_dates)[-1]
+    
+    # 3. Extract ONLY the Ticker and the Total Value Score from that specific past date
+    last_run_df = final_df[final_df['Date'] == last_date][['Ticker', 'Total Value Score']].copy()
+    
+    # Rename the score column so it doesn't get confused with today's score
+    last_run_df = last_run_df.rename(columns={'Total Value Score': 'Previous Score'})
+    
+    # 4. Merge this previous score onto today's snapshot
+    today_df = pd.merge(today_df, last_run_df, on='Ticker', how='left')
+    
+    # 5. Calculate the Momentum (Change in points)
+    today_df['Score Change'] = (today_df['Total Value Score'] - today_df['Previous Score']).round(2)
+    
+    # Clean up by dropping the 'Previous Score' column so the dashboard stays neat
+    today_df = today_df.drop(columns=['Previous Score'])
+else:
+    # If this is the very first run and there is no history, just set the change to 0
+    today_df['Score Change'] = 0.0
+
 # Sort today's data so your absolute best stocks are always at the top
 today_df = today_df.sort_values(by="Total Value Score", ascending=False)
 
@@ -181,11 +210,18 @@ print("Applying dynamic color codes and generating the dashboard...")
 
 # Apply the green-to-red styles to both datasets
 def apply_styles(dataframe):
-    return dataframe.style\
+    # 1. Apply the core styles that exist in both Today and Historical sheets
+    styler = dataframe.style\
         .background_gradient(cmap='RdYlGn', subset=['Total Value Score', 'Industry Value Score'], vmin=0, vmax=100)\
         .background_gradient(cmap='RdYlGn', subset=['Analyst Rating'], vmin=1, vmax=5)\
         .background_gradient(cmap='RdYlGn', subset=['Expected Upside'])\
         .background_gradient(cmap='RdYlGn_r', subset=['Risk Spread'])
+        
+    # 2. Safely apply the Momentum styling ONLY if the column exists (Today's sheet)
+    if 'Score Change' in dataframe.columns:
+        styler = styler.background_gradient(cmap='RdYlGn', subset=['Score Change'], vmin=-10, vmax=10)
+        
+    return styler
 
 styled_today = apply_styles(today_df)
 styled_final = apply_styles(final_df)
@@ -256,6 +292,14 @@ seconds = execution_time % 60
 print(f"Success! The database has been updated and formatted in {output_filename}.")
 print(f"⏱️ Total execution time: {minutes} minutes and {seconds:.2f} seconds.")
 
-# 10. AUTO-OPEN EXCEL ON MAC
-print("Opening the dashboard...")
-os.system(f"open '{output_filename}'")
+# =========================================================
+# 10. QUIET MODE EXCEL OPENER
+# =========================================================
+# Set this to True when you want the script to run invisibly in the background
+QUIET_MODE = True
+
+if not QUIET_MODE:
+    print("Opening the dashboard...")
+    os.system(f"open '{output_filename}'")
+else:
+    print("Quiet mode active. Dashboard saved but not opened.")
