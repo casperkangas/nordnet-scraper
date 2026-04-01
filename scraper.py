@@ -200,20 +200,27 @@ last_date = past_dates[-1] if past_dates else None
 # =========================================================
 print("Generating the historical score matrix...")
 
-# Pivot the data
 trend_df = final_df.pivot(index='Ticker', columns='Date', values='Total Value Score').reset_index()
 
-# Rename today's column to 'Current Score'
 if today_str in trend_df.columns:
     trend_df = trend_df.rename(columns={today_str: 'Current Score'})
 else:
     trend_df['Current Score'] = np.nan
 
-# Organize columns: Ticker -> Current Score -> Historical Dates (Chronological)
-recent_past_dates = past_dates[-9:] # Keep up to 9 past runs to keep it clean
-trend_df = trend_df[['Ticker', 'Current Score'] + recent_past_dates]
+recent_past_dates = past_dates[-9:]
 
-# Sort by the Current Score
+# Interleave the columns: Ticker -> Current -> Date 1 -> Date 1 % -> Date 2 -> Date 2 %
+score_cols = ['Ticker', 'Current Score']
+for d in recent_past_dates:
+    if d in trend_df.columns:
+        diff_col = f"{d} Diff %"
+        # Calculate the percentage difference and restrict to 2 decimals
+        trend_df[diff_col] = (((trend_df['Current Score'] - trend_df[d]) / trend_df[d].replace(0, np.nan)) * 100).round(2)
+        score_cols.extend([d, diff_col])
+
+# Filter and sort
+existing_score_cols = [c for c in score_cols if c in trend_df.columns]
+trend_df = trend_df[existing_score_cols]
 trend_df = trend_df.sort_values(by='Current Score', ascending=False)
 
 # =========================================================
@@ -229,17 +236,32 @@ if 'Current Price' in final_df.columns:
     else:
         price_trend_df['Current Price'] = np.nan
         
-    price_trend_df = price_trend_df[['Ticker', 'Current Price'] + recent_past_dates]
-    price_trend_df = price_trend_df.sort_values(by='Current Price', ascending=False)
-else:
-    price_trend_df = pd.DataFrame(columns=['Ticker', 'Current Price'])
+    price_cols = ['Ticker', 'Current Price']
+    for d in recent_past_dates:
+        if d in price_trend_df.columns:
+            diff_col = f"{d} Diff %"
+            # Calculate the percentage difference and restrict to 2 decimals
+            price_trend_df[diff_col] = (((price_trend_df['Current Price'] - price_trend_df[d]) / price_trend_df[d].replace(0, np.nan)) * 100).round(2)
+            price_cols.extend([d, diff_col])
+            
+    existing_price_cols = [c for c in price_cols if c in price_trend_df.columns]
+    price_trend_df = price_trend_df[existing_price_cols]
+    
+    # --- NEW: Sort by the most recent % difference (Momentum) ---
+    if recent_past_dates:
+        latest_diff_col = f"{recent_past_dates[-1]} Diff %"
+        if latest_diff_col in price_trend_df.columns:
+            price_trend_df = price_trend_df.sort_values(by=latest_diff_col, ascending=False)
+        else:
+            price_trend_df = price_trend_df.sort_values(by='Current Price', ascending=False)
+    else:
+        price_trend_df = price_trend_df.sort_values(by='Current Price', ascending=False)
 
 # =========================================================
 # 9. EXCEL FORMATTING, FILTERING, AND CHART GENERATION
 # =========================================================
 print("Applying dynamic color codes and generating the dashboard...")
 
-# 1. Core Styles for Snapshot and History
 def apply_styles(dataframe):
     return dataframe.style\
         .background_gradient(cmap='RdYlGn', subset=['Total Value Score', 'Industry Value Score'], vmin=0, vmax=100)\
@@ -250,27 +272,30 @@ def apply_styles(dataframe):
 styled_today = apply_styles(today_df)
 styled_final = apply_styles(final_df)
 
-# 2. Custom Logic to color the Current column based on the Previous column
-def highlight_comparison(data, current_col, prev_col):
-    # Create an empty styling grid that matches the dataframe
-    styles = pd.DataFrame('', index=data.index, columns=data.columns)
-    
-    if prev_col and prev_col in data.columns and current_col in data.columns:
-        diff = data[current_col] - data[prev_col]
-        
-        # Excel standard positive Green and negative Red
-        styles.loc[diff > 0, current_col] = 'background-color: #c6efce; color: #006100;'
-        styles.loc[diff < 0, current_col] = 'background-color: #ffc7ce; color: #9c0006;'
-        
-    return styles
+# A specific function to style the new Difference Percentage columns
+def apply_diff_styles(styler, df):
+    diff_cols = [col for col in df.columns if "Diff %" in col]
+    if diff_cols:
+        # Color the percentages (Green for positive, Red for negative, capped visually at +/- 20%)
+        styler = styler.background_gradient(cmap='RdYlGn', subset=diff_cols, vmin=-20, vmax=20)
+        # Format the numbers nicely as percentages (e.g., +5.20%)
+        format_dict = {col: "{:+.2f}%" for col in diff_cols}
+        styler = styler.format(format_dict, na_rep="")
+    return styler
 
 # Apply styles to Score Trend
-styled_trend = trend_df.style.apply(highlight_comparison, current_col='Current Score', prev_col=last_date, axis=None)
-for col in recent_past_dates:
+styled_trend = trend_df.style
+past_score_cols = [c for c in recent_past_dates if c in trend_df.columns]
+# Keep the 0-100 gradient ONLY for the raw scores
+for col in past_score_cols + ['Current Score']:
     styled_trend = styled_trend.background_gradient(cmap='RdYlGn', subset=[col], vmin=0, vmax=100)
+# Apply the specific percentage styling to the diff columns
+styled_trend = apply_diff_styles(styled_trend, trend_df)
 
 # Apply styles to Price Trend
-styled_price_trend = price_trend_df.style.apply(highlight_comparison, current_col='Current Price', prev_col=last_date, axis=None)
+styled_price_trend = price_trend_df.style
+# Notice we DO NOT color the raw historical prices or current prices here, just the diff columns!
+styled_price_trend = apply_diff_styles(styled_price_trend, price_trend_df)
 
 with pd.ExcelWriter(output_filename, engine='xlsxwriter') as writer:
     
