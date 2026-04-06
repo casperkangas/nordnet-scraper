@@ -80,7 +80,7 @@ with sync_playwright() as p:
                 # 2. THE HARD PAUSE: Tell the open browser to simply wait 3 seconds.
                 # This gives Nordnet's JavaScript plenty of time to paint the financial numbers.
                 # Use speed_test.py to experiment with this number and find the optimal balance between speed and data completeness.
-                page.wait_for_timeout(1625)
+                page.wait_for_timeout(1300)
                 
                 # 3. Grab ALL buttons immediately, whether they are hidden menus or financial data
                 buttons = page.query_selector_all('button')
