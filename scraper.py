@@ -6,6 +6,7 @@ import numpy as np
 import glob
 from scoring_engine import apply_weighted_scoring
 import time
+import matplotlib.pyplot as plt
 
 # --- NEW: START THE TIMER ---
 print("⏱️ Starting the scraping engine...")
@@ -256,6 +257,45 @@ if 'Current Price' in final_df.columns:
             price_trend_df = price_trend_df.sort_values(by='Current Price', ascending=False)
     else:
         price_trend_df = price_trend_df.sort_values(by='Current Price', ascending=False)
+
+# =========================================================
+# --- NEW: GENERATE RISK VS REWARD SCATTER PLOT ---
+# =========================================================
+print("Generating Risk vs. Reward visualization...")
+
+# 1. Isolate the data: Drop any stocks missing these metrics so the math doesn't crash
+plot_df = today_df.dropna(subset=['Risk Spread', 'Expected Upside']).copy()
+
+# 2. Define our axes
+x = plot_df['Risk Spread']       # X-axis: Risk (Volatility / Uncertainty)
+y = plot_df['Expected Upside']   # Y-axis: Reward (Potential Growth)
+tickers = plot_df['Ticker']      # Labels: The company names
+
+# 3. Create the blank canvas (10 inches wide by 6 inches tall)
+plt.figure(figsize=(10, 6))
+
+# 4. Draw the dots
+plt.scatter(x, y, color='#2196F3', alpha=0.7, edgecolors='black', s=50)
+
+# 5. Attach the Ticker names slightly offset from each dot
+for i, ticker in enumerate(tickers):
+    plt.annotate(ticker, (x.iloc[i], y.iloc[i]), xytext=(5, 5), textcoords='offset points', fontsize=8)
+
+# 6. Add titles and gridlines to make it highly readable
+plt.title(f'Risk vs. Reward Matrix ({today_str})', fontsize=14, fontweight='bold')
+plt.xlabel('Risk Spread (Best Case minus Worst Case)', fontsize=12)
+plt.ylabel('Expected Upside %', fontsize=12)
+plt.grid(True, linestyle='--', alpha=0.5)
+
+# 7. Add a "Zero Line" to instantly see negative upside stocks
+plt.axhline(0, color='red', linestyle='-', linewidth=1.5, alpha=0.8)
+
+# 8. Save the chart as a static image file
+plot_filename = f"Risk_Reward_{today_str}.png"
+plt.savefig(plot_filename, bbox_inches='tight', dpi=150)
+plt.close() # Free up computer memory
+
+print(f"Saved visualization as {plot_filename}")
 
 # =========================================================
 # 9. EXCEL FORMATTING, FILTERING, AND CHART GENERATION
