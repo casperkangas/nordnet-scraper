@@ -40,31 +40,33 @@ def apply_weighted_scoring(df):
     # =========================================================
     # 2. METRIC THEORY, TARGETS, AND MULTIPLIER WEIGHTS
     # =========================================================
+    # Total weights below equal 1.0 (100%) for a pure Fundamental Value Score.
 
     target_metrics = {
-        "P/E": {"target": 15.0, "weight": 0.10}  # 10%
+        # Valuation Anchor: Target a healthy 15.0 P/E
+        "P/E": {"target": 15.0, "weight": 0.30}  
     }
 
     higher_metrics = {
-        "EPS": 0.30,          # 30% 
-        "EBIT": 0.15,         # 15% 
-        "Liikevaihto": 0.0,   # Removed weight, replaced by our specific risk cases
+        # Sentiment: Professional analyst consensus (1 to 5 scale)
+        "Analyst Rating": 0.10,   
         
-        "Expected Upside": 0.10, # 10% 
-        "Worst Case": 0.05,      # 5% 
-        
-        "Analyst Rating": 0.05,   # 5%
+        # Unweighted tracking metrics (Kept at 0.0 to prevent engine crashes, 
+        # but completely ignored in the actual mathematical ranking)
         "Osinkotuotto": 0.0, 
-        "Omistajia Nordnetissä*": 0.0 
+        "Omistajia Nordnetissä*": 0.0,
+        "Liikevaihto": 0.0
     }
 
     lower_metrics = {
-        "PEG": 0.15,  # 15% 
-        "P/B": 0.05,  # 5%
+        # Growth Anchor: Price to Earnings Growth (balances the P/E)
+        "PEG": 0.30,  
         
-        # --- NEW SPREAD METRIC ---
-        # Ranked lower-is-better because a smaller spread means higher analyst certainty.
-        "Risk Spread": 0.05 # 5%
+        # Asset Valuation: Price to Book value
+        "P/B": 0.15,  
+        
+        # Revenue Valuation: Price to Sales (safely replaces raw Liikevaihto)
+        "P/S": 0.15   
     }
 
     # =========================================================
