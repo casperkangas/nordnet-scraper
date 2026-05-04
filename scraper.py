@@ -491,32 +491,104 @@ with pd.ExcelWriter(output_filename, engine='xlsxwriter') as writer:
         max_len = int(max(data_max, len(str(col))) + 2)
         worksheet_price.set_column(idx, idx, max_len)
     
-    # DRAW THE TOP 10 CHART
-    chart = workbook.add_chart({'type': 'column'})
-    
-    ticker_col = today_df.columns.get_loc("Ticker")
-    composite_col = today_df.columns.get_loc("⭐ Composite Score") if "⭐ Composite Score" in today_df.columns else today_df.columns.get_loc("Total Value Score")
-    upside_col = today_df.columns.get_loc("Expected Upside")
-    
+    # -------------------------------------------------------
+    # DRAW THE TOP 10 COMBO CHART
+    # All series share the primary (left) 0-100 axis to avoid
+    # XlsxWriter y2_axis / combine() XML corruption in Excel.
+    #
+    # Analyst Rating is scaled ×20 (1→20 … 5→100) and written
+    # to a helper column so it sits on the same axis naturally.
+    # Average Composite line written to a second helper column.
+    # -------------------------------------------------------
     chart_rows = min(len(today_df), 10)
-    
+
+    # Column indices for the real data
+    ticker_col    = today_df.columns.get_loc("Ticker")
+    composite_col = today_df.columns.get_loc("⭐ Composite Score") if "⭐ Composite Score" in today_df.columns else today_df.columns.get_loc("Total Value Score")
+    upside_col    = today_df.columns.get_loc("Expected Upside")
+    momentum_col  = today_df.columns.get_loc("📈 Momentum Score") if "📈 Momentum Score" in today_df.columns else None
+
+    # Helper columns written far to the right — invisible to the user
+    avg_col_idx    = len(today_df.columns) + 30   # flat average Composite line
+    rating_col_idx = len(today_df.columns) + 31   # Analyst Rating scaled ×20
+
+    # --- Write average Composite Score (repeated for each of the top-10 rows) ---
+    avg_composite = None
+    if '⭐ Composite Score' in today_df.columns:
+        avg_composite = round(float(today_df['⭐ Composite Score'].iloc[:chart_rows].mean()), 1)
+        for i in range(chart_rows):
+            worksheet_today.write(i + 1, avg_col_idx, avg_composite)
+
+    # --- Write Analyst Rating ×20 so it maps cleanly onto the 0-100 scale ---
+    has_rating_helper = False
+    if 'Analyst Rating' in today_df.columns:
+        for i in range(chart_rows):
+            raw = today_df['Analyst Rating'].iloc[i]
+            if pd.notna(raw):
+                worksheet_today.write(i + 1, rating_col_idx, round(float(raw) * 20, 1))
+        has_rating_helper = True
+
+    # ---- Main column chart (primary axis, 0-100) ----
+    chart = workbook.add_chart({'type': 'column'})
+
     chart.add_series({
         'name':       '⭐ Composite Score',
-        'categories': ['Today Snapshot', 1, ticker_col, chart_rows, ticker_col],
+        'categories': ['Today Snapshot', 1, ticker_col,    chart_rows, ticker_col],
         'values':     ['Today Snapshot', 1, composite_col, chart_rows, composite_col],
-        'fill':       {'color': '#4CAF50'} 
+        'fill':       {'color': '#4CAF50'},
+        'gap':        80,
     })
-    
+
+    if momentum_col is not None:
+        chart.add_series({
+            'name':       '📈 Momentum Score',
+            'categories': ['Today Snapshot', 1, ticker_col,   chart_rows, ticker_col],
+            'values':     ['Today Snapshot', 1, momentum_col, chart_rows, momentum_col],
+            'fill':       {'color': '#9C27B0'},
+        })
+
     chart.add_series({
         'name':       'Expected Upside %',
-        'categories': ['Today Snapshot', 1, ticker_col, chart_rows, ticker_col],
-        'values':     ['Today Snapshot', 1, upside_col, chart_rows, upside_col],
-        'fill':       {'color': '#2196F3'} 
+        'categories': ['Today Snapshot', 1, ticker_col,  chart_rows, ticker_col],
+        'values':     ['Today Snapshot', 1, upside_col,  chart_rows, upside_col],
+        'fill':       {'color': '#2196F3'},
     })
-    
-    chart.set_title({'name': f'Top {chart_rows} Actionable Stocks ({today_str})'})
-    chart.set_size({'width': 750, 'height': 400})
-    
+
+    chart.set_y_axis({
+        'name':    'Score / Upside (0–100)',
+        'min':      0,
+        'max':      100,
+        'major_gridlines': {'visible': True, 'line': {'color': '#E0E0E0'}},
+    })
+
+    # ---- Overlay line chart on the same primary axis (no y2_axis) ----
+    chart_lines = workbook.add_chart({'type': 'line'})
+
+    if avg_composite is not None:
+        chart_lines.add_series({
+            'name':       f'Avg Composite ({avg_composite})',
+            'categories': ['Today Snapshot', 1, ticker_col,   chart_rows, ticker_col],
+            'values':     ['Today Snapshot', 1, avg_col_idx,  chart_rows, avg_col_idx],
+            'line':       {'color': '#FF9800', 'dash_type': 'dash', 'width': 2.25},
+            'marker':     {'type': 'none'},
+        })
+
+    if has_rating_helper:
+        chart_lines.add_series({
+            'name':       'Analyst Rating (×20, i.e. 5★=100)',
+            'categories': ['Today Snapshot', 1, ticker_col,      chart_rows, ticker_col],
+            'values':     ['Today Snapshot', 1, rating_col_idx,  chart_rows, rating_col_idx],
+            'line':       {'color': '#F44336', 'width': 2.0},
+            'marker':     {'type': 'circle', 'size': 5, 'fill': {'color': '#F44336'}},
+        })
+
+    chart.combine(chart_lines)
+
+    chart.set_title({'name': f'Top {chart_rows} Actionable Stocks — Dashboard ({today_str})'})
+    chart.set_legend({'position': 'bottom'})
+    chart.set_size({'width': 1000, 'height': 600})
+    chart.set_chartarea({'border': {'color': '#BDBDBD'}})
+
     worksheet_today.insert_chart(1, len(today_df.columns) + 1, chart)
 
 # --- STOP TIMER ---
