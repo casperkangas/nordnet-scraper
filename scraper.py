@@ -81,7 +81,7 @@ with sync_playwright() as p:
                 # 2. THE HARD PAUSE: Tell the open browser to simply wait 3 seconds.
                 # This gives Nordnet's JavaScript plenty of time to paint the financial numbers.
                 # Use speed_test.py to experiment with this number and find the optimal balance between speed and data completeness.
-                page.wait_for_timeout(1000)
+                page.wait_for_timeout(3000)
                 
                 # 3. Grab ALL buttons immediately, whether they are hidden menus or financial data
                 buttons = page.query_selector_all('button')
@@ -94,21 +94,32 @@ with sync_playwright() as p:
                 # ==========================================
                 # --- NEW: GRAB THE CURRENT PRICE ---
                 # ==========================================
+                stock_data["Current Price"] = None  
+                
                 try:
-                    # Use substring matching (*=) to ignore the dynamic hash!
-                    price_element = page.locator("span[class*='InstrumentPrice-styles__CurrentPriceTypography']").first
+                    price_locator = page.locator("span[class*='InstrumentPrice-styles__CurrentPriceTypography']")
                     
-                    # Grab the text inside the span (e.g., "55,80")
-                    raw_price = price_element.inner_text(timeout=2000)
+                    # --- THE FIX: Force Playwright to wait for the element to exist BEFORE counting ---
+                    # It will wait up to 3 seconds for the price to attach to the page.
+                    price_locator.first.wait_for(state="attached", timeout=3000)
                     
-                    # Clean the European formatting (remove spaces, swap comma for dot)
-                    clean_price = raw_price.replace(" ", "").replace("\xa0", "").replace(",", ".")
-                    stock_data["Current Price"] = float(clean_price)
-                    # DEBUG: print(f"  -> Current Price for {ticker}: {stock_data['Current Price']} EUR")
+                    element_count = price_locator.count()
                     
+                    for i in range(element_count):
+                        # Bypass CSS visibility rules
+                        raw_price = price_locator.nth(i).text_content()
+                        
+                        if raw_price:
+                            clean_price = raw_price.replace(" ", "").replace("\xa0", "").replace(",", ".")
+                            
+                            try:
+                                stock_data["Current Price"] = float(clean_price)
+                                break  # We found the real price, stop looking!
+                            except ValueError:
+                                pass
+                                
                 except Exception as e:
                     print(f"  -> Notice: Could not locate price for {ticker}. Error: {e}")
-                    stock_data["Current Price"] = None
                 # ==========================================
                                 
                 for button in buttons:
