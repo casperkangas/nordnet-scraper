@@ -81,7 +81,7 @@ with sync_playwright() as p:
                 # 2. THE HARD PAUSE: Tell the open browser to simply wait 3 seconds.
                 # This gives Nordnet's JavaScript plenty of time to paint the financial numbers.
                 # Use speed_test.py to experiment with this number and find the optimal balance between speed and data completeness.
-                page.wait_for_timeout(3000)
+                page.wait_for_timeout(2000)
                 
                 # 3. Grab ALL buttons immediately, whether they are hidden menus or financial data
                 buttons = page.query_selector_all('button')
@@ -100,7 +100,7 @@ with sync_playwright() as p:
                     price_locator = page.locator("span[class*='InstrumentPrice-styles__CurrentPriceTypography']")
                     
                     # --- THE FIX: A cost-free generous timeout for slow-rendering cross-listed stocks ---
-                    price_locator.first.wait_for(state="attached", timeout=10000)
+                    price_locator.first.wait_for(state="attached", timeout=6000)
                     
                     element_count = price_locator.count()
                     
