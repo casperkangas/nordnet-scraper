@@ -99,9 +99,8 @@ with sync_playwright() as p:
                 try:
                     price_locator = page.locator("span[class*='InstrumentPrice-styles__CurrentPriceTypography']")
                     
-                    # --- THE FIX: Force Playwright to wait for the element to exist BEFORE counting ---
-                    # It will wait up to 3 seconds for the price to attach to the page.
-                    price_locator.first.wait_for(state="attached", timeout=3000)
+                    # --- THE FIX: A cost-free generous timeout for slow-rendering cross-listed stocks ---
+                    price_locator.first.wait_for(state="attached", timeout=10000)
                     
                     element_count = price_locator.count()
                     
