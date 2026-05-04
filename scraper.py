@@ -291,6 +291,71 @@ if score_diff_cols:
     today_df = today_df.merge(momentum_score, on='Ticker', how='left')
 
 # =========================================================
+# --- COMPOSITE & MOMENTUM SCORES ---
+# =========================================================
+print("Computing composite and momentum scores...")
+
+def _normalize_series(s, invert=False, clip_pct=(5, 95)):
+    """
+    Clip a series to its 5th-95th percentile range, then min-max scale it to 0-100.
+    If invert=True, flip the result so that lower raw values score higher.
+    Returns a float series; rows that were NaN stay NaN.
+    """
+    lo = np.nanpercentile(s.dropna(), clip_pct[0])
+    hi = np.nanpercentile(s.dropna(), clip_pct[1])
+    if hi == lo:                      # all values identical → mid-point
+        return pd.Series(50.0, index=s.index)
+    clipped = s.clip(lower=lo, upper=hi)
+    scaled  = (clipped - lo) / (hi - lo) * 100
+    return (100 - scaled) if invert else scaled
+
+# --- Composite Score: fundamentals + upside + risk ---
+# Weights must sum to 1.0. Adjust here to change the balance.
+W_TOTAL    = 0.35   # Total Value Score     (higher = better)
+W_INDUSTRY = 0.20   # Industry Value Score  (higher = better)
+W_UPSIDE   = 0.30   # Expected Upside %     (higher = better)
+W_RISK     = 0.15   # Risk Spread           (lower  = better → inverted)
+
+score_parts = []
+
+if 'Total Value Score' in today_df.columns:
+    score_parts.append(_normalize_series(today_df['Total Value Score']) * W_TOTAL)
+
+if 'Industry Value Score' in today_df.columns:
+    score_parts.append(_normalize_series(today_df['Industry Value Score']) * W_INDUSTRY)
+
+if 'Expected Upside' in today_df.columns:
+    score_parts.append(_normalize_series(today_df['Expected Upside']) * W_UPSIDE)
+
+if 'Risk Spread' in today_df.columns:
+    score_parts.append(_normalize_series(today_df['Risk Spread'], invert=True) * W_RISK)
+
+if score_parts:
+    today_df['⭐ Composite Score'] = pd.concat(score_parts, axis=1).sum(axis=1).round(1)
+
+# --- Momentum Score: how consistently the stock trends upward ---
+momentum_parts = []
+total_price_obs = None
+total_score_obs = None
+
+if 'Price ↑' in today_df.columns and 'Price ↓' in today_df.columns:
+    total_price_obs = today_df['Price ↑'] + today_df['Price ↓']
+    price_ratio = (today_df['Price ↑'] / total_price_obs.replace(0, np.nan)) * 100
+    momentum_parts.append(price_ratio * 0.50)
+
+if 'Score ↑' in today_df.columns and 'Score ↓' in today_df.columns:
+    total_score_obs = today_df['Score ↑'] + today_df['Score ↓']
+    score_ratio = (today_df['Score ↑'] / total_score_obs.replace(0, np.nan)) * 100
+    momentum_parts.append(score_ratio * 0.50)
+
+if momentum_parts:
+    today_df['📈 Momentum Score'] = pd.concat(momentum_parts, axis=1).sum(axis=1).round(1)
+
+# Re-sort the snapshot by the new master score
+if '⭐ Composite Score' in today_df.columns:
+    today_df = today_df.sort_values(by='⭐ Composite Score', ascending=False)
+
+# =========================================================
 # --- NEW: GENERATE RISK VS REWARD SCATTER PLOT ---
 # =========================================================
 print("Generating Risk vs. Reward visualization...")
@@ -340,7 +405,12 @@ def apply_styles(dataframe):
         .background_gradient(cmap='RdYlGn', subset=['Analyst Rating'], vmin=1, vmax=5)\
         .background_gradient(cmap='RdYlGn', subset=['Expected Upside'])\
         .background_gradient(cmap='RdYlGn_r', subset=['Risk Spread'])
-    # Colour momentum count columns if they are present in this dataframe
+    # Composite & Momentum scores (0-100 scale)
+    if '⭐ Composite Score' in dataframe.columns:
+        styler = styler.background_gradient(cmap='RdYlGn', subset=['⭐ Composite Score'], vmin=0, vmax=100)
+    if '📈 Momentum Score' in dataframe.columns:
+        styler = styler.background_gradient(cmap='RdYlGn', subset=['📈 Momentum Score'], vmin=0, vmax=100)
+    # Momentum count columns
     for up_col, down_col in [("Price ↑", "Price ↓"), ("Score ↑", "Score ↓")]:
         if up_col in dataframe.columns:
             max_val = max(dataframe[up_col].max(), dataframe[down_col].max(), 1)
@@ -425,15 +495,15 @@ with pd.ExcelWriter(output_filename, engine='xlsxwriter') as writer:
     chart = workbook.add_chart({'type': 'column'})
     
     ticker_col = today_df.columns.get_loc("Ticker")
-    total_col = today_df.columns.get_loc("Total Value Score")
+    composite_col = today_df.columns.get_loc("⭐ Composite Score") if "⭐ Composite Score" in today_df.columns else today_df.columns.get_loc("Total Value Score")
     upside_col = today_df.columns.get_loc("Expected Upside")
     
     chart_rows = min(len(today_df), 10)
     
     chart.add_series({
-        'name':       'Total Value Score',
+        'name':       '⭐ Composite Score',
         'categories': ['Today Snapshot', 1, ticker_col, chart_rows, ticker_col],
-        'values':     ['Today Snapshot', 1, total_col, chart_rows, total_col],
+        'values':     ['Today Snapshot', 1, composite_col, chart_rows, composite_col],
         'fill':       {'color': '#4CAF50'} 
     })
     
