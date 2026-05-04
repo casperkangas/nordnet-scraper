@@ -29,8 +29,11 @@ def apply_weighted_scoring(df):
         # SAFETY NET: If PERT fails because Worst/Best are blank, but Probable exists, use Probable.
         df["Expected Upside"] = df["Expected Upside"].fillna(df["Probable Case"])
         
-        # Calculate the Spread (Volatility). Higher spread = more risk.
-        df["Risk Spread"] = df["Best Case"] - df["Worst Case"]
+        # Calculate the Spread (Volatility Percentage)
+        # 1. Use .abs() to prevent negative risk if an analyst enters Worst > Best
+        # 2. Divide by Probable Case to normalize the risk regardless of share price
+        spread_currency = (df["Best Case"] - df["Worst Case"]).abs()
+        df["Risk Spread"] = (spread_currency / df["Probable Case"].replace(0, np.nan)) * 100
         
     else:
         df["Expected Upside"] = np.nan
