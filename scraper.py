@@ -269,6 +269,28 @@ if 'Current Price' in final_df.columns:
         price_trend_df = price_trend_df.sort_values(by='Current Price', ascending=False)
 
 # =========================================================
+# --- MOMENTUM COUNTS: Add +/- change tallies to Today Snapshot ---
+# =========================================================
+print("Calculating momentum counts (positive/negative change tallies)...")
+
+# --- Price momentum ---
+if 'Current Price' in final_df.columns:
+    price_diff_cols = [c for c in price_trend_df.columns if "Diff %" in c]
+    if price_diff_cols:
+        price_pos = (price_trend_df[price_diff_cols] > 0).sum(axis=1).rename("Price ↑")
+        price_neg = (price_trend_df[price_diff_cols] < 0).sum(axis=1).rename("Price ↓")
+        momentum_price = pd.concat([price_trend_df[['Ticker']], price_pos, price_neg], axis=1)
+        today_df = today_df.merge(momentum_price, on='Ticker', how='left')
+
+# --- Score momentum ---
+score_diff_cols = [c for c in trend_df.columns if "Diff %" in c]
+if score_diff_cols:
+    score_pos = (trend_df[score_diff_cols] > 0).sum(axis=1).rename("Score ↑")
+    score_neg = (trend_df[score_diff_cols] < 0).sum(axis=1).rename("Score ↓")
+    momentum_score = pd.concat([trend_df[['Ticker']], score_pos, score_neg], axis=1)
+    today_df = today_df.merge(momentum_score, on='Ticker', how='left')
+
+# =========================================================
 # --- NEW: GENERATE RISK VS REWARD SCATTER PLOT ---
 # =========================================================
 print("Generating Risk vs. Reward visualization...")
@@ -313,11 +335,18 @@ print(f"Saved visualization as {plot_filename}")
 print("Applying dynamic color codes and generating the dashboard...")
 
 def apply_styles(dataframe):
-    return dataframe.style\
+    styler = dataframe.style\
         .background_gradient(cmap='RdYlGn', subset=['Total Value Score', 'Industry Value Score'], vmin=0, vmax=100)\
         .background_gradient(cmap='RdYlGn', subset=['Analyst Rating'], vmin=1, vmax=5)\
         .background_gradient(cmap='RdYlGn', subset=['Expected Upside'])\
         .background_gradient(cmap='RdYlGn_r', subset=['Risk Spread'])
+    # Colour momentum count columns if they are present in this dataframe
+    for up_col, down_col in [("Price ↑", "Price ↓"), ("Score ↑", "Score ↓")]:
+        if up_col in dataframe.columns:
+            max_val = max(dataframe[up_col].max(), dataframe[down_col].max(), 1)
+            styler = styler.background_gradient(cmap='Greens', subset=[up_col], vmin=0, vmax=max_val)
+            styler = styler.background_gradient(cmap='Reds',   subset=[down_col], vmin=0, vmax=max_val)
+    return styler
 
 styled_today = apply_styles(today_df)
 styled_final = apply_styles(final_df)
