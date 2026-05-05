@@ -23,17 +23,15 @@ def apply_weighted_scoring(df):
     # =========================================================
     if "Worst Case" in df.columns and "Probable Case" in df.columns and "Best Case" in df.columns:
         
-        # Calculate Expected Upside using PERT
+        # 1. Calculate Expected Upside using PERT (Inputs are already percentages)
         df["Expected Upside"] = (df["Worst Case"] + (4 * df["Probable Case"]) + df["Best Case"]) / 6
         
         # SAFETY NET: If PERT fails because Worst/Best are blank, but Probable exists, use Probable.
         df["Expected Upside"] = df["Expected Upside"].fillna(df["Probable Case"])
         
-        # Calculate the Spread (Volatility Percentage)
-        # 1. Use .abs() to prevent negative risk if an analyst enters Worst > Best
-        # 2. Divide by Probable Case to normalize the risk regardless of share price
-        spread_currency = (df["Best Case"] - df["Worst Case"]).abs()
-        df["Risk Spread"] = (spread_currency / df["Probable Case"].replace(0, np.nan)) * 100
+        # 2. Calculate the Spread (Volatility Percentage)
+        # Since the inputs are already percentages, the spread is just the absolute difference!
+        df["Risk Spread"] = (df["Best Case"] - df["Worst Case"]).abs()
         
     else:
         df["Expected Upside"] = np.nan
