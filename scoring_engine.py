@@ -42,32 +42,54 @@ def apply_weighted_scoring(df):
     # 2. METRIC THEORY, TARGETS, AND MULTIPLIER WEIGHTS
     # =========================================================
     # Total weights below equal 1.0 (100%) for a pure Fundamental Value Score.
+    #
+    # WEIGHT RATIONALE:
+    # P/E is reduced from 0.30 → 0.15 because PEG already contains P/E in its
+    # numerator (PEG = P/E ÷ EPS growth rate). Giving both equal high weight
+    # caused earnings valuation to dominate ~60% of the score redundantly.
+    # The freed weight is redistributed to Analyst Rating (professional consensus),
+    # EBIT (operating profitability — are they actually making money?), and
+    # EPS (earnings per share — core long-term compounder signal).
+    # P/B is trimmed slightly because it is less meaningful for asset-light
+    # tech and pharma firms common on OMXH.
 
     target_metrics = {
-        # Valuation Anchor: Target a healthy 15.0 P/E
-        "P/E": {"target": 15.0, "weight": 0.30}  
+        # Valuation Anchor: Reward stocks trading close to a fair 15x P/E.
+        # Reduced from 0.30 to avoid double-counting with PEG.
+        "P/E": {"target": 15.0, "weight": 0.15}
     }
 
     higher_metrics = {
-        # Sentiment: Professional analyst consensus (1 to 5 scale)
-        "Analyst Rating": 0.10,   
-        
-        # Unweighted tracking metrics (Kept at 0.0 to prevent engine crashes, 
-        # but completely ignored in the actual mathematical ranking)
-        "Osinkotuotto": 0.0, 
+        # Sentiment: Professional analyst consensus (1 to 5 scale).
+        # Raised from 0.10 — analyst consensus is a meaningful signal.
+        "Analyst Rating": 0.15,
+
+        # Profitability: Higher EBIT = company actually generates operating profit.
+        # Activated from 0.0 — critical signal that was previously ignored.
+        "EBIT": 0.10,
+
+        # Growth: Higher EPS rewards profitable compounders.
+        # Activated from 0.0 — key long-term signal.
+        "EPS": 0.10,
+
+        # Unweighted tracking metrics (kept at 0.0 to prevent engine crashes,
+        # but completely excluded from the actual mathematical ranking).
+        "Osinkotuotto": 0.0,
         "Omistajia Nordnetissä*": 0.0,
         "Liikevaihto": 0.0
     }
 
     lower_metrics = {
-        # Growth Anchor: Price to Earnings Growth (balances the P/E)
-        "PEG": 0.30,  
-        
-        # Asset Valuation: Price to Book value
-        "P/B": 0.15,  
-        
-        # Revenue Valuation: Price to Sales (safely replaces raw Liikevaihto)
-        "P/S": 0.15   
+        # Growth Anchor: PEG is the most complete valuation metric as it
+        # normalises P/E by earnings growth. Primary driver of the score.
+        "PEG": 0.25,
+
+        # Asset Valuation: Price to Book value.
+        # Trimmed from 0.15 — less relevant for asset-light OMXH sectors.
+        "P/B": 0.10,
+
+        # Revenue Valuation: Price to Sales — universally applicable.
+        "P/S": 0.15
     }
 
     # =========================================================

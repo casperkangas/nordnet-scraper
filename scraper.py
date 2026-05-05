@@ -269,26 +269,39 @@ if 'Current Price' in final_df.columns:
         price_trend_df = price_trend_df.sort_values(by='Current Price', ascending=False)
 
 # =========================================================
-# --- MOMENTUM COUNTS: Add +/- change tallies to Today Snapshot ---
+# --- MOMENTUM COUNTS: period-over-period consecutive diffs ---
 # =========================================================
-print("Calculating momentum counts (positive/negative change tallies)...")
+# IMPORTANT: We do NOT use the Diff% display columns here because those
+# compare every historical date back to TODAY, meaning a stock that peaked
+# 6 months ago and has since declined would show mostly "negative" counts
+# even if it was rising for 5 of those 6 months.
+# Instead, we pivot the raw data and compute date[i] vs date[i-1] diffs,
+# which correctly captures directional movement between each consecutive scrape.
+print("Calculating momentum counts (period-over-period consecutive changes)...")
 
-# --- Price momentum ---
+# --- Price momentum (period-over-period) ---
 if 'Current Price' in final_df.columns:
-    price_diff_cols = [c for c in price_trend_df.columns if "Diff %" in c]
-    if price_diff_cols:
-        price_pos = (price_trend_df[price_diff_cols] > 0).sum(axis=1).rename("Price ↑")
-        price_neg = (price_trend_df[price_diff_cols] < 0).sum(axis=1).rename("Price ↓")
-        momentum_price = pd.concat([price_trend_df[['Ticker']], price_pos, price_neg], axis=1)
-        today_df = today_df.merge(momentum_price, on='Ticker', how='left')
+    _price_pivot = final_df.pivot_table(
+        index='Ticker', columns='Date', values='Current Price', aggfunc='last'
+    )
+    _price_sorted = _price_pivot[sorted(_price_pivot.columns)]
+    # diff(axis=1) gives col[i] - col[i-1]; first column becomes NaN (correct)
+    _price_consec = _price_sorted.diff(axis=1).iloc[:, 1:]
+    price_pos = (_price_consec > 0).sum(axis=1).rename("Price ↑")
+    price_neg = (_price_consec < 0).sum(axis=1).rename("Price ↓")
+    momentum_price = pd.concat([price_pos, price_neg], axis=1).reset_index()
+    today_df = today_df.merge(momentum_price, on='Ticker', how='left')
 
-# --- Score momentum ---
-score_diff_cols = [c for c in trend_df.columns if "Diff %" in c]
-if score_diff_cols:
-    score_pos = (trend_df[score_diff_cols] > 0).sum(axis=1).rename("Score ↑")
-    score_neg = (trend_df[score_diff_cols] < 0).sum(axis=1).rename("Score ↓")
-    momentum_score = pd.concat([trend_df[['Ticker']], score_pos, score_neg], axis=1)
-    today_df = today_df.merge(momentum_score, on='Ticker', how='left')
+# --- Score momentum (period-over-period) ---
+_score_pivot = final_df.pivot_table(
+    index='Ticker', columns='Date', values='Total Value Score', aggfunc='last'
+)
+_score_sorted = _score_pivot[sorted(_score_pivot.columns)]
+_score_consec = _score_sorted.diff(axis=1).iloc[:, 1:]
+score_pos = (_score_consec > 0).sum(axis=1).rename("Score ↑")
+score_neg = (_score_consec < 0).sum(axis=1).rename("Score ↓")
+momentum_score = pd.concat([score_pos, score_neg], axis=1).reset_index()
+today_df = today_df.merge(momentum_score, on='Ticker', how='left')
 
 # =========================================================
 # --- COMPOSITE & MOMENTUM SCORES ---
@@ -575,7 +588,7 @@ with pd.ExcelWriter(output_filename, engine='xlsxwriter') as writer:
 
     if has_rating_helper:
         chart_lines.add_series({
-            'name':       'Analyst Rating (×20, i.e. 5★=100)',
+            'name':       'Analyst Rating',
             'categories': ['Today Snapshot', 1, ticker_col,      chart_rows, ticker_col],
             'values':     ['Today Snapshot', 1, rating_col_idx,  chart_rows, rating_col_idx],
             'line':       {'color': '#F44336', 'width': 2.0},
@@ -586,7 +599,7 @@ with pd.ExcelWriter(output_filename, engine='xlsxwriter') as writer:
 
     chart.set_title({'name': f'Top {chart_rows} Actionable Stocks — Dashboard ({today_str})'})
     chart.set_legend({'position': 'bottom'})
-    chart.set_size({'width': 1000, 'height': 600})
+    chart.set_size({'width': 1200, 'height': 800})
     chart.set_chartarea({'border': {'color': '#BDBDBD'}})
 
     worksheet_today.insert_chart(1, len(today_df.columns) + 1, chart)
