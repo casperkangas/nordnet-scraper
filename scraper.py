@@ -97,7 +97,8 @@ with sync_playwright() as p:
                 stock_data["Current Price"] = None  
                 
                 try:
-                    price_locator = page.locator("span[class*='InstrumentPrice-styles__CurrentPriceTypography']")
+                    # --- UPDATED LOCATOR: Adapting to Nordnet's new Tailwind/Utility CSS frontend ---
+                    price_locator = page.locator("span[class*='typography-title2'][class*='font-extrabold']")
                     
                     # --- THE FIX: A cost-free generous timeout for slow-rendering cross-listed stocks ---
                     price_locator.first.wait_for(state="attached", timeout=6000)
