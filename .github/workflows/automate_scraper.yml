@@ -7,6 +7,9 @@ on:
     - cron: '0 15 * * 1-5'
   workflow_dispatch: # This adds a manual "Run workflow" button in GitHub so you can test it!
 
+permissions:
+  contents: write
+
 # 2. THE SERVER SETUP
 jobs:
   scrape-data:
