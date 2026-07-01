@@ -158,11 +158,18 @@ with sync_playwright() as p:
 print("\nConverting data to a table...")
 df = pd.DataFrame(all_stocks_data)
 
-# --- NEW: Ensure the data directory exists ---
-os.makedirs("data", exist_ok=True)
+# --- THE FIX: Anchor the paths securely to the script's exact location ---
+# 1. Get the absolute path of the folder where scraper_json.py lives
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
-# Route the master database into the new folder
-output_filename = "data/Stock_Analysis_Master.json"
+# 2. Build the precise path for the data directory
+data_dir = os.path.join(script_dir, "data")
+
+# 3. Create it if it doesn't exist
+os.makedirs(data_dir, exist_ok=True)
+
+# 4. Route the master database securely into the anchored folder
+output_filename = os.path.join(data_dir, "Stock_Analysis_Master.json")
 
 # 6. INTEGRATE MANUAL ANALYST RATINGS
 manual_file = "Manual_Analyst_Ratings.xlsx"
@@ -410,7 +417,7 @@ plt.grid(True, linestyle='--', alpha=0.5)
 plt.axhline(0, color='red', linestyle='-', linewidth=1.5, alpha=0.8)
 
 # 8. Save the chart as a static image file
-plot_filename = f"data/Risk_Reward_{today_str}.png"
+plot_filename = os.path.join(data_dir, f"Risk_Reward_{today_str}.png")
 plt.savefig(plot_filename, bbox_inches='tight', dpi=150)
 plt.close() # Free up computer memory
 
@@ -424,10 +431,10 @@ print("Saving database and exporting web-ready JSON panels...")
 # 1. Update the master history ledger database
 final_df.to_json(output_filename, orient="records", force_ascii=False, indent=4)
 
-# 2. Export the static UI panels into the data directory
-today_df.to_json("data/web_today_snapshot.json", orient="records", force_ascii=False, indent=4)
-trend_df.to_json("data/web_score_trend.json", orient="records", force_ascii=False, indent=4)
-price_trend_df.to_json("data/web_price_trend.json", orient="records", force_ascii=False, indent=4)
+# 2. Export the static UI panels into the anchored data directory
+today_df.to_json(os.path.join(data_dir, "web_today_snapshot.json"), orient="records", force_ascii=False, indent=4)
+trend_df.to_json(os.path.join(data_dir, "web_score_trend.json"), orient="records", force_ascii=False, indent=4)
+price_trend_df.to_json(os.path.join(data_dir, "web_price_trend.json"), orient="records", force_ascii=False, indent=4)
 
 # 3. Generate the interactive Time-Series Library
 import json
@@ -437,16 +444,18 @@ all_tickers = final_df['Ticker'].unique()
 for ticker in all_tickers:
     ticker_history = final_df[final_df['Ticker'] == ticker].copy()
     ticker_history = ticker_history.sort_values(by='Date')
+    
     desired_cols = ['Date', 'Current Price', 'Total Value Score', '⭐ Composite Score']
-    existing_cols = [col for col in desired_cols if col in ticker_history.columns]    
+    existing_cols = [col for col in desired_cols if col in ticker_history.columns]
+    
     chart_data = ticker_history[existing_cols].dropna(subset=['Current Price']).copy()
     historical_export[ticker] = chart_data.to_dict(orient='records')
 
-# Save the full library into the data directory
-with open("data/web_historical_timeseries.json", "w", encoding="utf-8") as f:
+# Save the full library into the anchored data directory
+with open(os.path.join(data_dir, "web_historical_timeseries.json"), "w", encoding="utf-8") as f:
     json.dump(historical_export, f, ensure_ascii=False, indent=4)
 
-print("Success! JSON panels and interactive Time-Series Library routed to the /data/ folder.")
+print("Success! JSON panels and interactive Time-Series Library securely routed.")
 
 # --- STOP TIMER ---
 end_time = time.time()

@@ -27,5 +27,68 @@
 
     </div>
 
+<script>
+        async function loadSnapshot() {
+            try {
+                // 1. Fetch the data from your new API folder
+                const response = await fetch('data/web_today_snapshot.json');
+                const data = await response.json();
+
+                // 2. Safety check: If the file is empty, stop running
+                if (data.length === 0) return;
+
+                // 3. Extract the column names dynamically from the first stock
+                const headers = Object.keys(data[0]);
+                const thead = document.querySelector('#snapshot-table thead');
+                
+                let headerHTML = '<tr>';
+                headers.forEach(header => {
+                    headerHTML += `<th class="px-4 py-3 font-semibold tracking-wide text-xs uppercase">${header}</th>`;
+                });
+                headerHTML += '</tr>';
+                thead.innerHTML = headerHTML;
+
+                // 4. Loop through the database and build the table rows
+                const tbody = document.getElementById('table-body');
+                let rowsHTML = '';
+                
+                data.forEach(stock => {
+                    // Tailwind hover effect makes rows highlight when the mouse passes over
+                    rowsHTML += '<tr class="hover:bg-slate-50 transition-colors duration-150">';
+                    
+                    headers.forEach(header => {
+                        let cellValue = stock[header];
+                        
+                        // Clean up empty values so it doesn't display "null"
+                        if (cellValue === null || cellValue === undefined) {
+                            cellValue = '-';
+                        } else if (typeof cellValue === 'number' && !Number.isInteger(cellValue)) {
+                            // Round long decimals to 2 places for a clean UI
+                            cellValue = cellValue.toFixed(2);
+                        }
+
+                        rowsHTML += `<td class="px-4 py-3 border-t border-slate-100 whitespace-nowrap">${cellValue}</td>`;
+                    });
+                    
+                    rowsHTML += '</tr>';
+                });
+                
+                tbody.innerHTML = rowsHTML;
+
+            } catch (error) {
+                console.error("Error loading dashboard data:", error);
+                document.getElementById('table-body').innerHTML = `
+                    <tr>
+                        <td class="px-4 py-4 text-red-500 font-medium">
+                            Cannot load data. Note: Web browsers block local file fetching (CORS). You must run a local server to test this.
+                        </td>
+                    </tr>`;
+            }
+        }
+
+        // Execute the function immediately when the page loads
+        loadSnapshot();
+    </script>
+
 </body>
 </html>
