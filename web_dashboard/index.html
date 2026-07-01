@@ -6,12 +6,17 @@
     <title>Quantitative Terminal</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-slate-50 p-8 text-slate-800">
 
     <div class="max-w-7xl mx-auto mb-8">
         <h1 class="text-4xl font-extrabold tracking-tight text-slate-900">Quantitative Terminal</h1>
         <p class="text-slate-500 mt-2">Automated Fundamental Analysis & Risk Matrix</p>
+    </div>
+
+    <div class="max-w-7xl mx-auto mb-8 bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+        <canvas id="top10Chart" height="100"></canvas>
     </div>
 
     <div class="max-w-7xl mx-auto bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
@@ -74,6 +79,69 @@
                 });
                 
                 tbody.innerHTML = rowsHTML;
+                
+                // 1. Slice the top 10 stocks from our data array
+                const top10 = data.slice(0, 10);
+                
+                // 2. Map out the specific data arrays for the axes
+                const labels = top10.map(stock => stock.Ticker);
+                const compositeScores = top10.map(stock => stock['⭐ Composite Score']);
+                const expectedUpsides = top10.map(stock => stock['Expected Upside']);
+                
+                // Scale Analyst Rating (1-5) to fit the 0-100 chart scale (x 20)
+                const analystRatings = top10.map(stock => {
+                    return stock['Analyst Rating'] !== null ? (stock['Analyst Rating'] * 20) : null;
+                });
+
+                // 3. Render the Chart
+                const ctx = document.getElementById('top10Chart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar', // Base chart type
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: '⭐ Composite Score',
+                                data: compositeScores,
+                                backgroundColor: '#4CAF50', // Green
+                                order: 2
+                            },
+                            {
+                                label: 'Expected Upside %',
+                                data: expectedUpsides,
+                                backgroundColor: '#2196F3', // Blue
+                                order: 3
+                            },
+                            {
+                                label: 'Analyst Rating (x20)',
+                                data: analystRatings,
+                                type: 'line', // Mix a line chart into the bar chart
+                                borderColor: '#F44336', // Red
+                                backgroundColor: '#F44336',
+                                pointRadius: 5,
+                                fill: false,
+                                order: 1 // Draw the line on top of the bars
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Top 10 Actionable Stocks Dashboard',
+                                font: { size: 16 }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100, // Lock the axis to 0-100 just like the Excel chart
+                                title: { display: true, text: 'Score / Upside (0-100)' }
+                            }
+                        }
+                    }
+                });
 
             } catch (error) {
                 console.error("Error loading dashboard data:", error);
