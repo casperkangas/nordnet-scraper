@@ -185,10 +185,7 @@ if os.path.exists(manual_file):
 else:
     print(f"Notice: {manual_file} not found. Skipping analyst scores.")
     
-# =========================================================
-# 7. APPLY WEIGHTED SCORING ENGINE
 df = apply_weighted_scoring(df)
-# =========================================================
 
 # =========================================================
 # 8. HISTORY APPENDING & DASHBOARD SEPARATION
@@ -196,12 +193,18 @@ df = apply_weighted_scoring(df)
 
 if os.path.exists(output_filename):
     print(f"Found existing {output_filename}. Appending new data...")
-    historical_df = pd.read_json(output_filename) # <-- Reads our JSON database natively
+    historical_df = pd.read_json(output_filename)
     final_df = pd.concat([historical_df, df], ignore_index=True)
-    final_df = final_df.drop_duplicates(subset=['Date', 'Ticker'], keep='last')
 else:
     print(f"No existing file found. Creating a fresh {output_filename}...")
     final_df = df
+
+# 1. First, strip out all Timestamps and force every date strictly to Text
+final_df['Date'] = pd.to_datetime(final_df['Date']).dt.strftime('%Y-%m-%d')
+
+# 2. Second, drop the duplicates so only the absolute latest run per day survives
+final_df = final_df.drop_duplicates(subset=['Date', 'Ticker'], keep='last')
+# ------------------------------------
 
 # Separate ONLY today's data for the Snapshot dashboard
 today_str = str(date.today())
@@ -434,7 +437,9 @@ all_tickers = final_df['Ticker'].unique()
 for ticker in all_tickers:
     ticker_history = final_df[final_df['Ticker'] == ticker].copy()
     ticker_history = ticker_history.sort_values(by='Date')
-    chart_data = ticker_history[['Date', 'Current Price', 'Total Value Score', '⭐ Composite Score']].dropna(subset=['Current Price']).copy()
+    desired_cols = ['Date', 'Current Price', 'Total Value Score', '⭐ Composite Score']
+    existing_cols = [col for col in desired_cols if col in ticker_history.columns]    
+    chart_data = ticker_history[existing_cols].dropna(subset=['Current Price']).copy()
     historical_export[ticker] = chart_data.to_dict(orient='records')
 
 # Save the full library into the data directory
