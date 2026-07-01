@@ -13,21 +13,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Upgraded to v4 to resolve Node warnings
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Upgraded to v5 to resolve Node warnings
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      # 3. INSTALL DEPENDENCIES
+      # --- THE FIX: Use requirements.txt and install openpyxl ---
       - name: Install Python packages
         run: |
-          pip install pandas numpy playwright matplotlib
+          pip install -r requirements.txt
           playwright install chromium
 
-        # 4. RUN THE SCRIPT
+      # 4. RUN THE SCRIPT
       - name: Execute Scraper
         run: python web_dashboard/scraper_json.py
 
