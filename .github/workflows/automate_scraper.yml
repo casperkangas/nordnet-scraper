@@ -1,0 +1,42 @@
+name: Daily Nordnet Scraper
+
+# 1. THE TRIGGER
+on:
+  schedule:
+    # Runs at 15:00 UTC (17:00/18:00 in Finland depending on Daylight Savings) every Monday through Friday
+    - cron: '0 15 * * 1-5'
+  workflow_dispatch: # This adds a manual "Run workflow" button in GitHub so you can test it!
+
+# 2. THE SERVER SETUP
+jobs:
+  scrape-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      # 3. INSTALL DEPENDENCIES
+      - name: Install Python packages
+        run: |
+          pip install pandas numpy playwright matplotlib
+          playwright install chromium
+
+      # 4. RUN THE SCRIPT
+      - name: Execute Scraper
+        # IMPORTANT: Make sure this path matches your exact folder name!
+        run: python nordnet-web-dashboard/scraper_json.py
+
+      # 5. COMMIT THE NEW DATA
+      - name: Commit and Push JSON Data
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add nordnet-web-dashboard/data/*
+          git commit -m "Automated data update from cloud scraper" || echo "No changes to commit"
+          git push
