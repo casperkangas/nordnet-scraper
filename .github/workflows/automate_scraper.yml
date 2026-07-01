@@ -31,13 +31,13 @@ jobs:
 
       # 4. RUN THE SCRIPT
       - name: Execute Scraper
-        run: python web_dashboard/scraper_json.py
+        run: python -u web_dashboard/scraper_json.py
 
       # 5. COMMIT THE NEW DATA
       - name: Commit and Push JSON Data
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add web_dashboard/data/*
+          git add web_dashboard/data/*.json
           git commit -m "Automated data update from cloud scraper" || echo "No changes to commit"
           git push
