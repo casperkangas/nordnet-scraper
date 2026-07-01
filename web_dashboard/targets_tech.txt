@@ -1,0 +1,12 @@
+NOKIA,https://www.nordnet.fi/osakkeet/kurssit/nokia-xhel?details
+QTCOM,https://www.nordnet.fi/osakkeet/kurssit/qt-group-qtcom-xhel?details
+GOFORE,https://www.nordnet.fi/osakkeet/kurssit/gofore-xhel?details
+BITTI,https://www.nordnet.fi/osakkeet/kurssit/bittium-bitti-xhel?details
+ELISA,https://www.nordnet.fi/osakkeet/kurssit/elisa-xhel?details
+TELIA1,https://www.nordnet.fi/osakkeet/kurssit/telia-company-telia1-xhel?details
+TIETO,https://www.nordnet.fi/osakkeet/kurssit/tieto-xhel?details
+FSECURE,https://www.nordnet.fi/osakkeet/kurssit/f-secure-fsecure-xhel?details
+TLT1V,https://www.nordnet.fi/osakkeet/kurssit/teleste-tlt1v-xhel?details
+VINCIT,https://www.nordnet.fi/osakkeet/kurssit/vincit-fsme?details
+SIILI,https://www.nordnet.fi/osakkeet/kurssit/siili-solutions-siili-xhel?details
+NETUM,https://www.nordnet.fi/osakkeet/kurssit/netum-fsme?details

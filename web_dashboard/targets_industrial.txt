@@ -1,0 +1,12 @@
+POSTI,https://www.nordnet.fi/osakkeet/kurssit/posti-group-posti-xhel?details
+WRT1V,https://www.nordnet.fi/osakkeet/kurssit/wartsila-b-wrt1v-xhel?details
+KNEBV,https://www.nordnet.fi/osakkeet/kurssit/kone-b-knebv-xhel?details
+METSO,https://www.nordnet.fi/osakkeet/kurssit/metso-xhel?details
+UPM,https://www.nordnet.fi/osakkeet/kurssit/upm-kymmene-upm-xhel?details
+STERV,https://www.nordnet.fi/osakkeet/kurssit/stora-enso-r-sterv-xhel?details
+KCR,https://www.nordnet.fi/osakkeet/kurssit/konecranes-kcr-xhel?details
+VALMT,https://www.nordnet.fi/osakkeet/kurssit/valmet-valmt-xhel?details
+KEMIRA,https://www.nordnet.fi/osakkeet/kurssit/kemira-xhel?details
+OUT1V,https://www.nordnet.fi/osakkeet/kurssit/outokumpu-out1v-xhel?details
+HUH1V,https://www.nordnet.fi/osakkeet/kurssit/huhtamaki-huh1v-xhel?details
+SSABBH,https://www.nordnet.fi/osakkeet/kurssit/ssab-b-ssabbh-xhel?details

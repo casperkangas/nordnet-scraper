@@ -1,0 +1,182 @@
+[
+    {
+        "Ticker":"ORNBV",
+        "Current Price":70.8
+    },
+    {
+        "Ticker":"KNEBV",
+        "Current Price":50.16
+    },
+    {
+        "Ticker":"ALBAV",
+        "Current Price":45.5
+    },
+    {
+        "Ticker":"ELISA",
+        "Current Price":35.22
+    },
+    {
+        "Ticker":"WRT1V",
+        "Current Price":32.44
+    },
+    {
+        "Ticker":"BITTI",
+        "Current Price":31.65
+    },
+    {
+        "Ticker":"NESTE",
+        "Current Price":27.56
+    },
+    {
+        "Ticker":"KCR",
+        "Current Price":26.38
+    },
+    {
+        "Ticker":"HUH1V",
+        "Current Price":25.98
+    },
+    {
+        "Ticker":"EVLI",
+        "Current Price":23.7
+    },
+    {
+        "Ticker":"QTCOM",
+        "Current Price":23.44
+    },
+    {
+        "Ticker":"UPM",
+        "Current Price":22.75
+    },
+    {
+        "Ticker":"VALMT",
+        "Current Price":20.98
+    },
+    {
+        "Ticker":"FORTUM",
+        "Current Price":19.705
+    },
+    {
+        "Ticker":"TIETO",
+        "Current Price":17.44
+    },
+    {
+        "Ticker":"NDA FI",
+        "Current Price":16.495
+    },
+    {
+        "Ticker":"KEMIRA",
+        "Current Price":16.3
+    },
+    {
+        "Ticker":"METSO",
+        "Current Price":14.97
+    },
+    {
+        "Ticker":"ENENTO",
+        "Current Price":14.26
+    },
+    {
+        "Ticker":"REG1V",
+        "Current Price":12.26
+    },
+    {
+        "Ticker":"KEMPOWR",
+        "Current Price":12.13
+    },
+    {
+        "Ticker":"OMASP",
+        "Current Price":11.5
+    },
+    {
+        "Ticker":"NOKIA",
+        "Current Price":11.385
+    },
+    {
+        "Ticker":"AKTIA",
+        "Current Price":11.28
+    },
+    {
+        "Ticker":"PIHLIS",
+        "Current Price":10.64
+    },
+    {
+        "Ticker":"EQV1V",
+        "Current Price":9.9
+    },
+    {
+        "Ticker":"GOFORE",
+        "Current Price":9.82
+    },
+    {
+        "Ticker":"POSTI",
+        "Current Price":9.72
+    },
+    {
+        "Ticker":"SAMPO",
+        "Current Price":9.234
+    },
+    {
+        "Ticker":"STERV",
+        "Current Price":9.096
+    },
+    {
+        "Ticker":"PAMPALO",
+        "Current Price":8.7
+    },
+    {
+        "Ticker":"SSABBH",
+        "Current Price":7.972
+    },
+    {
+        "Ticker":"TTALO",
+        "Current Price":7.65
+    },
+    {
+        "Ticker":"MANTA",
+        "Current Price":5.445
+    },
+    {
+        "Ticker":"MERUS",
+        "Current Price":5.1
+    },
+    {
+        "Ticker":"OUT1V",
+        "Current Price":4.89
+    },
+    {
+        "Ticker":"TELIA1",
+        "Current Price":4.111
+    },
+    {
+        "Ticker":"ESENSE",
+        "Current Price":3.77
+    },
+    {
+        "Ticker":"TLT1V",
+        "Current Price":3.4
+    },
+    {
+        "Ticker":"SIILI",
+        "Current Price":2.55
+    },
+    {
+        "Ticker":"FSECURE",
+        "Current Price":2.025
+    },
+    {
+        "Ticker":"CAPMAN",
+        "Current Price":1.748
+    },
+    {
+        "Ticker":"NETUM",
+        "Current Price":1.01
+    },
+    {
+        "Ticker":"ORIOLA",
+        "Current Price":0.92
+    },
+    {
+        "Ticker":"VINCIT",
+        "Current Price":0.898
+    }
+]
