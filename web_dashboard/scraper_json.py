@@ -157,7 +157,12 @@ with sync_playwright() as p:
 
 print("\nConverting data to a table...")
 df = pd.DataFrame(all_stocks_data)
-output_filename = "Stock_Analysis_Master.json" # <-- Changed to JSON database
+
+# --- NEW: Ensure the data directory exists ---
+os.makedirs("data", exist_ok=True)
+
+# Route the master database into the new folder
+output_filename = "data/Stock_Analysis_Master.json"
 
 # 6. INTEGRATE MANUAL ANALYST RATINGS
 manual_file = "Manual_Analyst_Ratings.xlsx"
@@ -402,7 +407,7 @@ plt.grid(True, linestyle='--', alpha=0.5)
 plt.axhline(0, color='red', linestyle='-', linewidth=1.5, alpha=0.8)
 
 # 8. Save the chart as a static image file
-plot_filename = f"Risk_Reward_{today_str}.png"
+plot_filename = f"data/Risk_Reward_{today_str}.png"
 plt.savefig(plot_filename, bbox_inches='tight', dpi=150)
 plt.close() # Free up computer memory
 
@@ -416,12 +421,27 @@ print("Saving database and exporting web-ready JSON panels...")
 # 1. Update the master history ledger database
 final_df.to_json(output_filename, orient="records", force_ascii=False, indent=4)
 
-# 2. Export independent JSON endpoints for your web frontend to query effortlessly
-today_df.to_json("web_today_snapshot.json", orient="records", force_ascii=False, indent=4)
-trend_df.to_json("web_score_trend.json", orient="records", force_ascii=False, indent=4)
-price_trend_df.to_json("web_price_trend.json", orient="records", force_ascii=False, indent=4)
+# 2. Export the static UI panels into the data directory
+today_df.to_json("data/web_today_snapshot.json", orient="records", force_ascii=False, indent=4)
+trend_df.to_json("data/web_score_trend.json", orient="records", force_ascii=False, indent=4)
+price_trend_df.to_json("data/web_price_trend.json", orient="records", force_ascii=False, indent=4)
 
-print("Success! JSON panels updated for web app rendering.")
+# 3. Generate the interactive Time-Series Library
+import json
+historical_export = {}
+all_tickers = final_df['Ticker'].unique()
+
+for ticker in all_tickers:
+    ticker_history = final_df[final_df['Ticker'] == ticker].copy()
+    ticker_history = ticker_history.sort_values(by='Date')
+    chart_data = ticker_history[['Date', 'Current Price', 'Total Value Score', '⭐ Composite Score']].dropna(subset=['Current Price']).copy()
+    historical_export[ticker] = chart_data.to_dict(orient='records')
+
+# Save the full library into the data directory
+with open("data/web_historical_timeseries.json", "w", encoding="utf-8") as f:
+    json.dump(historical_export, f, ensure_ascii=False, indent=4)
+
+print("Success! JSON panels and interactive Time-Series Library routed to the /data/ folder.")
 
 # --- STOP TIMER ---
 end_time = time.time()
