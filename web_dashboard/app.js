@@ -100,11 +100,8 @@ function buildColumnToggles() {
     const btn = document.createElement("button");
 
     // Styling changes based on whether it is active or hidden
-    btn.className = `px-3 py-1 text-xs font-medium rounded-full transition-colors border ${
-      isActive
-        ? "bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100"
-        : "bg-slate-50 text-slate-400 border-slate-200 hover:bg-slate-100"
-    }`;
+    btn.className = `column-chip ${isActive ? "column-chip--active" : "column-chip--inactive"}`;
+
     btn.textContent = col;
 
     btn.onclick = () => {
@@ -206,7 +203,8 @@ function buildTableHeaders() {
     }
     headerHTML += `
                     <th onclick="handleSort('${header}')" 
-                        class="px-4 py-3 font-semibold tracking-wide text-xs uppercase cursor-pointer select-none hover:bg-slate-100 transition-colors duration-150">
+                        class="table-header-cell"
+>
                         ${header}${arrow}
                     </th>`;
   });
@@ -219,11 +217,11 @@ function renderTable(dataToRender) {
   let rowsHTML = "";
 
   dataToRender.forEach((stock) => {
-    rowsHTML += '<tr class="hover:bg-slate-50 transition-colors duration-150">';
+    rowsHTML += '<tr class="table-row">';
 
-    // Only render cells for VISIBLE columns
     visibleColumns.forEach((header) => {
       let cellValue = stock[header];
+
       if (cellValue === null || cellValue === undefined) {
         cellValue = "-";
       } else if (
@@ -232,8 +230,10 @@ function renderTable(dataToRender) {
       ) {
         cellValue = cellValue.toFixed(2);
       }
-      rowsHTML += `<td class="px-4 py-3 whitespace-nowrap">${cellValue}</td>`;
+
+      rowsHTML += `<td class="table-cell">${cellValue}</td>`;
     });
+
     rowsHTML += "</tr>";
   });
 

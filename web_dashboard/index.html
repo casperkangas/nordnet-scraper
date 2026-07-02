@@ -97,18 +97,19 @@
           <h2 class="section-title">Screener Matrix</h2>
         </div>
 
-        <div class="surface-card kpi-card">
-          <span class="panel-label">Toggle Visible Columns:</span>
+        <div class="matrix-stack">
+          <div class="surface-card kpi-card">
+            <span class="panel-label">Toggle Visible Columns:</span>
+            <div id="column-toggles" class="flex flex-wrap gap-2"></div>
+          </div>
 
-          <div id="column-toggles" class="flex flex-wrap gap-2"></div>
-        </div>
-
-        <div class="surface-card kpi-card">
-          <div class="table-shell">
-            <table id="snapshot-table" class="data-table">
-              <thead></thead>
-              <tbody id="table-body"></tbody>
-            </table>
+          <div class="surface-card kpi-card">
+            <div class="table-shell">
+              <table id="snapshot-table" class="data-table">
+                <thead></thead>
+                <tbody id="table-body"></tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>

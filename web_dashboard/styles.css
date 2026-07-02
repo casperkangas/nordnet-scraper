@@ -316,3 +316,74 @@ body {
   line-height: 1;
   font-size: 0.95rem;
 }
+
+.table-header-cell {
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
+  color: var(--text-muted);
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.table-header-cell:hover {
+  background: color-mix(in srgb, var(--surface) 82%, var(--bg));
+  color: var(--text);
+}
+
+.table-row {
+  transition: background-color 150ms ease;
+}
+
+.table-row:hover {
+  background: color-mix(in srgb, var(--surface) 50%, var(--bg));
+}
+
+html[data-theme="dark"] .table-row:hover {
+  background: color-mix(in srgb, var(--accent) 5%, var(--surface));
+}
+
+.table-cell {
+  padding: 0.75rem 1rem;
+  white-space: nowrap;
+  color: var(--text);
+}
+
+.column-chip {
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--surface-border);
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
+}
+
+.column-chip--active {
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 30%, var(--surface-border));
+}
+
+.column-chip--inactive {
+  background: color-mix(in srgb, var(--surface) 88%, var(--bg));
+  color: var(--text-faint);
+  border-color: var(--surface-border);
+}
+
+.column-chip:hover {
+  border-color: var(--surface-border-strong);
+}
+
+.matrix-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
