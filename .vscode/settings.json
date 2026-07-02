@@ -2,5 +2,8 @@
   "editor.defaultFormatter": "KevinRose.vsc-python-indent",
   "github-actions.workflows.pinned.workflows": [
     ".github/workflows/automate_scraper.yml"
-  ]
+  ],
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

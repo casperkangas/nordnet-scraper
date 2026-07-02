@@ -1,162 +1,404 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantitative Terminal</title>
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nordnet Quantitative Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body class="bg-slate-50 p-8 text-slate-800">
+  </head>
+  <body class="bg-slate-100 text-slate-800 p-4 sm:p-6 font-sans">
+    <div class="max-w-7xl mx-auto space-y-6">
+      <header class="border-b border-slate-200 pb-4">
+        <h1
+          class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900"
+        >
+          Financial Analytics Terminal
+        </h1>
+        <p class="text-sm text-slate-500 mt-1">
+          Automated Stock Screener & Quantitative Ranking
+        </p>
+      </header>
 
-    <div class="max-w-7xl mx-auto mb-8">
-        <h1 class="text-4xl font-extrabold tracking-tight text-slate-900">Quantitative Terminal</h1>
-        <p class="text-slate-500 mt-2">Automated Fundamental Analysis & Risk Matrix</p>
-    </div>
-
-    <div class="max-w-7xl mx-auto mb-8 bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-        <canvas id="top10Chart" height="100"></canvas>
-    </div>
-
-    <div class="max-w-7xl mx-auto bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-        
-        <div class="overflow-x-auto">
-            <table class="w-full text-left text-sm" id="snapshot-table">
-                <thead class="bg-slate-50 border-b border-slate-200 text-slate-600">
-                    </thead>
-                <tbody class="divide-y divide-slate-200" id="table-body">
-                    </tbody>
-            </table>
+      <section aria-label="Market Overview">
+        <h2
+          class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2"
+        >
+          Market Overview (Current Filter)
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm border border-slate-200/60 flex flex-col"
+          >
+            <span class="text-sm text-slate-500 font-medium">Total Assets</span>
+            <span id="kpi-total" class="text-2xl font-bold text-slate-800"
+              >-</span
+            >
+          </div>
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm border border-slate-200/60 flex flex-col"
+          >
+            <span class="text-sm text-slate-500 font-medium"
+              >Avg Composite Score</span
+            >
+            <span id="kpi-score" class="text-2xl font-bold text-green-600"
+              >-</span
+            >
+          </div>
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm border border-slate-200/60 flex flex-col"
+          >
+            <span class="text-sm text-slate-500 font-medium"
+              >Avg Expected Upside</span
+            >
+            <span id="kpi-upside" class="text-2xl font-bold text-blue-600"
+              >-</span
+            >
+          </div>
         </div>
+      </section>
 
+      <section aria-label="Filters and Search">
+        <h2
+          class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2"
+        >
+          Search & Filters
+        </h2>
+        <div
+          class="flex flex-col sm:flex-row gap-3 bg-white p-4 rounded-xl shadow-sm border border-slate-200/60"
+        >
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search Ticker..."
+            class="px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-64"
+          />
+
+          <select
+            id="industryFilter"
+            class="px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-64 bg-white"
+          >
+            <option value="ALL">All Industries</option>
+          </select>
+        </div>
+      </section>
+
+      <section aria-label="Visual Analytics">
+        <h2
+          class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2"
+        >
+          Top Opportunities (Combo Analysis)
+        </h2>
+        <div
+          class="bg-white p-4 rounded-xl shadow-sm border border-slate-200/60"
+        >
+          <div class="relative w-full h-[300px] sm:h-[400px]">
+            <canvas id="topStocksChart"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <section aria-label="Stock Data Matrix">
+        <h2
+          class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2"
+        >
+          Screener Matrix
+        </h2>
+        <div
+          class="bg-white rounded-xl shadow-sm border border-slate-200/60 overflow-hidden"
+        >
+          <div class="overflow-x-auto w-full">
+            <table
+              id="snapshot-table"
+              class="w-full text-left border-collapse min-w-[1000px]"
+            >
+              <thead
+                class="bg-slate-50 text-slate-500 border-b border-slate-200"
+              ></thead>
+              <tbody
+                id="table-body"
+                class="divide-y divide-slate-100 text-sm"
+              ></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
     </div>
 
-<script>
-        async function loadSnapshot() {
-            try {
-                // 1. Fetch the data from your new API folder
-                const response = await fetch('data/web_today_snapshot.json');
-                const data = await response.json();
+    <script>
+      let masterData = [];
+      let currentSortKey = "⭐ Composite Score";
+      let isAscending = false;
+      let chartInstance = null;
 
-                // 2. Safety check: If the file is empty, stop running
-                if (data.length === 0) return;
+      async function initDashboard() {
+        try {
+          const response = await fetch("data/web_today_snapshot.json");
+          masterData = await response.json();
 
-                // 3. Extract the column names dynamically from the first stock
-                const headers = Object.keys(data[0]);
-                const thead = document.querySelector('#snapshot-table thead');
-                
-                let headerHTML = '<tr>';
-                headers.forEach(header => {
-                    headerHTML += `<th class="px-4 py-3 font-semibold tracking-wide text-xs uppercase">${header}</th>`;
-                });
-                headerHTML += '</tr>';
-                thead.innerHTML = headerHTML;
+          if (masterData.length === 0) return;
 
-                // 4. Loop through the database and build the table rows
-                const tbody = document.getElementById('table-body');
-                let rowsHTML = '';
-                
-                data.forEach(stock => {
-                    // Tailwind hover effect makes rows highlight when the mouse passes over
-                    rowsHTML += '<tr class="hover:bg-slate-50 transition-colors duration-150">';
-                    
-                    headers.forEach(header => {
-                        let cellValue = stock[header];
-                        
-                        // Clean up empty values so it doesn't display "null"
-                        if (cellValue === null || cellValue === undefined) {
-                            cellValue = '-';
-                        } else if (typeof cellValue === 'number' && !Number.isInteger(cellValue)) {
-                            // Round long decimals to 2 places for a clean UI
-                            cellValue = cellValue.toFixed(2);
-                        }
+          const headers = Object.keys(masterData[0]);
+          buildTableHeaders(headers);
+          populateIndustryDropdown(masterData);
 
-                        rowsHTML += `<td class="px-4 py-3 border-t border-slate-100 whitespace-nowrap">${cellValue}</td>`;
-                    });
-                    
-                    rowsHTML += '</tr>';
-                });
-                
-                tbody.innerHTML = rowsHTML;
-                
-                // 1. Slice the top 10 stocks from our data array
-                const top10 = data.slice(0, 10);
-                
-                // 2. Map out the specific data arrays for the axes
-                const labels = top10.map(stock => stock.Ticker);
-                const compositeScores = top10.map(stock => stock['⭐ Composite Score']);
-                const expectedUpsides = top10.map(stock => stock['Expected Upside']);
-                
-                // Scale Analyst Rating (1-5) to fit the 0-100 chart scale (x 20)
-                const analystRatings = top10.map(stock => {
-                    return stock['Analyst Rating'] !== null ? (stock['Analyst Rating'] * 20) : null;
-                });
+          applyFilters();
+        } catch (error) {
+          console.error("Error loading dashboard data:", error);
+          document.getElementById("table-body").innerHTML = `
+                    <tr><td class="px-4 py-4 text-red-500 font-medium">Failed to load real-time analytics data. Note: You must use Live Server locally.</td></tr>`;
+        }
+      }
 
-                // 3. Render the Chart
-                const ctx = document.getElementById('top10Chart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'bar', // Base chart type
-                    data: {
-                        labels: labels,
-                        datasets: [
-                            {
-                                label: '⭐ Composite Score',
-                                data: compositeScores,
-                                backgroundColor: '#4CAF50', // Green
-                                order: 2
-                            },
-                            {
-                                label: 'Expected Upside %',
-                                data: expectedUpsides,
-                                backgroundColor: '#2196F3', // Blue
-                                order: 3
-                            },
-                            {
-                                label: 'Analyst Rating (x20)',
-                                data: analystRatings,
-                                type: 'line', // Mix a line chart into the bar chart
-                                borderColor: '#F44336', // Red
-                                backgroundColor: '#F44336',
-                                pointRadius: 5,
-                                fill: false,
-                                order: 1 // Draw the line on top of the bars
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            title: {
-                                display: true,
-                                text: 'Top 10 Actionable Stocks Dashboard',
-                                font: { size: 16 }
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                max: 100, // Lock the axis to 0-100 just like the Excel chart
-                                title: { display: true, text: 'Score / Upside (0-100)' }
-                            }
-                        }
-                    }
-                });
+      // --- NEW: THE KPI SUMMARY ENGINE ---
+      function updateSummaryCards(filteredData) {
+        // 1. Total Count
+        document.getElementById("kpi-total").textContent = filteredData.length;
 
-            } catch (error) {
-                console.error("Error loading dashboard data:", error);
-                document.getElementById('table-body').innerHTML = `
-                    <tr>
-                        <td class="px-4 py-4 text-red-500 font-medium">
-                            Cannot load data. Note: Web browsers block local file fetching (CORS). You must run a local server to test this.
-                        </td>
-                    </tr>`;
-            }
+        if (filteredData.length === 0) {
+          document.getElementById("kpi-score").textContent = "-";
+          document.getElementById("kpi-upside").textContent = "-";
+          return;
         }
 
-        // Execute the function immediately when the page loads
-        loadSnapshot();
-    </script>
+        // 2. Average Composite Score
+        let totalScore = 0;
+        let validScoreCount = 0;
 
-</body>
+        // 3. Average Expected Upside
+        let totalUpside = 0;
+        let validUpsideCount = 0;
+
+        filteredData.forEach((stock) => {
+          const score = stock["⭐ Composite Score"];
+          const upside = stock["Expected Upside"];
+
+          if (typeof score === "number") {
+            totalScore += score;
+            validScoreCount++;
+          }
+
+          if (typeof upside === "number") {
+            totalUpside += upside;
+            validUpsideCount++;
+          }
+        });
+
+        const avgScore =
+          validScoreCount > 0 ? (totalScore / validScoreCount).toFixed(1) : "-";
+        const avgUpside =
+          validUpsideCount > 0
+            ? (totalUpside / validUpsideCount).toFixed(1) + "%"
+            : "-";
+
+        document.getElementById("kpi-score").textContent = avgScore;
+        document.getElementById("kpi-upside").textContent = avgUpside;
+      }
+
+      function buildTableHeaders(headers) {
+        const thead = document.querySelector("#snapshot-table thead");
+        let headerHTML = "<tr>";
+        headers.forEach((header) => {
+          let arrow = "";
+          if (header === currentSortKey) {
+            arrow = isAscending ? " ▲" : " ▼";
+          }
+          headerHTML += `
+                    <th onclick="handleSort('${header}')" 
+                        class="px-4 py-3 font-semibold tracking-wide text-xs uppercase cursor-pointer select-none hover:bg-slate-100 transition-colors duration-150">
+                        ${header}${arrow}
+                    </th>`;
+        });
+        headerHTML += "</tr>";
+        thead.innerHTML = headerHTML;
+      }
+
+      function populateIndustryDropdown(data) {
+        const dropdown = document.getElementById("industryFilter");
+        const uniqueIndustries = [
+          ...new Set(data.map((stock) => stock.Industry)),
+        ]
+          .filter(Boolean)
+          .sort();
+
+        uniqueIndustries.forEach((ind) => {
+          const option = document.createElement("option");
+          option.value = ind;
+          option.textContent = ind;
+          dropdown.appendChild(option);
+        });
+      }
+
+      function renderTable(dataToRender, headers) {
+        const tbody = document.getElementById("table-body");
+        let rowsHTML = "";
+
+        dataToRender.forEach((stock) => {
+          rowsHTML +=
+            '<tr class="hover:bg-slate-50 transition-colors duration-150">';
+          headers.forEach((header) => {
+            let cellValue = stock[header];
+            if (cellValue === null || cellValue === undefined) {
+              cellValue = "-";
+            } else if (
+              typeof cellValue === "number" &&
+              !Number.isInteger(cellValue)
+            ) {
+              cellValue = cellValue.toFixed(2);
+            }
+            rowsHTML += `<td class="px-4 py-3 whitespace-nowrap">${cellValue}</td>`;
+          });
+          rowsHTML += "</tr>";
+        });
+
+        tbody.innerHTML = rowsHTML;
+      }
+
+      // --- UPGRADED: MULTI-METRIC COMBO CHART ENGINE ---
+      function updateChart(filteredData) {
+        const ctx = document.getElementById("topStocksChart").getContext("2d");
+
+        if (chartInstance) {
+          chartInstance.destroy();
+        }
+
+        const top10 = filteredData.slice(0, 10);
+
+        const labels = top10.map((stock) => stock.Ticker);
+        const compositeScores = top10.map(
+          (stock) => stock["⭐ Composite Score"] || 0,
+        );
+        const expectedUpsides = top10.map(
+          (stock) => stock["Expected Upside"] || 0,
+        );
+        const momentumScores = top10.map((stock) => stock["Momentum"] || 0);
+
+        // Scale Analyst Rating (1-5) to 0-100 scale (x 20)
+        const analystRatings = top10.map((stock) => {
+          return stock["Analyst Rating"] !== null &&
+            stock["Analyst Rating"] !== undefined
+            ? stock["Analyst Rating"] * 20
+            : null;
+        });
+
+        chartInstance = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "Analyst Rating (x20)",
+                data: analystRatings,
+                type: "line",
+                borderColor: "#ef4444", // Red line
+                backgroundColor: "#ef4444",
+                pointRadius: 5,
+                fill: false,
+                order: 1, // Drawn on top
+              },
+              {
+                label: "Composite Score",
+                data: compositeScores,
+                backgroundColor: "#22c55e", // Green bar
+                borderRadius: 4,
+                order: 2,
+              },
+              {
+                label: "Expected Upside %",
+                data: expectedUpsides,
+                backgroundColor: "#3b82f6", // Blue bar
+                borderRadius: 4,
+                order: 3,
+              },
+              {
+                label: "Momentum",
+                data: momentumScores,
+                backgroundColor: "#a855f7", // Purple bar
+                borderRadius: 4,
+                order: 4,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+                max: 100, // Lock axis scale to 100
+                grid: { color: "#f1f5f9" },
+                title: { display: true, text: "Score / Metric (0-100)" },
+              },
+              x: {
+                grid: { display: false },
+              },
+            },
+            plugins: {
+              legend: {
+                display: true,
+                position: "top",
+              },
+            },
+          },
+        });
+      }
+
+      function applyFilters() {
+        const searchTerm = document
+          .getElementById("searchInput")
+          .value.toUpperCase();
+        const selectedIndustry =
+          document.getElementById("industryFilter").value;
+
+        let filteredData = masterData.filter((stock) => {
+          const matchesSearch = stock.Ticker.toUpperCase().includes(searchTerm);
+          const matchesIndustry =
+            selectedIndustry === "ALL" || stock.Industry === selectedIndustry;
+          return matchesSearch && matchesIndustry;
+        });
+
+        filteredData.sort((a, b) => {
+          let valA = a[currentSortKey];
+          let valB = b[currentSortKey];
+
+          if (valA === null || valA === undefined) return 1;
+          if (valB === null || valB === undefined) return -1;
+
+          if (typeof valA === "string" && typeof valB === "string") {
+            return isAscending
+              ? valA.localeCompare(valB)
+              : valB.localeCompare(valA);
+          }
+          return isAscending ? valA - valB : valB - valA;
+        });
+
+        const headers = Object.keys(masterData[0]);
+        buildTableHeaders(headers);
+        renderTable(filteredData, headers);
+
+        // Execute the new updates
+        updateSummaryCards(filteredData);
+        updateChart(filteredData);
+      }
+
+      function handleSort(headerKey) {
+        if (currentSortKey === headerKey) {
+          isAscending = !isAscending;
+        } else {
+          currentSortKey = headerKey;
+          isAscending = false;
+        }
+        applyFilters();
+      }
+
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", applyFilters);
+      document
+        .getElementById("industryFilter")
+        .addEventListener("change", applyFilters);
+
+      initDashboard();
+    </script>
+  </body>
 </html>
