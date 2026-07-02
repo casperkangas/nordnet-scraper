@@ -9,6 +9,7 @@ import time
 import matplotlib.pyplot as plt
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(script_dir)
 
 # --- NEW: START THE TIMER ---
 print("⏱️ Starting the scraping engine...")
@@ -29,7 +30,7 @@ headers = {
 }
 
 # 3. Use glob to find all text files that start with "targets_"
-target_files = glob.glob(os.path.join(script_dir, "targets_*.txt"))
+target_files = sorted(glob.glob(os.path.join(project_root, "targets_*.txt")))
 
 if not target_files:
     print("No target files found! Make sure they are named like 'targets_finance.txt'")
@@ -170,7 +171,7 @@ os.makedirs(data_dir, exist_ok=True)
 output_filename = os.path.join(data_dir, "Stock_Analysis_Master.json")
 
 # 6. INTEGRATE MANUAL ANALYST RATINGS
-manual_file = os.path.join(script_dir, "Manual_Analyst_Ratings.xlsx")
+manual_file = os.path.join(project_root, "Manual_Analyst_Ratings.xlsx")
 
 if os.path.exists(manual_file):
     print(f"Found {manual_file}. Merging analyst scores...")
