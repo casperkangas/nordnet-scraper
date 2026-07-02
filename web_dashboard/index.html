@@ -7,17 +7,27 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
-  <body class="bg-slate-100 text-slate-800 p-4 sm:p-6 font-sans">
-    <div class="max-w-7xl mx-auto space-y-6">
-      <header class="border-b border-slate-200 pb-4">
-        <h1
-          class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900"
+  <body class="bg-slate-100 text-slate-800 p-2 sm:p-4 md:p-6 lg:p-8 font-sans">
+    <div class="w-full max-w-[1600px] mx-auto space-y-6">
+      <header
+        class="border-b border-slate-200 pb-4 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2"
+      >
+        <div>
+          <h1
+            class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900"
+          >
+            Financial Analytics Terminal
+          </h1>
+          <p class="text-sm text-slate-500 mt-1">
+            Automated Stock Screener & Quantitative Ranking
+          </p>
+        </div>
+        <div
+          class="text-xs font-semibold uppercase tracking-wider text-slate-400 bg-white px-3 py-1 rounded-md border border-slate-200 shadow-sm"
         >
-          Financial Analytics Terminal
-        </h1>
-        <p class="text-sm text-slate-500 mt-1">
-          Automated Stock Screener & Quantitative Ranking
-        </p>
+          Data Updated:
+          <span id="last-updated-date" class="text-blue-600">-</span>
+        </div>
       </header>
 
       <section aria-label="Market Overview">
@@ -26,7 +36,7 @@
         >
           Market Overview (Current Filter)
         </h2>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <div
             class="bg-white p-4 rounded-xl shadow-sm border border-slate-200/60 flex flex-col"
           >
@@ -38,8 +48,19 @@
           <div
             class="bg-white p-4 rounded-xl shadow-sm border border-slate-200/60 flex flex-col"
           >
+            <span class="text-sm text-slate-500 font-medium">Top Sector</span>
+            <span
+              id="kpi-sector"
+              class="text-lg font-bold text-slate-800 truncate"
+              title="Sector with highest avg score"
+              >-</span
+            >
+          </div>
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm border border-slate-200/60 flex flex-col"
+          >
             <span class="text-sm text-slate-500 font-medium"
-              >Avg Composite Score</span
+              >Avg Composite</span
             >
             <span id="kpi-score" class="text-2xl font-bold text-green-600"
               >-</span
@@ -48,9 +69,7 @@
           <div
             class="bg-white p-4 rounded-xl shadow-sm border border-slate-200/60 flex flex-col"
           >
-            <span class="text-sm text-slate-500 font-medium"
-              >Avg Expected Upside</span
-            >
+            <span class="text-sm text-slate-500 font-medium">Avg Upside</span>
             <span id="kpi-upside" class="text-2xl font-bold text-blue-600"
               >-</span
             >
@@ -99,18 +118,32 @@
       </section>
 
       <section aria-label="Stock Data Matrix">
-        <h2
-          class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2"
+        <div
+          class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-2 gap-2"
         >
-          Screener Matrix
-        </h2>
+          <h2
+            class="text-xs font-semibold uppercase tracking-wider text-slate-400"
+          >
+            Screener Matrix
+          </h2>
+        </div>
+
+        <div
+          class="bg-white rounded-xl shadow-sm border border-slate-200/60 p-4 mb-4"
+        >
+          <span class="text-xs font-medium text-slate-500 mb-2 block"
+            >Toggle Visible Columns:</span
+          >
+          <div id="column-toggles" class="flex flex-wrap gap-2"></div>
+        </div>
+
         <div
           class="bg-white rounded-xl shadow-sm border border-slate-200/60 overflow-hidden"
         >
           <div class="overflow-x-auto w-full">
             <table
               id="snapshot-table"
-              class="w-full text-left border-collapse min-w-[1000px]"
+              class="w-full text-left border-collapse min-w-[800px]"
             >
               <thead
                 class="bg-slate-50 text-slate-500 border-b border-slate-200"
@@ -123,6 +156,36 @@
           </div>
         </div>
       </section>
+
+      <footer class="pt-8 pb-12 border-t border-slate-200 mt-8">
+        <h3 class="text-sm font-bold text-slate-700 mb-3">
+          Methodology & Terminology
+        </h3>
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-xs text-slate-500"
+        >
+          <div>
+            <strong class="text-slate-700 block mb-1"
+              >⭐ Composite Score</strong
+            >
+            A normalized 0-100 ranking combining valuation, analyst sentiment,
+            and risk metrics. A score closer to 100 indicates a highly favorable
+            quantitative profile relative to the current market.
+          </div>
+          <div>
+            <strong class="text-slate-700 block mb-1">Expected Upside</strong>
+            The percentage difference between the current stock price and the
+            average analyst price target. Indicates the theoretical growth
+            potential based on institutional consensus.
+          </div>
+          <div>
+            <strong class="text-slate-700 block mb-1">Momentum</strong>
+            Measures consecutive period-over-period positive changes in the
+            underlying Total Value Score. A higher number indicates sustained
+            sequential improvement over recent scraper runs.
+          </div>
+        </div>
+      </footer>
     </div>
 
     <script>
@@ -131,6 +194,34 @@
       let isAscending = false;
       let chartInstance = null;
 
+      // --- DYNAMIC COLUMN STATE ---
+      let allColumns = [];
+      let visibleColumns = [];
+      const hiddenForever = ["Date"]; // Never show in table
+
+      // Columns to hide by default on first load
+      const defaultHidden = [
+        "Omistajia Nordnetissä*",
+        "Buy",
+        "Hold",
+        "Sell",
+        "Worst Case",
+        "Probable Case",
+        "Best Case",
+        "Liikevaihto",
+        "PEG",
+        "P/E",
+        "P/S",
+        "P/B",
+        "EBIT",
+        "EPS",
+        "Price ↑",
+        "Price ↓",
+        "Score ↑",
+        "Score ↓",
+        "Data Completeness %",
+      ];
+
       async function initDashboard() {
         try {
           const response = await fetch("data/web_today_snapshot.json");
@@ -138,67 +229,143 @@
 
           if (masterData.length === 0) return;
 
-          const headers = Object.keys(masterData[0]);
-          buildTableHeaders(headers);
-          populateIndustryDropdown(masterData);
+          // 1. Extract Date for the Header
+          if (masterData[0].Date) {
+            document.getElementById("last-updated-date").textContent =
+              masterData[0].Date;
+          }
 
+          // 2. Setup Columns
+          allColumns = Object.keys(masterData[0]).filter(
+            (col) => !hiddenForever.includes(col),
+          );
+
+          // Initialize visible columns (exclude the default hidden ones)
+          visibleColumns = allColumns.filter(
+            (col) => !defaultHidden.some((hidden) => col.includes(hidden)),
+          );
+
+          buildColumnToggles();
+          populateIndustryDropdown(masterData);
           applyFilters();
         } catch (error) {
-          console.error("Error loading dashboard data:", error);
+          console.error("Error loading data:", error);
           document.getElementById("table-body").innerHTML = `
-                    <tr><td class="px-4 py-4 text-red-500 font-medium">Failed to load real-time analytics data. Note: You must use Live Server locally.</td></tr>`;
+                    <tr><td class="px-4 py-4 text-red-500 font-medium">Failed to load real-time analytics data.</td></tr>`;
         }
       }
 
-      // --- NEW: THE KPI SUMMARY ENGINE ---
+      // --- NEW: COLUMN TOGGLE UI ---
+      function buildColumnToggles() {
+        const container = document.getElementById("column-toggles");
+        container.innerHTML = ""; // Clear existing
+
+        allColumns.forEach((col) => {
+          const isActive = visibleColumns.includes(col);
+          const btn = document.createElement("button");
+
+          // Styling changes based on whether it is active or hidden
+          btn.className = `px-3 py-1 text-xs font-medium rounded-full transition-colors border ${
+            isActive
+              ? "bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100"
+              : "bg-slate-50 text-slate-400 border-slate-200 hover:bg-slate-100"
+          }`;
+          btn.textContent = col;
+
+          btn.onclick = () => {
+            if (visibleColumns.includes(col)) {
+              // Remove it
+              visibleColumns = visibleColumns.filter((c) => c !== col);
+            } else {
+              // Add it back in the original order
+              const originalIndex = allColumns.indexOf(col);
+              visibleColumns.splice(originalIndex, 0, col);
+              // Sort visible array to match original array order
+              visibleColumns.sort(
+                (a, b) => allColumns.indexOf(a) - allColumns.indexOf(b),
+              );
+            }
+            buildColumnToggles(); // Redraw buttons
+            applyFilters(); // Redraw table
+          };
+
+          container.appendChild(btn);
+        });
+      }
+
       function updateSummaryCards(filteredData) {
-        // 1. Total Count
         document.getElementById("kpi-total").textContent = filteredData.length;
 
         if (filteredData.length === 0) {
           document.getElementById("kpi-score").textContent = "-";
           document.getElementById("kpi-upside").textContent = "-";
+          document.getElementById("kpi-sector").textContent = "-";
           return;
         }
 
-        // 2. Average Composite Score
         let totalScore = 0;
         let validScoreCount = 0;
-
-        // 3. Average Expected Upside
         let totalUpside = 0;
         let validUpsideCount = 0;
+
+        // Map to track industry performance
+        const industryScores = {};
 
         filteredData.forEach((stock) => {
           const score = stock["⭐ Composite Score"];
           const upside = stock["Expected Upside"];
+          const ind = stock["Industry"];
 
           if (typeof score === "number") {
             totalScore += score;
             validScoreCount++;
-          }
 
+            if (ind) {
+              if (!industryScores[ind])
+                industryScores[ind] = { total: 0, count: 0 };
+              industryScores[ind].total += score;
+              industryScores[ind].count++;
+            }
+          }
           if (typeof upside === "number") {
             totalUpside += upside;
             validUpsideCount++;
           }
         });
 
-        const avgScore =
+        // Find top sector
+        let topSector = "-";
+        let highestAvg = -1;
+        for (const [ind, data] of Object.entries(industryScores)) {
+          if (data.count >= 2) {
+            // Only count sectors with at least 2 stocks
+            const avg = data.total / data.count;
+            if (avg > highestAvg) {
+              highestAvg = avg;
+              topSector = ind;
+            }
+          }
+        }
+        if (topSector === "-" && Object.keys(industryScores).length > 0) {
+          // Fallback if no sector has 2+ stocks
+          topSector = Object.keys(industryScores)[0];
+        }
+
+        document.getElementById("kpi-score").textContent =
           validScoreCount > 0 ? (totalScore / validScoreCount).toFixed(1) : "-";
-        const avgUpside =
+        document.getElementById("kpi-upside").textContent =
           validUpsideCount > 0
             ? (totalUpside / validUpsideCount).toFixed(1) + "%"
             : "-";
-
-        document.getElementById("kpi-score").textContent = avgScore;
-        document.getElementById("kpi-upside").textContent = avgUpside;
+        document.getElementById("kpi-sector").textContent = topSector;
       }
 
-      function buildTableHeaders(headers) {
+      function buildTableHeaders() {
         const thead = document.querySelector("#snapshot-table thead");
         let headerHTML = "<tr>";
-        headers.forEach((header) => {
+
+        // Only loop through VISIBLE columns
+        visibleColumns.forEach((header) => {
           let arrow = "";
           if (header === currentSortKey) {
             arrow = isAscending ? " ▲" : " ▼";
@@ -213,30 +380,16 @@
         thead.innerHTML = headerHTML;
       }
 
-      function populateIndustryDropdown(data) {
-        const dropdown = document.getElementById("industryFilter");
-        const uniqueIndustries = [
-          ...new Set(data.map((stock) => stock.Industry)),
-        ]
-          .filter(Boolean)
-          .sort();
-
-        uniqueIndustries.forEach((ind) => {
-          const option = document.createElement("option");
-          option.value = ind;
-          option.textContent = ind;
-          dropdown.appendChild(option);
-        });
-      }
-
-      function renderTable(dataToRender, headers) {
+      function renderTable(dataToRender) {
         const tbody = document.getElementById("table-body");
         let rowsHTML = "";
 
         dataToRender.forEach((stock) => {
           rowsHTML +=
             '<tr class="hover:bg-slate-50 transition-colors duration-150">';
-          headers.forEach((header) => {
+
+          // Only render cells for VISIBLE columns
+          visibleColumns.forEach((header) => {
             let cellValue = stock[header];
             if (cellValue === null || cellValue === undefined) {
               cellValue = "-";
@@ -254,7 +407,6 @@
         tbody.innerHTML = rowsHTML;
       }
 
-      // --- UPGRADED: MULTI-METRIC COMBO CHART ENGINE ---
       function updateChart(filteredData) {
         const ctx = document.getElementById("topStocksChart").getContext("2d");
 
@@ -273,7 +425,6 @@
         );
         const momentumScores = top10.map((stock) => stock["Momentum"] || 0);
 
-        // Scale Analyst Rating (1-5) to 0-100 scale (x 20)
         const analystRatings = top10.map((stock) => {
           return stock["Analyst Rating"] !== null &&
             stock["Analyst Rating"] !== undefined
@@ -287,33 +438,33 @@
             labels: labels,
             datasets: [
               {
-                label: "Analyst Rating (x20)",
+                label: "Analyst Rating",
                 data: analystRatings,
                 type: "line",
-                borderColor: "#ef4444", // Red line
+                borderColor: "#ef4444",
                 backgroundColor: "#ef4444",
                 pointRadius: 5,
                 fill: false,
-                order: 1, // Drawn on top
+                order: 1,
               },
               {
                 label: "Composite Score",
                 data: compositeScores,
-                backgroundColor: "#22c55e", // Green bar
+                backgroundColor: "#22c55e",
                 borderRadius: 4,
                 order: 2,
               },
               {
                 label: "Expected Upside %",
                 data: expectedUpsides,
-                backgroundColor: "#3b82f6", // Blue bar
+                backgroundColor: "#3b82f6",
                 borderRadius: 4,
                 order: 3,
               },
               {
                 label: "Momentum",
                 data: momentumScores,
-                backgroundColor: "#a855f7", // Purple bar
+                backgroundColor: "#a855f7",
                 borderRadius: 4,
                 order: 4,
               },
@@ -323,23 +474,26 @@
             responsive: true,
             maintainAspectRatio: false,
             scales: {
-              y: {
-                beginAtZero: true,
-                max: 100, // Lock axis scale to 100
-                grid: { color: "#f1f5f9" },
-                title: { display: true, text: "Score / Metric (0-100)" },
-              },
-              x: {
-                grid: { display: false },
-              },
+              y: { beginAtZero: true, max: 100, grid: { color: "#f1f5f9" } },
+              x: { grid: { display: false } },
             },
-            plugins: {
-              legend: {
-                display: true,
-                position: "top",
-              },
-            },
+            plugins: { legend: { display: true, position: "top" } },
           },
+        });
+      }
+
+      function populateIndustryDropdown(data) {
+        const dropdown = document.getElementById("industryFilter");
+        const uniqueIndustries = [
+          ...new Set(data.map((stock) => stock.Industry)),
+        ]
+          .filter(Boolean)
+          .sort();
+        uniqueIndustries.forEach((ind) => {
+          const option = document.createElement("option");
+          option.value = ind;
+          option.textContent = ind;
+          dropdown.appendChild(option);
         });
       }
 
@@ -360,10 +514,8 @@
         filteredData.sort((a, b) => {
           let valA = a[currentSortKey];
           let valB = b[currentSortKey];
-
           if (valA === null || valA === undefined) return 1;
           if (valB === null || valB === undefined) return -1;
-
           if (typeof valA === "string" && typeof valB === "string") {
             return isAscending
               ? valA.localeCompare(valB)
@@ -372,11 +524,9 @@
           return isAscending ? valA - valB : valB - valA;
         });
 
-        const headers = Object.keys(masterData[0]);
-        buildTableHeaders(headers);
-        renderTable(filteredData, headers);
+        buildTableHeaders();
+        renderTable(filteredData);
 
-        // Execute the new updates
         updateSummaryCards(filteredData);
         updateChart(filteredData);
       }
