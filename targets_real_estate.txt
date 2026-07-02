@@ -1,0 +1,2 @@
+TOIVO,https://www.nordnet.fi/osakkeet/kurssit/toivo-group-toivo-xhel?details
+INVEST,https://www.nordnet.fi/osakkeet/kurssit/investors-house-invest-xhel?details

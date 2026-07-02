@@ -1,6 +1,0 @@
-NESTE,https://www.nordnet.fi/osakkeet/kurssit/neste-xhel?details
-FORTUM,https://www.nordnet.fi/osakkeet/kurssit/fortum-xhel?details
-KEMPOWR,https://www.nordnet.fi/osakkeet/kurssit/kempower-kempowr-xhel?details
-PAMPALO,https://www.nordnet.fi/osakkeet/kurssit/endomines-finland-pampalo-xhel?details
-ESENSE,https://www.nordnet.fi/osakkeet/kurssit/enersense-international-esense-xhel?details
-MERUS,https://www.nordnet.fi/osakkeet/kurssit/merus-power-merus-fsme?details

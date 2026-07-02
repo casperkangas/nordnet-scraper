@@ -10,3 +10,9 @@ KEMIRA,https://www.nordnet.fi/osakkeet/kurssit/kemira-xhel?details
 OUT1V,https://www.nordnet.fi/osakkeet/kurssit/outokumpu-out1v-xhel?details
 HUH1V,https://www.nordnet.fi/osakkeet/kurssit/huhtamaki-huh1v-xhel?details
 SSABBH,https://www.nordnet.fi/osakkeet/kurssit/ssab-b-ssabbh-xhel?details
+METSB,https://www.nordnet.fi/osakkeet/kurssit/metsa-board-b-metsb-xhel?details
+EXEL,https://www.nordnet.fi/osakkeet/kurssit/exel-composites-exel-xhel?details
+SCANFL,https://www.nordnet.fi/osakkeet/kurssit/scanfil-scanfl-xhel?details
+CTH1V,https://www.nordnet.fi/osakkeet/kurssit/componenta-cth1v-xhel?details
+GLA1V,https://www.nordnet.fi/osakkeet/kurssit/glaston-gla1v-xhel?details
+VIK1V,https://www.nordnet.fi/osakkeet/kurssit/viking-line-vik1v-xhel?details

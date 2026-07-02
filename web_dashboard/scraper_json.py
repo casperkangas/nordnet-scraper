@@ -8,6 +8,8 @@ from scoring_engine import apply_weighted_scoring
 import time
 import matplotlib.pyplot as plt
 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
 # --- NEW: START THE TIMER ---
 print("⏱️ Starting the scraping engine...")
 start_time = time.time()
@@ -27,7 +29,7 @@ headers = {
 }
 
 # 3. Use glob to find all text files that start with "targets_"
-target_files = glob.glob("targets_*.txt")
+target_files = glob.glob(os.path.join(script_dir, "targets_*.txt"))
 
 if not target_files:
     print("No target files found! Make sure they are named like 'targets_finance.txt'")
@@ -159,10 +161,6 @@ print("\nConverting data to a table...")
 df = pd.DataFrame(all_stocks_data)
 
 # --- THE FIX: Anchor the paths securely to the script's exact location ---
-# 1. Get the absolute path of the folder where scraper_json.py lives
-script_dir = os.path.dirname(os.path.abspath(__file__))
-
-# 2. Build the precise path for the data directory
 data_dir = os.path.join(script_dir, "data")
 
 # 3. Create it if it doesn't exist
@@ -172,7 +170,7 @@ os.makedirs(data_dir, exist_ok=True)
 output_filename = os.path.join(data_dir, "Stock_Analysis_Master.json")
 
 # 6. INTEGRATE MANUAL ANALYST RATINGS
-manual_file = "Manual_Analyst_Ratings.xlsx"
+manual_file = os.path.join(script_dir, "Manual_Analyst_Ratings.xlsx")
 
 if os.path.exists(manual_file):
     print(f"Found {manual_file}. Merging analyst scores...")
