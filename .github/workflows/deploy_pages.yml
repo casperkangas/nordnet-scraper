@@ -1,9 +1,10 @@
 name: Deploy Dashboard to GitHub Pages
 
 on:
-  # Runs every time the scraper bot pushes new data to the main branch
-  push:
-    branches: ["main"]
+  workflow_run:
+    workflows: ["Daily Nordnet Scraper"]
+    types:
+      - completed
   workflow_dispatch:
 
 permissions:
@@ -17,6 +18,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -24,13 +26,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # This tells GitHub to ONLY publish your web dashboard folder!
           path: './web_dashboard'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
