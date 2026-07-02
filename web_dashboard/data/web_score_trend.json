@@ -1,7 +1,7 @@
 [
     {
         "Ticker":"VALMT",
-        "Current Score":84.48
+        "Current Score":83.52
     },
     {
         "Ticker":"STERV",
@@ -29,7 +29,7 @@
     },
     {
         "Ticker":"ORNBV",
-        "Current Score":57.33
+        "Current Score":57.7
     },
     {
         "Ticker":"TLT1V",
@@ -48,6 +48,10 @@
         "Current Score":54.69
     },
     {
+        "Ticker":"TIETO",
+        "Current Score":54.67
+    },
+    {
         "Ticker":"METSO",
         "Current Score":54.24
     },
@@ -58,10 +62,6 @@
     {
         "Ticker":"ENENTO",
         "Current Score":53.48
-    },
-    {
-        "Ticker":"TIETO",
-        "Current Score":53.38
     },
     {
         "Ticker":"KNEBV",
@@ -125,7 +125,7 @@
     },
     {
         "Ticker":"OMASP",
-        "Current Score":33.22
+        "Current Score":32.89
     },
     {
         "Ticker":"MERUS",
@@ -165,7 +165,7 @@
     },
     {
         "Ticker":"EQV1V",
-        "Current Score":20.44
+        "Current Score":20.06
     },
     {
         "Ticker":"TELIA1",
