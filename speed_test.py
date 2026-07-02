@@ -46,7 +46,7 @@ def run_scrape_pass(wait_time_ms):
                 
                 # 1. Grab Price (Strict Test Mode)
                 try:
-                    price_element = page.locator("span[class*='InstrumentPrice-styles__CurrentPriceTypography']").first
+                    price_element = page.locator("span[class*='typography-title2'][class*='font-extrabold']").first
                     raw_price = price_element.inner_text(timeout=100) # 100ms strict limit
                     clean_price = raw_price.replace(" ", "").replace("\xa0", "").replace(",", ".")
                     stock_data["Current Price"] = float(clean_price)
@@ -93,10 +93,10 @@ def verify_data_completeness(data):
 print("🧪 Starting 5x5 Dynamic Speed Profiler...\n")
 test_start_time = time.time()
 
-current_wait = 1000  # Starting at 1000ms
+current_wait = 2000  # Starting at 2000ms
 step_down = 50      # Shaving off 50ms each loop
-last_safe = 500
-passes_required = 5
+last_safe = 1000
+passes_required = 3
 
 print("--- PHASE 1: FINDING THE BREAKING POINT ---")
 while current_wait >= 0:
