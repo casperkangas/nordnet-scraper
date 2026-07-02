@@ -1,182 +1,242 @@
 [
     {
         "Ticker":"VALMT",
-        "Current Score":83.52
+        "Current Score":82.31
     },
     {
         "Ticker":"STERV",
-        "Current Score":74.67
+        "Current Score":75.46
     },
     {
         "Ticker":"HUH1V",
-        "Current Score":73.79
+        "Current Score":71.88
+    },
+    {
+        "Ticker":"KESKOA",
+        "Current Score":66.18
     },
     {
         "Ticker":"UPM",
-        "Current Score":65.63
+        "Current Score":64.69
     },
     {
         "Ticker":"PIHLIS",
-        "Current Score":63.87
+        "Current Score":63.52
+    },
+    {
+        "Ticker":"OLVAS",
+        "Current Score":60.64
     },
     {
         "Ticker":"NDA FI",
-        "Current Score":60.0
+        "Current Score":60.15
     },
     {
         "Ticker":"NESTE",
-        "Current Score":59.19
+        "Current Score":59.15
     },
     {
         "Ticker":"ORNBV",
-        "Current Score":57.7
-    },
-    {
-        "Ticker":"TLT1V",
-        "Current Score":55.98
-    },
-    {
-        "Ticker":"KCR",
-        "Current Score":55.09
-    },
-    {
-        "Ticker":"KEMIRA",
-        "Current Score":54.84
-    },
-    {
-        "Ticker":"SSABBH",
-        "Current Score":54.69
-    },
-    {
-        "Ticker":"TIETO",
-        "Current Score":54.67
-    },
-    {
-        "Ticker":"METSO",
-        "Current Score":54.24
+        "Current Score":58.08
     },
     {
         "Ticker":"FSECURE",
-        "Current Score":53.9
+        "Current Score":56.67
     },
     {
-        "Ticker":"ENENTO",
-        "Current Score":53.48
+        "Ticker":"TLT1V",
+        "Current Score":56.07
     },
     {
-        "Ticker":"KNEBV",
-        "Current Score":52.97
+        "Ticker":"KEMIRA",
+        "Current Score":55.76
+    },
+    {
+        "Ticker":"SSABBH",
+        "Current Score":54.93
+    },
+    {
+        "Ticker":"TIETO",
+        "Current Score":54.62
+    },
+    {
+        "Ticker":"METSO",
+        "Current Score":53.83
     },
     {
         "Ticker":"TTALO",
-        "Current Score":52.62
-    },
-    {
-        "Ticker":"POSTI",
-        "Current Score":52.32
+        "Current Score":53.69
     },
     {
         "Ticker":"ELISA",
-        "Current Score":52.16
+        "Current Score":53.46
     },
     {
-        "Ticker":"EVLI",
-        "Current Score":44.6
+        "Ticker":"TOKMAN",
+        "Current Score":53.1
+    },
+    {
+        "Ticker":"KCR",
+        "Current Score":53.08
+    },
+    {
+        "Ticker":"KNEBV",
+        "Current Score":52.88
+    },
+    {
+        "Ticker":"TOIVO",
+        "Current Score":52.01
+    },
+    {
+        "Ticker":"ENENTO",
+        "Current Score":51.88
+    },
+    {
+        "Ticker":"POSTI",
+        "Current Score":51.61
+    },
+    {
+        "Ticker":"VIK1V",
+        "Current Score":50.58
+    },
+    {
+        "Ticker":"GLA1V",
+        "Current Score":45.54
     },
     {
         "Ticker":"NOKIA",
-        "Current Score":43.46
+        "Current Score":45.05
     },
     {
-        "Ticker":"SAMPO",
-        "Current Score":43.2
-    },
-    {
-        "Ticker":"REG1V",
-        "Current Score":41.95
-    },
-    {
-        "Ticker":"GOFORE",
-        "Current Score":41.88
-    },
-    {
-        "Ticker":"NETUM",
-        "Current Score":40.99
+        "Ticker":"EVLI",
+        "Current Score":44.23
     },
     {
         "Ticker":"WRT1V",
-        "Current Score":39.61
+        "Current Score":41.76
+    },
+    {
+        "Ticker":"REG1V",
+        "Current Score":41.65
+    },
+    {
+        "Ticker":"NETUM",
+        "Current Score":41.31
+    },
+    {
+        "Ticker":"SAMPO",
+        "Current Score":40.87
     },
     {
         "Ticker":"FORTUM",
-        "Current Score":39.32
+        "Current Score":40.86
+    },
+    {
+        "Ticker":"GOFORE",
+        "Current Score":40.57
     },
     {
         "Ticker":"SIILI",
-        "Current Score":38.66
+        "Current Score":39.37
     },
     {
         "Ticker":"QTCOM",
-        "Current Score":36.55
+        "Current Score":37.04
+    },
+    {
+        "Ticker":"PUUILO",
+        "Current Score":35.81
+    },
+    {
+        "Ticker":"HKFOODS",
+        "Current Score":34.63
     },
     {
         "Ticker":"ORIOLA",
-        "Current Score":35.27
+        "Current Score":33.69
     },
     {
         "Ticker":"OMASP",
-        "Current Score":32.89
+        "Current Score":33.15
     },
     {
-        "Ticker":"MERUS",
-        "Current Score":31.94
+        "Ticker":"SCANFL",
+        "Current Score":33.07
+    },
+    {
+        "Ticker":"CTH1V",
+        "Current Score":32.45
     },
     {
         "Ticker":"ALBAV",
-        "Current Score":31.02
+        "Current Score":30.48
+    },
+    {
+        "Ticker":"MERUS",
+        "Current Score":29.97
+    },
+    {
+        "Ticker":"EXEL",
+        "Current Score":29.13
     },
     {
         "Ticker":"OUT1V",
-        "Current Score":27.96
+        "Current Score":28.62
     },
     {
         "Ticker":"VINCIT",
-        "Current Score":26.9
-    },
-    {
-        "Ticker":"MANTA",
-        "Current Score":26.6
+        "Current Score":27.79
     },
     {
         "Ticker":"ESENSE",
-        "Current Score":25.97
+        "Current Score":26.83
+    },
+    {
+        "Ticker":"METSB",
+        "Current Score":26.19
+    },
+    {
+        "Ticker":"INVEST",
+        "Current Score":25.62
+    },
+    {
+        "Ticker":"MANTA",
+        "Current Score":24.42
+    },
+    {
+        "Ticker":"HEALTH",
+        "Current Score":23.83
     },
     {
         "Ticker":"BITTI",
-        "Current Score":22.69
-    },
-    {
-        "Ticker":"AKTIA",
-        "Current Score":22.04
+        "Current Score":22.85
     },
     {
         "Ticker":"CAPMAN",
-        "Current Score":21.79
+        "Current Score":22.84
+    },
+    {
+        "Ticker":"AKTIA",
+        "Current Score":21.55
     },
     {
         "Ticker":"EQV1V",
-        "Current Score":20.06
+        "Current Score":20.71
     },
     {
         "Ticker":"TELIA1",
-        "Current Score":16.75
-    },
-    {
-        "Ticker":"PAMPALO",
-        "Current Score":15.64
+        "Current Score":16.87
     },
     {
         "Ticker":"KEMPOWR",
-        "Current Score":14.44
+        "Current Score":14.81
+    },
+    {
+        "Ticker":"PAMPALO",
+        "Current Score":13.28
+    },
+    {
+        "Ticker":"SOSI1",
+        "Current Score":6.91
     }
 ]
