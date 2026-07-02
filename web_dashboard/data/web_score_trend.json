@@ -21,7 +21,7 @@
     },
     {
         "Ticker":"PIHLIS",
-        "Current Score":63.52
+        "Current Score":62.69
     },
     {
         "Ticker":"OLVAS",
@@ -60,16 +60,16 @@
         "Current Score":54.62
     },
     {
+        "Ticker":"ELISA",
+        "Current Score":54.29
+    },
+    {
         "Ticker":"METSO",
         "Current Score":53.83
     },
     {
         "Ticker":"TTALO",
         "Current Score":53.69
-    },
-    {
-        "Ticker":"ELISA",
-        "Current Score":53.46
     },
     {
         "Ticker":"TOKMAN",
@@ -81,7 +81,7 @@
     },
     {
         "Ticker":"KNEBV",
-        "Current Score":52.88
+        "Current Score":52.6
     },
     {
         "Ticker":"TOIVO",
@@ -101,7 +101,7 @@
     },
     {
         "Ticker":"GLA1V",
-        "Current Score":45.54
+        "Current Score":45.83
     },
     {
         "Ticker":"NOKIA",
@@ -116,6 +116,10 @@
         "Current Score":41.76
     },
     {
+        "Ticker":"FORTUM",
+        "Current Score":41.73
+    },
+    {
         "Ticker":"REG1V",
         "Current Score":41.65
     },
@@ -128,20 +132,16 @@
         "Current Score":40.87
     },
     {
-        "Ticker":"FORTUM",
-        "Current Score":40.86
-    },
-    {
         "Ticker":"GOFORE",
         "Current Score":40.57
     },
     {
         "Ticker":"SIILI",
-        "Current Score":39.37
+        "Current Score":39.08
     },
     {
         "Ticker":"QTCOM",
-        "Current Score":37.04
+        "Current Score":36.5
     },
     {
         "Ticker":"PUUILO",
@@ -156,12 +156,12 @@
         "Current Score":33.69
     },
     {
-        "Ticker":"OMASP",
-        "Current Score":33.15
-    },
-    {
         "Ticker":"SCANFL",
         "Current Score":33.07
+    },
+    {
+        "Ticker":"OMASP",
+        "Current Score":32.86
     },
     {
         "Ticker":"CTH1V",
@@ -217,7 +217,7 @@
     },
     {
         "Ticker":"AKTIA",
-        "Current Score":21.55
+        "Current Score":21.8
     },
     {
         "Ticker":"EQV1V",
