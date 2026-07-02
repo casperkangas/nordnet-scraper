@@ -11,7 +11,7 @@
   <body class="p-2 sm:p-4 md:p-6 lg:p-8 font-sans">
     <div class="dashboard-shell space-y-6">
       <header
-        class="app-header border-b pb-4 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2"
+        class="app-header border-b pb-4 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3"
       >
         <div>
           <h1 class="page-title">Financial Analytics Terminal</h1>
@@ -19,9 +19,21 @@
             Automated Stock Screener & Quantitative Ranking
           </p>
         </div>
-        <div class="status-badge">
-          Data Updated:
-          <span id="last-updated-date">-</span>
+        <div class="flex items-center gap-2">
+          <div class="status-badge">
+            Data Updated:
+            <span id="last-updated-date">-</span>
+          </div>
+
+          <button
+            id="theme-toggle"
+            type="button"
+            class="theme-toggle"
+            aria-label="Toggle dark mode"
+          >
+            <span class="theme-toggle__sun">☀</span>
+            <span class="theme-toggle__moon">☾</span>
+          </button>
         </div>
       </header>
 

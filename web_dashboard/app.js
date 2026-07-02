@@ -31,6 +31,32 @@ const defaultHidden = [
   "Data Completeness %",
 ];
 
+const root = document.documentElement;
+const themeToggle = document.getElementById("theme-toggle");
+
+let currentTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+  ? "dark"
+  : "light";
+
+root.setAttribute("data-theme", currentTheme);
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    currentTheme = currentTheme === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", currentTheme);
+
+    if (masterData.length) {
+      applyFilters();
+    }
+  });
+}
+
+function getThemeColor(name) {
+  return getComputedStyle(document.documentElement)
+    .getPropertyValue(name)
+    .trim();
+}
+
 async function initDashboard() {
   try {
     const response = await fetch("data/web_today_snapshot.json");
@@ -237,6 +263,13 @@ function updateChart(filteredData) {
       : null;
   });
 
+  const chartGrid = getThemeColor("--chart-grid");
+  const chartTick = getThemeColor("--chart-tick");
+  const chartLegend = getThemeColor("--chart-legend");
+
+  Chart.defaults.color = chartTick;
+  Chart.defaults.borderColor = chartGrid;
+
   chartInstance = new Chart(ctx, {
     type: "bar",
     data: {
@@ -249,6 +282,9 @@ function updateChart(filteredData) {
           borderColor: "#ef4444",
           backgroundColor: "#ef4444",
           pointRadius: 5,
+          pointHoverRadius: 6,
+          borderWidth: 2,
+          tension: 0.25,
           fill: false,
           order: 1,
         },
@@ -279,10 +315,48 @@ function updateChart(filteredData) {
       responsive: true,
       maintainAspectRatio: false,
       scales: {
-        y: { beginAtZero: true, max: 100, grid: { color: "#f1f5f9" } },
-        x: { grid: { display: false } },
+        y: {
+          beginAtZero: true,
+          max: 100,
+          border: {
+            display: false,
+          },
+          ticks: {
+            color: chartTick,
+            padding: 8,
+          },
+          grid: {
+            color: chartGrid,
+            drawBorder: false,
+          },
+        },
+        x: {
+          border: {
+            display: false,
+          },
+          ticks: {
+            color: chartTick,
+            padding: 8,
+          },
+          grid: {
+            display: false,
+            drawBorder: false,
+          },
+        },
       },
-      plugins: { legend: { display: true, position: "top" } },
+      plugins: {
+        legend: {
+          display: true,
+          position: "top",
+          labels: {
+            color: chartLegend,
+            usePointStyle: true,
+            boxWidth: 10,
+            boxHeight: 10,
+            padding: 16,
+          },
+        },
+      },
     },
   });
 }
