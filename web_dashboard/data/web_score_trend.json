@@ -1,242 +1,362 @@
 [
     {
         "Ticker":"VALMT",
-        "Current Score":82.31
+        "Current Score":82.31,
+        "2026-07-02":82.31,
+        "2026-07-02 Diff %":0.0
     },
     {
         "Ticker":"STERV",
-        "Current Score":75.46
+        "Current Score":75.46,
+        "2026-07-02":75.46,
+        "2026-07-02 Diff %":0.0
     },
     {
         "Ticker":"HUH1V",
-        "Current Score":71.88
+        "Current Score":71.88,
+        "2026-07-02":71.88,
+        "2026-07-02 Diff %":0.0
     },
     {
         "Ticker":"KESKOA",
-        "Current Score":66.18
+        "Current Score":66.06,
+        "2026-07-02":66.18,
+        "2026-07-02 Diff %":-0.18
     },
     {
         "Ticker":"UPM",
-        "Current Score":64.69
+        "Current Score":64.98,
+        "2026-07-02":64.69,
+        "2026-07-02 Diff %":0.45
     },
     {
         "Ticker":"PIHLIS",
-        "Current Score":62.69
+        "Current Score":62.81,
+        "2026-07-02":62.69,
+        "2026-07-02 Diff %":0.19
     },
     {
         "Ticker":"OLVAS",
-        "Current Score":60.64
+        "Current Score":60.35,
+        "2026-07-02":60.64,
+        "2026-07-02 Diff %":-0.48
     },
     {
         "Ticker":"NDA FI",
-        "Current Score":60.15
+        "Current Score":60.31,
+        "2026-07-02":60.15,
+        "2026-07-02 Diff %":0.27
     },
     {
         "Ticker":"NESTE",
-        "Current Score":59.15
+        "Current Score":59.15,
+        "2026-07-02":59.15,
+        "2026-07-02 Diff %":0.0
     },
     {
         "Ticker":"ORNBV",
-        "Current Score":58.08
+        "Current Score":57.79,
+        "2026-07-02":58.08,
+        "2026-07-02 Diff %":-0.5
     },
     {
         "Ticker":"FSECURE",
-        "Current Score":56.67
+        "Current Score":56.13,
+        "2026-07-02":56.67,
+        "2026-07-02 Diff %":-0.95
     },
     {
         "Ticker":"TLT1V",
-        "Current Score":56.07
-    },
-    {
-        "Ticker":"KEMIRA",
-        "Current Score":55.76
-    },
-    {
-        "Ticker":"SSABBH",
-        "Current Score":54.93
-    },
-    {
-        "Ticker":"TIETO",
-        "Current Score":54.62
+        "Current Score":55.78,
+        "2026-07-02":56.07,
+        "2026-07-02 Diff %":-0.52
     },
     {
         "Ticker":"ELISA",
-        "Current Score":54.29
+        "Current Score":55.0,
+        "2026-07-02":54.29,
+        "2026-07-02 Diff %":1.31
     },
     {
-        "Ticker":"METSO",
-        "Current Score":53.83
+        "Ticker":"TIETO",
+        "Current Score":54.79,
+        "2026-07-02":54.62,
+        "2026-07-02 Diff %":0.31
+    },
+    {
+        "Ticker":"KEMIRA",
+        "Current Score":54.61,
+        "2026-07-02":55.76,
+        "2026-07-02 Diff %":-2.06
+    },
+    {
+        "Ticker":"SSABBH",
+        "Current Score":54.35,
+        "2026-07-02":54.93,
+        "2026-07-02 Diff %":-1.06
     },
     {
         "Ticker":"TTALO",
-        "Current Score":53.69
+        "Current Score":53.85,
+        "2026-07-02":53.69,
+        "2026-07-02 Diff %":0.3
+    },
+    {
+        "Ticker":"METSO",
+        "Current Score":53.83,
+        "2026-07-02":53.83,
+        "2026-07-02 Diff %":0.0
     },
     {
         "Ticker":"TOKMAN",
-        "Current Score":53.1
+        "Current Score":53.27,
+        "2026-07-02":53.1,
+        "2026-07-02 Diff %":0.32
     },
     {
         "Ticker":"KCR",
-        "Current Score":53.08
+        "Current Score":52.96,
+        "2026-07-02":53.08,
+        "2026-07-02 Diff %":-0.23
     },
     {
         "Ticker":"KNEBV",
-        "Current Score":52.6
-    },
-    {
-        "Ticker":"TOIVO",
-        "Current Score":52.01
+        "Current Score":52.6,
+        "2026-07-02":52.6,
+        "2026-07-02 Diff %":0.0
     },
     {
         "Ticker":"ENENTO",
-        "Current Score":51.88
+        "Current Score":52.13,
+        "2026-07-02":51.88,
+        "2026-07-02 Diff %":0.48
     },
     {
         "Ticker":"POSTI",
-        "Current Score":51.61
+        "Current Score":51.61,
+        "2026-07-02":51.61,
+        "2026-07-02 Diff %":0.0
+    },
+    {
+        "Ticker":"TOIVO",
+        "Current Score":51.56,
+        "2026-07-02":52.01,
+        "2026-07-02 Diff %":-0.87
     },
     {
         "Ticker":"VIK1V",
-        "Current Score":50.58
+        "Current Score":50.58,
+        "2026-07-02":50.58,
+        "2026-07-02 Diff %":0.0
     },
     {
         "Ticker":"GLA1V",
-        "Current Score":45.83
+        "Current Score":46.08,
+        "2026-07-02":45.83,
+        "2026-07-02 Diff %":0.55
     },
     {
         "Ticker":"NOKIA",
-        "Current Score":45.05
+        "Current Score":45.3,
+        "2026-07-02":45.05,
+        "2026-07-02 Diff %":0.55
     },
     {
         "Ticker":"EVLI",
-        "Current Score":44.23
-    },
-    {
-        "Ticker":"WRT1V",
-        "Current Score":41.76
-    },
-    {
-        "Ticker":"FORTUM",
-        "Current Score":41.73
-    },
-    {
-        "Ticker":"REG1V",
-        "Current Score":41.65
+        "Current Score":44.98,
+        "2026-07-02":44.23,
+        "2026-07-02 Diff %":1.7
     },
     {
         "Ticker":"NETUM",
-        "Current Score":41.31
+        "Current Score":41.89,
+        "2026-07-02":41.31,
+        "2026-07-02 Diff %":1.4
+    },
+    {
+        "Ticker":"WRT1V",
+        "Current Score":41.76,
+        "2026-07-02":41.76,
+        "2026-07-02 Diff %":0.0
     },
     {
         "Ticker":"SAMPO",
-        "Current Score":40.87
+        "Current Score":41.74,
+        "2026-07-02":40.87,
+        "2026-07-02 Diff %":2.13
+    },
+    {
+        "Ticker":"FORTUM",
+        "Current Score":41.73,
+        "2026-07-02":41.73,
+        "2026-07-02 Diff %":0.0
+    },
+    {
+        "Ticker":"REG1V",
+        "Current Score":41.49,
+        "2026-07-02":41.65,
+        "2026-07-02 Diff %":-0.38
     },
     {
         "Ticker":"GOFORE",
-        "Current Score":40.57
+        "Current Score":40.57,
+        "2026-07-02":40.57,
+        "2026-07-02 Diff %":0.0
     },
     {
         "Ticker":"SIILI",
-        "Current Score":39.08
+        "Current Score":38.21,
+        "2026-07-02":39.08,
+        "2026-07-02 Diff %":-2.23
     },
     {
         "Ticker":"QTCOM",
-        "Current Score":36.5
+        "Current Score":36.66,
+        "2026-07-02":36.5,
+        "2026-07-02 Diff %":0.44
     },
     {
         "Ticker":"PUUILO",
-        "Current Score":35.81
+        "Current Score":35.81,
+        "2026-07-02":35.81,
+        "2026-07-02 Diff %":0.0
     },
     {
         "Ticker":"HKFOODS",
-        "Current Score":34.63
+        "Current Score":34.63,
+        "2026-07-02":34.63,
+        "2026-07-02 Diff %":0.0
     },
     {
         "Ticker":"ORIOLA",
-        "Current Score":33.69
+        "Current Score":33.69,
+        "2026-07-02":33.69,
+        "2026-07-02 Diff %":0.0
     },
     {
         "Ticker":"SCANFL",
-        "Current Score":33.07
+        "Current Score":33.07,
+        "2026-07-02":33.07,
+        "2026-07-02 Diff %":0.0
     },
     {
         "Ticker":"OMASP",
-        "Current Score":32.86
+        "Current Score":32.86,
+        "2026-07-02":32.86,
+        "2026-07-02 Diff %":0.0
     },
     {
         "Ticker":"CTH1V",
-        "Current Score":32.45
+        "Current Score":32.74,
+        "2026-07-02":32.45,
+        "2026-07-02 Diff %":0.89
     },
     {
         "Ticker":"ALBAV",
-        "Current Score":30.48
+        "Current Score":30.23,
+        "2026-07-02":30.48,
+        "2026-07-02 Diff %":-0.82
     },
     {
         "Ticker":"MERUS",
-        "Current Score":29.97
+        "Current Score":29.97,
+        "2026-07-02":29.97,
+        "2026-07-02 Diff %":0.0
     },
     {
         "Ticker":"EXEL",
-        "Current Score":29.13
+        "Current Score":29.13,
+        "2026-07-02":29.13,
+        "2026-07-02 Diff %":0.0
     },
     {
         "Ticker":"OUT1V",
-        "Current Score":28.62
+        "Current Score":28.62,
+        "2026-07-02":28.62,
+        "2026-07-02 Diff %":0.0
     },
     {
         "Ticker":"VINCIT",
-        "Current Score":27.79
+        "Current Score":27.54,
+        "2026-07-02":27.79,
+        "2026-07-02 Diff %":-0.9
     },
     {
         "Ticker":"ESENSE",
-        "Current Score":26.83
+        "Current Score":26.66,
+        "2026-07-02":26.83,
+        "2026-07-02 Diff %":-0.63
     },
     {
         "Ticker":"METSB",
-        "Current Score":26.19
+        "Current Score":26.19,
+        "2026-07-02":26.19,
+        "2026-07-02 Diff %":0.0
     },
     {
         "Ticker":"INVEST",
-        "Current Score":25.62
+        "Current Score":25.37,
+        "2026-07-02":25.62,
+        "2026-07-02 Diff %":-0.98
     },
     {
         "Ticker":"MANTA",
-        "Current Score":24.42
+        "Current Score":24.26,
+        "2026-07-02":24.42,
+        "2026-07-02 Diff %":-0.66
     },
     {
         "Ticker":"HEALTH",
-        "Current Score":23.83
+        "Current Score":24.0,
+        "2026-07-02":23.83,
+        "2026-07-02 Diff %":0.71
     },
     {
         "Ticker":"BITTI",
-        "Current Score":22.85
+        "Current Score":22.85,
+        "2026-07-02":22.85,
+        "2026-07-02 Diff %":0.0
     },
     {
         "Ticker":"CAPMAN",
-        "Current Score":22.84
+        "Current Score":22.84,
+        "2026-07-02":22.84,
+        "2026-07-02 Diff %":0.0
     },
     {
         "Ticker":"AKTIA",
-        "Current Score":21.8
+        "Current Score":21.8,
+        "2026-07-02":21.8,
+        "2026-07-02 Diff %":0.0
     },
     {
         "Ticker":"EQV1V",
-        "Current Score":20.71
+        "Current Score":21.58,
+        "2026-07-02":20.71,
+        "2026-07-02 Diff %":4.2
     },
     {
         "Ticker":"TELIA1",
-        "Current Score":16.87
+        "Current Score":16.71,
+        "2026-07-02":16.87,
+        "2026-07-02 Diff %":-0.95
     },
     {
         "Ticker":"KEMPOWR",
-        "Current Score":14.81
+        "Current Score":15.06,
+        "2026-07-02":14.81,
+        "2026-07-02 Diff %":1.69
     },
     {
         "Ticker":"PAMPALO",
-        "Current Score":13.28
+        "Current Score":13.11,
+        "2026-07-02":13.28,
+        "2026-07-02 Diff %":-1.28
     },
     {
         "Ticker":"SOSI1",
-        "Current Score":6.91
+        "Current Score":6.74,
+        "2026-07-02":6.91,
+        "2026-07-02 Diff %":-2.46
     }
 ]
