@@ -3,3 +3,4 @@ PUUILO,https://www.nordnet.fi/osakkeet/kurssit/puuilo-xhel?details
 OLVAS,https://www.nordnet.fi/osakkeet/kurssit/olvi-a-olvas-xhel?details
 HKFOODS,https://www.nordnet.fi/osakkeet/kurssit/hkfoods-a-hkfoods-xhel?details
 KESKOA,https://www.nordnet.fi/osakkeet/kurssit/kesko-a-keskoa-xhel?details
+NOHO,https://www.nordnet.fi/osakkeet/kurssit/no-ho-partners-noho-xhel?details
