@@ -254,7 +254,7 @@ function updateChart(filteredData) {
     (stock) => stock["⭐ Composite Score"] || 0,
   );
   const expectedUpsides = top10.map((stock) => stock["Expected Upside"] || 0);
-  const momentumScores = top10.map((stock) => stock["Momentum"] || 0);
+  const momentumScores = top10.map((stock) => stock["📈 Momentum Score"] ?? 0);
 
   const analystRatings = top10.map((stock) => {
     return stock["Analyst Rating"] !== null &&
