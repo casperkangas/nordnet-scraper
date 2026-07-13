@@ -489,7 +489,7 @@ ranked_history_df['Rank'] = np.nan
 for run_date in sorted(ranked_history_df['Date'].dropna().unique()):
     day_mask = ranked_history_df['Date'] == run_date
     day_df = ranked_history_df.loc[day_mask].copy()
-    day_df = day_df.sort_values(by='Total Value Score', ascending=False).reset_index()
+    day_df = day_df.sort_values(by='⭐ Composite Score', ascending=False).reset_index()
     day_df['Rank'] = day_df.index + 1
     ranked_history_df.loc[day_df['index'], 'Rank'] = day_df['Rank'].values
 

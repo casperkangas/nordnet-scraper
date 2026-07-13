@@ -6,7 +6,7 @@ let chartInstance = null;
 // --- DYNAMIC COLUMN STATE ---
 let allColumns = [];
 let visibleColumns = [];
-const hiddenForever = ["Date"]; // Never show in table
+const hiddenForever = ["Date", "Rank Change Value"]; // Never show in table
 
 // Columns to hide by default on first load
 const defaultHidden = [
@@ -29,6 +29,7 @@ const defaultHidden = [
   "Score ↑",
   "Score ↓",
   "Data Completeness %",
+  "Industry Value Score",
 ];
 
 const root = document.documentElement;
@@ -74,6 +75,13 @@ async function initDashboard() {
     allColumns = Object.keys(masterData[0]).filter(
       (col) => !hiddenForever.includes(col),
     );
+
+    const priorityColumns = ["Current Rank", "Rank Change", "Ticker"];
+
+    allColumns = [
+      ...priorityColumns.filter((col) => allColumns.includes(col)),
+      ...allColumns.filter((col) => !priorityColumns.includes(col)),
+    ];
 
     // Initialize visible columns (exclude the default hidden ones)
     visibleColumns = allColumns.filter(
