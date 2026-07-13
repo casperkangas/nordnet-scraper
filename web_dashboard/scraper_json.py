@@ -231,33 +231,8 @@ today_df = today_df.sort_values(by="Total Value Score", ascending=False)
 # Identify the historical dates for our comparisons
 past_dates = sorted(final_df[final_df['Date'] < today_str]['Date'].unique())
 last_date = past_dates[-1] if past_dates else None
-# Build ranking history across all dates
 rankings_by_date = build_rankings_by_date(final_df)
-
-# Add previous rank and rank change to today's snapshot
 previous_ranks = rankings_by_date.get(last_date, {}) if last_date else {}
-
-today_df['Previous Rank'] = today_df['Ticker'].map(previous_ranks)
-
-def format_rank_change(current_rank, previous_rank):
-    if pd.isna(previous_rank):
-        return '-'
-    delta = int(previous_rank) - int(current_rank)
-    if delta > 0:
-        return f'↑ {delta}'
-    if delta < 0:
-        return f'↓ {abs(delta)}'
-    return '-'
-
-today_df['Rank Change'] = today_df.apply(
-    lambda row: format_rank_change(row['Current Rank'], row['Previous Rank']),
-    axis=1
-)
-
-today_df['Rank Change Value'] = today_df.apply(
-    lambda row: 0 if pd.isna(row['Previous Rank']) else int(row['Previous Rank']) - int(row['Current Rank']),
-    axis=1
-)
 
 # =========================================================
 # --- GENERATE THE SCORE TREND MATRIX ---
@@ -421,9 +396,30 @@ if momentum_parts:
 if '⭐ Composite Score' in today_df.columns:
     today_df = today_df.sort_values(by='⭐ Composite Score', ascending=False)
     
-# Add current rank based on today's sorted order
 today_df = today_df.reset_index(drop=True)
 today_df['Current Rank'] = today_df.index + 1
+today_df['Previous Rank'] = today_df['Ticker'].map(previous_ranks)
+
+def format_rank_change(current_rank, previous_rank):
+    if pd.isna(previous_rank):
+        return '-'
+    delta = int(previous_rank) - int(current_rank)
+    if delta > 0:
+        return f'↑ {delta}'
+    if delta < 0:
+        return f'↓ {abs(delta)}'
+    return '-'
+
+today_df['Rank Change'] = today_df.apply(
+    lambda row: format_rank_change(row['Current Rank'], row['Previous Rank']),
+    axis=1
+)
+
+today_df['Rank Change Value'] = today_df.apply(
+    lambda row: 0 if pd.isna(row['Previous Rank']) else int(row['Previous Rank']) - int(row['Current Rank']),
+    axis=1
+)
+
 
 # =========================================================
 # --- NEW: GENERATE RISK VS REWARD SCATTER PLOT ---
