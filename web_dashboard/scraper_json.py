@@ -29,6 +29,17 @@ headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 }
 
+def build_rankings_by_date(df):
+    rankings = {}
+
+    for run_date in sorted(df['Date'].dropna().unique()):
+        day_df = df[df['Date'] == run_date].copy()
+        day_df = day_df.sort_values(by='Total Value Score', ascending=False).reset_index(drop=True)
+        day_df['Rank'] = day_df.index + 1
+        rankings[run_date] = dict(zip(day_df['Ticker'], day_df['Rank']))
+
+    return rankings
+
 # 3. Use glob to find all text files that start with "targets_"
 target_files = sorted(glob.glob(os.path.join(project_root, "targets_*.txt")))
 
@@ -216,10 +227,41 @@ final_df = final_df.drop_duplicates(subset=['Date', 'Ticker'], keep='last')
 today_str = str(date.today())
 today_df = final_df[final_df['Date'] == today_str].copy()
 today_df = today_df.sort_values(by="Total Value Score", ascending=False)
+# Add current rank based on today's sorted order
+today_df = today_df.reset_index(drop=True)
+today_df['Current Rank'] = today_df.index + 1
+
 
 # Identify the historical dates for our comparisons
 past_dates = sorted(final_df[final_df['Date'] < today_str]['Date'].unique())
 last_date = past_dates[-1] if past_dates else None
+# Build ranking history across all dates
+rankings_by_date = build_rankings_by_date(final_df)
+
+# Add previous rank and rank change to today's snapshot
+previous_ranks = rankings_by_date.get(last_date, {}) if last_date else {}
+
+today_df['Previous Rank'] = today_df['Ticker'].map(previous_ranks)
+
+def format_rank_change(current_rank, previous_rank):
+    if pd.isna(previous_rank):
+        return '-'
+    delta = int(previous_rank) - int(current_rank)
+    if delta > 0:
+        return f'↑ {delta}'
+    if delta < 0:
+        return f'↓ {abs(delta)}'
+    return '-'
+
+today_df['Rank Change'] = today_df.apply(
+    lambda row: format_rank_change(row['Current Rank'], row['Previous Rank']),
+    axis=1
+)
+
+today_df['Rank Change Value'] = today_df.apply(
+    lambda row: 0 if pd.isna(row['Previous Rank']) else int(row['Previous Rank']) - int(row['Current Rank']),
+    axis=1
+)
 
 # =========================================================
 # --- GENERATE THE SCORE TREND MATRIX ---
@@ -440,15 +482,27 @@ import json
 historical_export = {}
 all_tickers = final_df['Ticker'].unique()
 
+# Rebuild a rank-enhanced copy of final_df for historical export
+ranked_history_df = final_df.copy()
+ranked_history_df['Rank'] = np.nan
+
+for run_date in sorted(ranked_history_df['Date'].dropna().unique()):
+    day_mask = ranked_history_df['Date'] == run_date
+    day_df = ranked_history_df.loc[day_mask].copy()
+    day_df = day_df.sort_values(by='Total Value Score', ascending=False).reset_index()
+    day_df['Rank'] = day_df.index + 1
+    ranked_history_df.loc[day_df['index'], 'Rank'] = day_df['Rank'].values
+
 for ticker in all_tickers:
-    ticker_history = final_df[final_df['Ticker'] == ticker].copy()
+    ticker_history = ranked_history_df[ranked_history_df['Ticker'] == ticker].copy()
     ticker_history = ticker_history.sort_values(by='Date')
     
-    desired_cols = ['Date', 'Current Price', 'Total Value Score', '⭐ Composite Score']
+    desired_cols = ['Date', 'Current Price', 'Total Value Score', '⭐ Composite Score', 'Rank']
     existing_cols = [col for col in desired_cols if col in ticker_history.columns]
     
     chart_data = ticker_history[existing_cols].dropna(subset=['Current Price']).copy()
     historical_export[ticker] = chart_data.to_dict(orient='records')
+
 
 # Save the full library into the anchored data directory
 with open(os.path.join(data_dir, "web_historical_timeseries.json"), "w", encoding="utf-8") as f:

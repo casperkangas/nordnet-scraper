@@ -387,3 +387,20 @@ html[data-theme="dark"] .table-row:hover {
   flex-direction: column;
   gap: 1rem;
 }
+
+.rank-change {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.rank-change--up {
+  color: #16a34a;
+}
+
+.rank-change--down {
+  color: #dc2626;
+}
+
+.rank-change--flat {
+  opacity: 0.7;
+}

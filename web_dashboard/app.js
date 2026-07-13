@@ -221,17 +221,34 @@ function renderTable(dataToRender) {
 
     visibleColumns.forEach((header) => {
       let cellValue = stock[header];
+      let cellClass = "table-cell";
 
-      if (cellValue === null || cellValue === undefined) {
-        cellValue = "-";
-      } else if (
-        typeof cellValue === "number" &&
-        !Number.isInteger(cellValue)
-      ) {
-        cellValue = cellValue.toFixed(2);
+      if (header === "Rank Change") {
+        const rawChange = stock["Rank Change Value"] ?? 0;
+
+        if (cellValue === null || cellValue === undefined || cellValue === "") {
+          cellValue = "-";
+        }
+
+        if (rawChange > 0) {
+          cellClass += " rank-change rank-change--up";
+        } else if (rawChange < 0) {
+          cellClass += " rank-change rank-change--down";
+        } else {
+          cellClass += " rank-change rank-change--flat";
+        }
+      } else {
+        if (cellValue === null || cellValue === undefined) {
+          cellValue = "-";
+        } else if (
+          typeof cellValue === "number" &&
+          !Number.isInteger(cellValue)
+        ) {
+          cellValue = cellValue.toFixed(2);
+        }
       }
 
-      rowsHTML += `<td class="table-cell">${cellValue}</td>`;
+      rowsHTML += `<td class="${cellClass}">${cellValue}</td>`;
     });
 
     rowsHTML += "</tr>";
