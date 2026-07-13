@@ -227,10 +227,6 @@ final_df = final_df.drop_duplicates(subset=['Date', 'Ticker'], keep='last')
 today_str = str(date.today())
 today_df = final_df[final_df['Date'] == today_str].copy()
 today_df = today_df.sort_values(by="Total Value Score", ascending=False)
-# Add current rank based on today's sorted order
-today_df = today_df.reset_index(drop=True)
-today_df['Current Rank'] = today_df.index + 1
-
 
 # Identify the historical dates for our comparisons
 past_dates = sorted(final_df[final_df['Date'] < today_str]['Date'].unique())
@@ -424,6 +420,10 @@ if momentum_parts:
 # Re-sort the snapshot by the new master score
 if '⭐ Composite Score' in today_df.columns:
     today_df = today_df.sort_values(by='⭐ Composite Score', ascending=False)
+    
+# Add current rank based on today's sorted order
+today_df = today_df.reset_index(drop=True)
+today_df['Current Rank'] = today_df.index + 1
 
 # =========================================================
 # --- NEW: GENERATE RISK VS REWARD SCATTER PLOT ---
@@ -489,7 +489,7 @@ ranked_history_df['Rank'] = np.nan
 for run_date in sorted(ranked_history_df['Date'].dropna().unique()):
     day_mask = ranked_history_df['Date'] == run_date
     day_df = ranked_history_df.loc[day_mask].copy()
-    day_df = day_df.sort_values(by='⭐ Composite Score', ascending=False).reset_index()
+    day_df = day_df.sort_values(by='Total Value Score', ascending=False).reset_index()
     day_df['Rank'] = day_df.index + 1
     ranked_history_df.loc[day_df['index'], 'Rank'] = day_df['Rank'].values
 
