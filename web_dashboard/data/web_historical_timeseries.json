@@ -65,6 +65,12 @@
             "Current Price": 7.13,
             "Total Value Score": 53.69,
             "Rank": 13.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 7.165,
+            "Total Value Score": 53.69,
+            "Rank": 14.0
         }
     ],
     "PUUILO": [
@@ -133,6 +139,12 @@
             "Current Price": 17.1,
             "Total Value Score": 37.33,
             "Rank": 37.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 17.14,
+            "Total Value Score": 36.77,
+            "Rank": 39.0
         }
     ],
     "OLVAS": [
@@ -201,6 +213,12 @@
             "Current Price": 32.55,
             "Total Value Score": 46.4,
             "Rank": 25.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 32.65,
+            "Total Value Score": 46.24,
+            "Rank": 25.0
         }
     ],
     "HKFOODS": [
@@ -266,7 +284,13 @@
         },
         {
             "Date": "2026-07-15",
-            "Current Price": 1.68,
+            "Current Price": 1.6800000000000002,
+            "Total Value Score": 34.52,
+            "Rank": 41.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 1.726,
             "Total Value Score": 34.52,
             "Rank": 41.0
         }
@@ -337,6 +361,12 @@
             "Current Price": 19.46,
             "Total Value Score": 63.32,
             "Rank": 6.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 19.68,
+            "Total Value Score": 63.32,
+            "Rank": 6.0
         }
     ],
     "NESTE": [
@@ -403,6 +433,12 @@
         {
             "Date": "2026-07-15",
             "Current Price": 30.96,
+            "Total Value Score": 56.13,
+            "Rank": 10.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 31.53,
             "Total Value Score": 56.13,
             "Rank": 10.0
         }
@@ -473,6 +509,12 @@
             "Current Price": 19.81,
             "Total Value Score": 42.14,
             "Rank": 33.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 19.575,
+            "Total Value Score": 42.14,
+            "Rank": 33.0
         }
     ],
     "KEMPOWR": [
@@ -539,6 +581,12 @@
         {
             "Date": "2026-07-15",
             "Current Price": 11.74,
+            "Total Value Score": 15.01,
+            "Rank": 59.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 11.65,
             "Total Value Score": 15.01,
             "Rank": 59.0
         }
@@ -609,6 +657,12 @@
             "Current Price": 8.0,
             "Total Value Score": 13.36,
             "Rank": 60.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 7.92,
+            "Total Value Score": 13.36,
+            "Rank": 60.0
         }
     ],
     "ESENSE": [
@@ -676,6 +730,12 @@
             "Date": "2026-07-15",
             "Current Price": 3.62,
             "Total Value Score": 26.9,
+            "Rank": 49.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 3.61,
+            "Total Value Score": 27.07,
             "Rank": 49.0
         }
     ],
@@ -745,6 +805,12 @@
             "Current Price": 4.63,
             "Total Value Score": 30.2,
             "Rank": 46.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 4.7,
+            "Total Value Score": 30.2,
+            "Rank": 46.0
         }
     ],
     "SOSI1": [
@@ -810,8 +876,14 @@
         },
         {
             "Date": "2026-07-15",
-            "Current Price": 0.3595,
+            "Current Price": 0.35950000000000004,
             "Total Value Score": 6.91,
+            "Rank": 61.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 0.35,
+            "Total Value Score": 7.16,
             "Rank": 61.0
         }
     ],
@@ -881,6 +953,12 @@
             "Current Price": 16.89,
             "Total Value Score": 59.54,
             "Rank": 7.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 17.02,
+            "Total Value Score": 59.86,
+            "Rank": 7.0
         }
     ],
     "AKTIA": [
@@ -947,6 +1025,12 @@
         {
             "Date": "2026-07-15",
             "Current Price": 11.1,
+            "Total Value Score": 21.09,
+            "Rank": 56.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 11.06,
             "Total Value Score": 21.09,
             "Rank": 56.0
         }
@@ -1017,6 +1101,12 @@
             "Current Price": 16.84,
             "Total Value Score": 34.82,
             "Rank": 40.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 16.86,
+            "Total Value Score": 34.82,
+            "Rank": 40.0
         }
     ],
     "MANTA": [
@@ -1085,6 +1175,12 @@
             "Current Price": 5.535,
             "Total Value Score": 23.92,
             "Rank": 52.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 5.475,
+            "Total Value Score": 23.92,
+            "Rank": 52.0
         }
     ],
     "SAMPO": [
@@ -1150,8 +1246,14 @@
         },
         {
             "Date": "2026-07-15",
-            "Current Price": 9.524,
+            "Current Price": 9.524000000000001,
             "Total Value Score": 45.73,
+            "Rank": 26.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 9.554,
+            "Total Value Score": 45.45,
             "Rank": 26.0
         }
     ],
@@ -1221,6 +1323,12 @@
             "Current Price": 46.8,
             "Total Value Score": 31.13,
             "Rank": 45.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 46.9,
+            "Total Value Score": 31.09,
+            "Rank": 45.0
         }
     ],
     "EVLI": [
@@ -1288,6 +1396,12 @@
             "Date": "2026-07-15",
             "Current Price": 24.8,
             "Total Value Score": 43.39,
+            "Rank": 29.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 24.6,
+            "Total Value Score": 43.96,
             "Rank": 29.0
         }
     ],
@@ -1357,6 +1471,12 @@
             "Current Price": 9.66,
             "Total Value Score": 20.36,
             "Rank": 57.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 9.7,
+            "Total Value Score": 20.64,
+            "Rank": 57.0
         }
     ],
     "ENENTO": [
@@ -1425,6 +1545,12 @@
             "Current Price": 14.36,
             "Total Value Score": 43.85,
             "Rank": 28.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 14.5,
+            "Total Value Score": 44.38,
+            "Rank": 28.0
         }
     ],
     "CAPMAN": [
@@ -1491,6 +1617,12 @@
         {
             "Date": "2026-07-15",
             "Current Price": 1.74,
+            "Total Value Score": 23.29,
+            "Rank": 55.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 1.752,
             "Total Value Score": 23.29,
             "Rank": 55.0
         }
@@ -1561,6 +1693,12 @@
             "Current Price": 9.88,
             "Total Value Score": 52.07,
             "Rank": 19.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 9.9,
+            "Total Value Score": 51.95,
+            "Rank": 19.0
         }
     ],
     "WRT1V": [
@@ -1628,6 +1766,12 @@
             "Date": "2026-07-15",
             "Current Price": 30.19,
             "Total Value Score": 43.25,
+            "Rank": 31.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 29.71,
+            "Total Value Score": 42.84,
             "Rank": 31.0
         }
     ],
@@ -1697,6 +1841,12 @@
             "Current Price": 48.48,
             "Total Value Score": 52.24,
             "Rank": 18.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 49.53,
+            "Total Value Score": 52.52,
+            "Rank": 18.0
         }
     ],
     "METSO": [
@@ -1765,6 +1915,12 @@
             "Current Price": 15.38,
             "Total Value Score": 50.32,
             "Rank": 22.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 15.34,
+            "Total Value Score": 50.32,
+            "Rank": 21.0
         }
     ],
     "UPM": [
@@ -1831,6 +1987,12 @@
         {
             "Date": "2026-07-15",
             "Current Price": 23.32,
+            "Total Value Score": 64.7,
+            "Rank": 5.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 23.25,
             "Total Value Score": 64.7,
             "Rank": 5.0
         }
@@ -1901,6 +2063,12 @@
             "Current Price": 9.426,
             "Total Value Score": 75.02,
             "Rank": 2.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 9.484,
+            "Total Value Score": 75.46,
+            "Rank": 2.0
         }
     ],
     "KCR": [
@@ -1967,6 +2135,12 @@
         {
             "Date": "2026-07-15",
             "Current Price": 26.98,
+            "Total Value Score": 53.11,
+            "Rank": 17.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 27.32,
             "Total Value Score": 53.11,
             "Rank": 17.0
         }
@@ -2037,6 +2211,12 @@
             "Current Price": 21.68,
             "Total Value Score": 80.32,
             "Rank": 1.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 22.2,
+            "Total Value Score": 80.08,
+            "Rank": 1.0
         }
     ],
     "KEMIRA": [
@@ -2104,6 +2284,12 @@
             "Date": "2026-07-15",
             "Current Price": 16.69,
             "Total Value Score": 54.91,
+            "Rank": 12.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 16.8,
+            "Total Value Score": 55.36,
             "Rank": 12.0
         }
     ],
@@ -2173,6 +2359,12 @@
             "Current Price": 5.525,
             "Total Value Score": 27.89,
             "Rank": 48.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 5.555,
+            "Total Value Score": 27.64,
+            "Rank": 48.0
         }
     ],
     "HUH1V": [
@@ -2240,6 +2432,12 @@
             "Date": "2026-07-15",
             "Current Price": 26.28,
             "Total Value Score": 72.54,
+            "Rank": 3.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 26.5,
+            "Total Value Score": 71.39,
             "Rank": 3.0
         }
     ],
@@ -2309,6 +2507,12 @@
             "Current Price": 9.028,
             "Total Value Score": 43.37,
             "Rank": 30.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 9.032,
+            "Total Value Score": 43.04,
+            "Rank": 30.0
         }
     ],
     "METSB": [
@@ -2375,6 +2579,12 @@
         {
             "Date": "2026-07-15",
             "Current Price": 2.686,
+            "Total Value Score": 24.94,
+            "Rank": 51.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 2.708,
             "Total Value Score": 24.94,
             "Rank": 51.0
         }
@@ -2445,6 +2655,12 @@
             "Current Price": 11.9,
             "Total Value Score": 28.97,
             "Rank": 47.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 11.9,
+            "Total Value Score": 28.64,
+            "Rank": 47.0
         }
     ],
     "SCANFL": [
@@ -2513,6 +2729,12 @@
             "Current Price": 11.64,
             "Total Value Score": 36.85,
             "Rank": 38.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 11.52,
+            "Total Value Score": 36.85,
+            "Rank": 38.0
         }
     ],
     "CTH1V": [
@@ -2578,6 +2800,12 @@
         },
         {
             "Date": "2026-07-15",
+            "Current Price": 5.94,
+            "Total Value Score": 32.86,
+            "Rank": 44.0
+        },
+        {
+            "Date": "2026-07-16",
             "Current Price": 5.94,
             "Total Value Score": 32.86,
             "Rank": 44.0
@@ -2649,6 +2877,12 @@
             "Current Price": 1.115,
             "Total Value Score": 45.39,
             "Rank": 27.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 1.115,
+            "Total Value Score": 45.22,
+            "Rank": 27.0
         }
     ],
     "VIK1V": [
@@ -2716,6 +2950,12 @@
             "Date": "2026-07-15",
             "Current Price": 20.2,
             "Total Value Score": 49.35,
+            "Rank": 23.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 20.2,
+            "Total Value Score": 49.1,
             "Rank": 23.0
         }
     ],
@@ -2785,6 +3025,12 @@
             "Current Price": 68.5,
             "Total Value Score": 59.43,
             "Rank": 8.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 68.75,
+            "Total Value Score": 59.72,
+            "Rank": 8.0
         }
     ],
     "TTALO": [
@@ -2852,6 +3098,12 @@
             "Date": "2026-07-15",
             "Current Price": 7.03,
             "Total Value Score": 55.41,
+            "Rank": 11.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 7.32,
+            "Total Value Score": 55.96,
             "Rank": 11.0
         }
     ],
@@ -2921,6 +3173,12 @@
             "Current Price": 10.4,
             "Total Value Score": 65.15,
             "Rank": 4.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 10.4,
+            "Total Value Score": 64.78,
+            "Rank": 4.0
         }
     ],
     "REG1V": [
@@ -2988,6 +3246,12 @@
             "Date": "2026-07-15",
             "Current Price": 12.66,
             "Total Value Score": 42.59,
+            "Rank": 32.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 12.72,
+            "Total Value Score": 42.31,
             "Rank": 32.0
         }
     ],
@@ -3057,6 +3321,12 @@
             "Current Price": 0.916,
             "Total Value Score": 33.11,
             "Rank": 43.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 0.921,
+            "Total Value Score": 32.95,
+            "Rank": 43.0
         }
     ],
     "HEALTH": [
@@ -3123,6 +3393,12 @@
         {
             "Date": "2026-07-15",
             "Current Price": 0.852,
+            "Total Value Score": 23.92,
+            "Rank": 53.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 0.874,
             "Total Value Score": 23.92,
             "Rank": 53.0
         }
@@ -3193,6 +3469,12 @@
             "Current Price": 0.936,
             "Total Value Score": 51.67,
             "Rank": 20.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 0.936,
+            "Total Value Score": 51.39,
+            "Rank": 20.0
         }
     ],
     "INVEST": [
@@ -3259,6 +3541,12 @@
         {
             "Date": "2026-07-15",
             "Current Price": 3.33,
+            "Total Value Score": 25.7,
+            "Rank": 50.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 3.36,
             "Total Value Score": 25.7,
             "Rank": 50.0
         }
@@ -3329,6 +3617,12 @@
             "Current Price": 9.782,
             "Total Value Score": 48.01,
             "Rank": 24.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 9.152,
+            "Total Value Score": 48.01,
+            "Rank": 24.0
         }
     ],
     "QTCOM": [
@@ -3396,6 +3690,12 @@
             "Date": "2026-07-15",
             "Current Price": 24.64,
             "Total Value Score": 34.18,
+            "Rank": 42.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 25.0,
+            "Total Value Score": 34.1,
             "Rank": 42.0
         }
     ],
@@ -3465,6 +3765,12 @@
             "Current Price": 9.93,
             "Total Value Score": 39.44,
             "Rank": 36.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 10.08,
+            "Total Value Score": 39.11,
+            "Rank": 36.0
         }
     ],
     "BITTI": [
@@ -3532,6 +3838,12 @@
             "Date": "2026-07-15",
             "Current Price": 27.05,
             "Total Value Score": 23.31,
+            "Rank": 54.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 26.6,
+            "Total Value Score": 23.47,
             "Rank": 54.0
         }
     ],
@@ -3601,6 +3913,12 @@
             "Current Price": 34.98,
             "Total Value Score": 53.59,
             "Rank": 14.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 35.26,
+            "Total Value Score": 54.46,
+            "Rank": 13.0
         }
     ],
     "TELIA1": [
@@ -3667,6 +3985,12 @@
         {
             "Date": "2026-07-15",
             "Current Price": 4.177,
+            "Total Value Score": 15.04,
+            "Rank": 58.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 4.094,
             "Total Value Score": 15.04,
             "Rank": 58.0
         }
@@ -3737,6 +4061,12 @@
             "Current Price": 17.78,
             "Total Value Score": 53.55,
             "Rank": 15.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 17.86,
+            "Total Value Score": 53.55,
+            "Rank": 15.0
         }
     ],
     "FSECURE": [
@@ -3803,6 +4133,12 @@
         {
             "Date": "2026-07-15",
             "Current Price": 2.09,
+            "Total Value Score": 57.62,
+            "Rank": 9.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 2.1,
             "Total Value Score": 57.62,
             "Rank": 9.0
         }
@@ -3873,6 +4209,12 @@
             "Current Price": 3.59,
             "Total Value Score": 53.34,
             "Rank": 16.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 3.6,
+            "Total Value Score": 53.3,
+            "Rank": 16.0
         }
     ],
     "VINCIT": [
@@ -3938,8 +4280,14 @@
         },
         {
             "Date": "2026-07-15",
-            "Current Price": 0.83,
+            "Current Price": 0.8300000000000001,
             "Total Value Score": 40.56,
+            "Rank": 35.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 0.858,
+            "Total Value Score": 40.32,
             "Rank": 35.0
         }
     ],
@@ -4009,6 +4357,12 @@
             "Current Price": 3.01,
             "Total Value Score": 36.51,
             "Rank": 39.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 3.03,
+            "Total Value Score": 37.04,
+            "Rank": 37.0
         }
     ],
     "NETUM": [
@@ -4077,6 +4431,12 @@
             "Current Price": 1.025,
             "Total Value Score": 41.32,
             "Rank": 34.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 1.0,
+            "Total Value Score": 41.89,
+            "Rank": 34.0
         }
     ],
     "NOHO": [
@@ -4121,6 +4481,12 @@
             "Current Price": 7.55,
             "Total Value Score": 50.45,
             "Rank": 21.0
+        },
+        {
+            "Date": "2026-07-16",
+            "Current Price": 7.44,
+            "Total Value Score": 50.28,
+            "Rank": 22.0
         }
     ]
 }
