@@ -34,7 +34,7 @@ def build_rankings_by_date(df):
 
     for run_date in sorted(df['Date'].dropna().unique()):
         day_df = df[df['Date'] == run_date].copy()
-        day_df = day_df.sort_values(by='Total Value Score', ascending=False).reset_index(drop=True)
+        day_df = day_df.sort_values(by='⭐ Composite Score', ascending=False).reset_index(drop=True)
         day_df['Rank'] = day_df.index + 1
         rankings[run_date] = dict(zip(day_df['Ticker'], day_df['Rank']))
 
@@ -223,10 +223,48 @@ final_df['Date'] = pd.to_datetime(final_df['Date']).dt.strftime('%Y-%m-%d')
 final_df = final_df.drop_duplicates(subset=['Date', 'Ticker'], keep='last')
 # ------------------------------------
 
+# --- Calculate Composite Score for the entire history ---
+def _normalize_series(s, invert=False, clip_pct=(5, 95)):
+    clean_s = s.dropna()
+    if clean_s.empty:
+        return pd.Series(np.nan, index=s.index)
+    lo = np.nanpercentile(clean_s, clip_pct[0])
+    hi = np.nanpercentile(clean_s, clip_pct[1])
+    if hi == lo:
+        return pd.Series(50.0, index=s.index)
+    clipped = s.clip(lower=lo, upper=hi)
+    scaled  = (clipped - lo) / (hi - lo) * 100
+    return (100 - scaled) if invert else scaled
+
+def _calc_composite_for_group(group):
+    W_TOTAL    = 0.35
+    W_INDUSTRY = 0.20
+    W_UPSIDE   = 0.30
+    W_RISK     = 0.15
+
+    score_parts = []
+    if 'Total Value Score' in group.columns:
+        score_parts.append(_normalize_series(group['Total Value Score']) * W_TOTAL)
+    if 'Industry Value Score' in group.columns:
+        score_parts.append(_normalize_series(group['Industry Value Score']) * W_INDUSTRY)
+    if 'Expected Upside' in group.columns:
+        score_parts.append(_normalize_series(group['Expected Upside']) * W_UPSIDE)
+    if 'Risk Spread' in group.columns:
+        score_parts.append(_normalize_series(group['Risk Spread'], invert=True) * W_RISK)
+    
+    if score_parts:
+        group['⭐ Composite Score'] = pd.concat(score_parts, axis=1).sum(axis=1).round(1)
+    else:
+        group['⭐ Composite Score'] = np.nan
+        
+    return group
+
+final_df = final_df.groupby('Date', group_keys=False).apply(_calc_composite_for_group)
+
 # Separate ONLY today's data for the Snapshot dashboard
 today_str = str(date.today())
 today_df = final_df[final_df['Date'] == today_str].copy()
-today_df = today_df.sort_values(by="Total Value Score", ascending=False)
+today_df = today_df.sort_values(by="⭐ Composite Score", ascending=False)
 
 # Identify the historical dates for our comparisons
 past_dates = sorted(final_df[final_df['Date'] < today_str]['Date'].unique())
@@ -239,7 +277,7 @@ previous_ranks = rankings_by_date.get(last_date, {}) if last_date else {}
 # =========================================================
 print("Generating the historical score matrix...")
 
-trend_df = final_df.pivot(index='Ticker', columns='Date', values='Total Value Score').reset_index()
+trend_df = final_df.pivot(index='Ticker', columns='Date', values='⭐ Composite Score').reset_index()
 
 if today_str in trend_df.columns:
     trend_df = trend_df.rename(columns={today_str: 'Current Score'})
@@ -322,7 +360,7 @@ if 'Current Price' in final_df.columns:
 
 # --- Score momentum (period-over-period) ---
 _score_pivot = final_df.pivot_table(
-    index='Ticker', columns='Date', values='Total Value Score', aggfunc='last'
+    index='Ticker', columns='Date', values='⭐ Composite Score', aggfunc='last'
 )
 _score_sorted = _score_pivot[sorted(_score_pivot.columns)]
 _score_consec = _score_sorted.diff(axis=1).iloc[:, 1:]
@@ -336,43 +374,6 @@ today_df = today_df.merge(momentum_score, on='Ticker', how='left')
 # =========================================================
 print("Computing composite and momentum scores...")
 
-def _normalize_series(s, invert=False, clip_pct=(5, 95)):
-    """
-    Clip a series to its 5th-95th percentile range, then min-max scale it to 0-100.
-    If invert=True, flip the result so that lower raw values score higher.
-    Returns a float series; rows that were NaN stay NaN.
-    """
-    lo = np.nanpercentile(s.dropna(), clip_pct[0])
-    hi = np.nanpercentile(s.dropna(), clip_pct[1])
-    if hi == lo:                      # all values identical → mid-point
-        return pd.Series(50.0, index=s.index)
-    clipped = s.clip(lower=lo, upper=hi)
-    scaled  = (clipped - lo) / (hi - lo) * 100
-    return (100 - scaled) if invert else scaled
-
-# --- Composite Score: fundamentals + upside + risk ---
-# Weights must sum to 1.0. Adjust here to change the balance.
-W_TOTAL    = 0.35   # Total Value Score     (higher = better)
-W_INDUSTRY = 0.20   # Industry Value Score  (higher = better)
-W_UPSIDE   = 0.30   # Expected Upside %     (higher = better)
-W_RISK     = 0.15   # Risk Spread           (lower  = better → inverted)
-
-score_parts = []
-
-if 'Total Value Score' in today_df.columns:
-    score_parts.append(_normalize_series(today_df['Total Value Score']) * W_TOTAL)
-
-if 'Industry Value Score' in today_df.columns:
-    score_parts.append(_normalize_series(today_df['Industry Value Score']) * W_INDUSTRY)
-
-if 'Expected Upside' in today_df.columns:
-    score_parts.append(_normalize_series(today_df['Expected Upside']) * W_UPSIDE)
-
-if 'Risk Spread' in today_df.columns:
-    score_parts.append(_normalize_series(today_df['Risk Spread'], invert=True) * W_RISK)
-
-if score_parts:
-    today_df['⭐ Composite Score'] = pd.concat(score_parts, axis=1).sum(axis=1).round(1)
 
 # --- Momentum Score: how consistently the stock trends upward ---
 momentum_parts = []
@@ -485,7 +486,7 @@ ranked_history_df['Rank'] = np.nan
 for run_date in sorted(ranked_history_df['Date'].dropna().unique()):
     day_mask = ranked_history_df['Date'] == run_date
     day_df = ranked_history_df.loc[day_mask].copy()
-    day_df = day_df.sort_values(by='Total Value Score', ascending=False).reset_index()
+    day_df = day_df.sort_values(by='⭐ Composite Score', ascending=False).reset_index()
     day_df['Rank'] = day_df.index + 1
     ranked_history_df.loc[day_df['index'], 'Rank'] = day_df['Rank'].values
 
