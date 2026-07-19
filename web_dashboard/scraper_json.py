@@ -253,15 +253,11 @@ def _calc_composite_for_group(group):
         score_parts.append(_normalize_series(group['Risk Spread'], invert=True) * W_RISK)
     
     if score_parts:
-        group['⭐ Composite Score'] = pd.concat(score_parts, axis=1).sum(axis=1).round(1)
+        return pd.concat(score_parts, axis=1).sum(axis=1).round(1)
     else:
-        group['⭐ Composite Score'] = np.nan
-        
-    return group
+        return pd.Series(np.nan, index=group.index)
 
-final_df = final_df.groupby('Date', group_keys=False).apply(_calc_composite_for_group)
-if 'Date' not in final_df.columns:
-    final_df = final_df.reset_index()
+final_df['⭐ Composite Score'] = final_df.groupby('Date', group_keys=False).apply(_calc_composite_for_group)
 
 # Separate ONLY today's data for the Snapshot dashboard
 today_str = str(date.today())
