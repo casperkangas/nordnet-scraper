@@ -15,4 +15,6 @@ EXEL,https://www.nordnet.fi/osakkeet/kurssit/exel-composites-exel-xhel?details
 SCANFL,https://www.nordnet.fi/osakkeet/kurssit/scanfil-scanfl-xhel?details
 CTH1V,https://www.nordnet.fi/osakkeet/kurssit/componenta-cth1v-xhel?details
 GLA1V,https://www.nordnet.fi/osakkeet/kurssit/glaston-gla1v-xhel?details
-VIK1V,https://www.nordnet.fi/osakkeet/kurssit/viking-line-vik1v-xhel?details
+VIK1V,https://www.nordnet.fi/osakkeet/kurssit/viking-line-vik1v-xhel?detailsCGCBV,https://www.nordnet.fi/osakkeet/kurssit/cargotec-xhel?details
+PONS1V,https://www.nordnet.fi/osakkeet/kurssit/ponsse-1-pons1v-xhel?details
+YIT,https://www.nordnet.fi/osakkeet/kurssit/yit-xhel?details

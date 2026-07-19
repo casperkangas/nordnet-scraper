@@ -1,7 +1,10 @@
 let masterData = [];
+let scoreTrendData = [];
+let priceTrendData = [];
 let currentSortKey = "⭐ Composite Score";
 let isAscending = false;
 let chartInstance = null;
+let trendChartInstance = null;
 
 // --- DYNAMIC COLUMN STATE ---
 let allColumns = [];
@@ -58,12 +61,141 @@ function getThemeColor(name) {
     .trim();
 }
 
+
+// --- NEW: TREND MODAL LOGIC ---
+function openTrendModal(ticker) {
+  const modal = document.getElementById("trendModal");
+  const modalTitle = document.getElementById("trendModalTitle");
+  modal.classList.remove("hidden");
+  modalTitle.textContent = `${ticker} - Historical Trend`;
+
+  // Find score trend for this ticker
+  const scoreRow = scoreTrendData.find((r) => r.Ticker === ticker);
+  const priceRow = priceTrendData.find((r) => r.Ticker === ticker);
+
+  if (!scoreRow && !priceRow) {
+    console.warn("No trend data found for", ticker);
+    return;
+  }
+
+  // Extract dates (exclude Ticker, Current Score, and Diff % columns)
+  let dates = [];
+  if (scoreRow) {
+    dates = Object.keys(scoreRow).filter(k => k.match(/^\d{4}-\d{2}-\d{2}$/)).sort();
+  } else if (priceRow) {
+    dates = Object.keys(priceRow).filter(k => k.match(/^\d{4}-\d{2}-\d{2}$/)).sort();
+  }
+  
+  // Also add today's date using "Current Score" / "Current Price" if it doesn't already exist in the list
+  const todayDateStr = masterData.length > 0 && masterData[0].Date ? masterData[0].Date : "Today";
+  dates.push(todayDateStr);
+
+  const scores = dates.map(d => {
+    if (d === todayDateStr) return scoreRow ? scoreRow["Current Score"] : null;
+    return scoreRow ? scoreRow[d] : null;
+  });
+
+  const prices = dates.map(d => {
+    if (d === todayDateStr) return priceRow ? priceRow["Current Price"] : null;
+    return priceRow ? priceRow[d] : null;
+  });
+
+  renderTrendChart(dates, scores, prices);
+}
+
+function closeTrendModal() {
+  const modal = document.getElementById("trendModal");
+  modal.classList.add("hidden");
+}
+
+document.getElementById("closeModalBtn").addEventListener("click", closeTrendModal);
+
+document.getElementById("trendModal").addEventListener("click", (e) => {
+  if (e.target.id === "trendModal") {
+    closeTrendModal();
+  }
+});
+
+function renderTrendChart(labels, scoreData, priceData) {
+  const ctx = document.getElementById("trendChartCanvas").getContext("2d");
+  const isDarkMode = document.body.classList.contains("dark");
+
+  const textColor = isDarkMode ? "#e5e7eb" : "#374151";
+  const gridColor = isDarkMode ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)";
+
+  if (trendChartInstance) {
+    trendChartInstance.destroy();
+  }
+
+  trendChartInstance = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "⭐ Composite Score",
+          data: scoreData,
+          borderColor: "#22c55e",
+          backgroundColor: "#22c55e",
+          tension: 0.2,
+          yAxisID: 'y',
+        },
+        {
+          label: "Current Price",
+          data: priceData,
+          borderColor: "#3b82f6",
+          backgroundColor: "#3b82f6",
+          tension: 0.2,
+          yAxisID: 'y1',
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: 'index',
+        intersect: false,
+      },
+      plugins: {
+        legend: { labels: { color: textColor } }
+      },
+      scales: {
+        x: { ticks: { color: textColor }, grid: { color: gridColor } },
+        y: {
+          type: 'linear',
+          display: true,
+          position: 'left',
+          title: { display: true, text: 'Score', color: textColor },
+          ticks: { color: textColor },
+          grid: { color: gridColor }
+        },
+        y1: {
+          type: 'linear',
+          display: true,
+          position: 'right',
+          title: { display: true, text: 'Price (€)', color: textColor },
+          ticks: { color: textColor },
+          grid: { drawOnChartArea: false } // only want the grid lines for one axis
+        }
+      }
+    }
+  });
+}
+
 async function initDashboard() {
   try {
-    const response = await fetch("data/web_today_snapshot.json");
-    masterData = await response.json();
+    const [snapRes, scoreRes, priceRes] = await Promise.all([
+      fetch("data/web_today_snapshot.json").catch(() => null),
+      fetch("data/web_score_trend.json").catch(() => null),
+      fetch("data/web_price_trend.json").catch(() => null)
+    ]);
+    
+    if (snapRes && snapRes.ok) masterData = await snapRes.json();
+    if (scoreRes && scoreRes.ok) scoreTrendData = await scoreRes.json();
+    if (priceRes && priceRes.ok) priceTrendData = await priceRes.json();
 
-    if (masterData.length === 0) return;
+    if (!masterData || masterData.length === 0) return;
 
     // 1. Extract Date for the Header
     if (masterData[0].Date) {
@@ -254,6 +386,10 @@ function renderTable(dataToRender) {
         ) {
           cellValue = cellValue.toFixed(2);
         }
+      }
+
+      if (header === "Ticker") {
+        cellValue = `<button onclick="openTrendModal('${stock.Ticker}')" class="text-blue-600 dark:text-blue-400 font-bold hover:underline" title="View historical trend">${cellValue} 📈</button>`;
       }
 
       rowsHTML += `<td class="${cellClass}">${cellValue}</td>`;

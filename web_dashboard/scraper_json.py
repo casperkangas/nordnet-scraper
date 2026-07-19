@@ -455,7 +455,7 @@ plt.grid(True, linestyle='--', alpha=0.5)
 plt.axhline(0, color='red', linestyle='-', linewidth=1.5, alpha=0.8)
 
 # 8. Save the chart as a static image file
-plot_filename = os.path.join(data_dir, f"Risk_Reward_{today_str}.png")
+plot_filename = os.path.join(data_dir, "Risk_Reward_Latest.png")
 plt.savefig(plot_filename, bbox_inches='tight', dpi=150)
 plt.close() # Free up computer memory
 
