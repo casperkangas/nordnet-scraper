@@ -260,6 +260,8 @@ def _calc_composite_for_group(group):
     return group
 
 final_df = final_df.groupby('Date', group_keys=False).apply(_calc_composite_for_group)
+if 'Date' not in final_df.columns:
+    final_df = final_df.reset_index()
 
 # Separate ONLY today's data for the Snapshot dashboard
 today_str = str(date.today())
