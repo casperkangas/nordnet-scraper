@@ -9,6 +9,7 @@ FSECURE,https://www.nordnet.fi/osakkeet/kurssit/f-secure-fsecure-xhel?details
 TLT1V,https://www.nordnet.fi/osakkeet/kurssit/teleste-tlt1v-xhel?details
 VINCIT,https://www.nordnet.fi/osakkeet/kurssit/vincit-fsme?details
 SIILI,https://www.nordnet.fi/osakkeet/kurssit/siili-solutions-siili-xhel?details
-NETUM,https://www.nordnet.fi/osakkeet/kurssit/netum-fsme?detailsDIGIA,https://www.nordnet.fi/osakkeet/kurssit/digia-xhel?details
+NETUM,https://www.nordnet.fi/osakkeet/kurssit/netum-fsme?details
+DIGIA,https://www.nordnet.fi/osakkeet/kurssit/digia-xhel?details
 REMEDY,https://www.nordnet.fi/osakkeet/kurssit/remedy-entertainment-remedy-xhel?details
 INCAP,https://www.nordnet.fi/osakkeet/kurssit/incap-xhel?details

@@ -1,3 +1,4 @@
 TOIVO,https://www.nordnet.fi/osakkeet/kurssit/toivo-group-toivo-xhel?details
-INVEST,https://www.nordnet.fi/osakkeet/kurssit/investors-house-invest-xhel?detailsKOJAMO,https://www.nordnet.fi/osakkeet/kurssit/kojamo-xhel?details
+INVEST,https://www.nordnet.fi/osakkeet/kurssit/investors-house-invest-xhel?details
+KOJAMO,https://www.nordnet.fi/osakkeet/kurssit/kojamo-xhel?details
 CITYCON,https://www.nordnet.fi/osakkeet/kurssit/citycon-xhel?details
