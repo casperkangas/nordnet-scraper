@@ -11,7 +11,7 @@ def apply_weighted_scoring(df):
     metrics_to_keep = [
         "P/E", "EPS", "Osinko/osake", "Osinkotuotto", 
         "P/B", "PEG", "P/S", "Liikevaihto", "EBIT", 
-        "Omistajia Nordnetissä*", "Analyst Rating",
+        "Omistajia Nordnetissä*", "Analyst Rating", "Total Analysts",
         "Worst Case", "Probable Case", "Best Case"
     ]
     for col in metrics_to_keep:
@@ -39,7 +39,38 @@ def apply_weighted_scoring(df):
         df["Risk Spread"] = np.nan
 
     # =========================================================
-    # 2. METRIC THEORY, TARGETS, AND MULTIPLIER WEIGHTS
+    # 2. BAYESIAN ADJUSTMENT FOR ANALYST RATINGS
+    # =========================================================
+    if "Analyst Rating" in df.columns and "Total Analysts" in df.columns:
+        # Calculate Bayesian average for Analyst Rating
+        # This rewards stocks with a high rating AND a high number of analysts
+        C = df["Total Analysts"].mean()
+        m = df["Analyst Rating"].mean()
+        
+        if pd.isna(m):
+            m = 3.0
+        if pd.isna(C) or C == 0:
+            C = 1.0
+            
+        v = df["Total Analysts"].fillna(0)
+        R = df["Analyst Rating"]
+        
+        # Bayesian formula: (C * m + v * R) / (C + v)
+        # If there are no ratings at all, fallback to NaN so it's ignored in scoring
+        df["Adjusted Analyst Rating"] = np.where(
+            v > 0,
+            (C * m + v * R) / (C + v),
+            np.nan
+        )
+    else:
+        # Fallback if columns are missing
+        if "Analyst Rating" in df.columns:
+            df["Adjusted Analyst Rating"] = df["Analyst Rating"]
+        else:
+            df["Adjusted Analyst Rating"] = np.nan
+
+    # =========================================================
+    # 3. METRIC THEORY, TARGETS, AND MULTIPLIER WEIGHTS
     # =========================================================
     # Total weights below equal 1.0 (100%) for a pure Fundamental Value Score.
     #
@@ -62,7 +93,8 @@ def apply_weighted_scoring(df):
     higher_metrics = {
         # Sentiment: Professional analyst consensus (1 to 5 scale).
         # Raised from 0.10 — analyst consensus is a meaningful signal.
-        "Analyst Rating": 0.15,
+        # Uses Bayesian adjusted rating to give more weight to ratings with higher analyst counts.
+        "Adjusted Analyst Rating": 0.15,
 
         # Profitability: Higher EBIT = company actually generates operating profit.
         # Activated from 0.0 — critical signal that was previously ignored.
