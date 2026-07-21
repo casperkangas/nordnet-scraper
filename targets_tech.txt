@@ -12,4 +12,4 @@ SIILI,https://www.nordnet.fi/osakkeet/kurssit/siili-solutions-siili-xhel?details
 NETUM,https://www.nordnet.fi/osakkeet/kurssit/netum-fsme?details
 DIGIA,https://www.nordnet.fi/osakkeet/kurssit/digia-xhel?details
 REMEDY,https://www.nordnet.fi/osakkeet/kurssit/remedy-entertainment-remedy-xhel?details
-INCAP,https://www.nordnet.fi/osakkeet/kurssit/incap-xhel?details
+ICP1V,https://www.nordnet.fi/osakkeet/kurssit/incap-icp1v-xhel?details
