@@ -27903,7 +27903,7 @@
         "Ticker":"TOKMAN",
         "Date":"2026-07-21",
         "Industry":"Consumer",
-        "Current Price":7.09,
+        "Current Price":7.065,
         "Liikevaihto":1728325000.0,
         "EBIT":78913000.0,
         "EPS":0.618,
@@ -27924,16 +27924,16 @@
         "Analyst Rating":2.7142857143,
         "Expected Upside":-3.9866666667,
         "Risk Spread":8.26,
-        "Total Value Score":53.68,
+        "Total Value Score":54.0,
         "Industry Value Score":60.42,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":56.4
+        "⭐ Composite Score":56.0
     },
     {
         "Ticker":"PUUILO",
         "Date":"2026-07-21",
         "Industry":"Consumer",
-        "Current Price":16.88,
+        "Current Price":16.86,
         "Liikevaihto":442300000.0,
         "EBIT":74700000.0,
         "EPS":0.6641,
@@ -27954,16 +27954,16 @@
         "Analyst Rating":4.7142857143,
         "Expected Upside":0.8,
         "Risk Spread":8.76,
-        "Total Value Score":37.04,
+        "Total Value Score":37.44,
         "Industry Value Score":41.35,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":40.7
+        "⭐ Composite Score":39.8
     },
     {
         "Ticker":"OLVAS",
         "Date":"2026-07-21",
         "Industry":"Consumer",
-        "Current Price":32.95,
+        "Current Price":32.9,
         "Liikevaihto":665275000.0,
         "EBIT":80558000.0,
         "EPS":3.0915,
@@ -27984,16 +27984,16 @@
         "Analyst Rating":3.8,
         "Expected Upside":6.4616666667,
         "Risk Spread":31.01,
-        "Total Value Score":46.41,
+        "Total Value Score":46.43,
         "Industry Value Score":50.07,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":49.6
+        "⭐ Composite Score":48.7
     },
     {
         "Ticker":"HKFOODS",
         "Date":"2026-07-21",
         "Industry":"Consumer",
-        "Current Price":1.728,
+        "Current Price":1.74,
         "Liikevaihto":996400000.0,
         "EBIT":28900000.0,
         "EPS":-0.0489,
@@ -28014,16 +28014,16 @@
         "Analyst Rating":3.0,
         "Expected Upside":12.4716666667,
         "Risk Spread":20.95,
-        "Total Value Score":34.88,
+        "Total Value Score":34.87,
         "Industry Value Score":39.38,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":43.5
+        "⭐ Composite Score":42.2
     },
     {
         "Ticker":"KESKOA",
         "Date":"2026-07-21",
         "Industry":"Consumer",
-        "Current Price":19.66,
+        "Current Price":19.64,
         "Liikevaihto":12474900000.0,
         "EBIT":410500000.0,
         "EPS":1.0154,
@@ -28044,7 +28044,7 @@
         "Analyst Rating":4.1428571429,
         "Expected Upside":9.645,
         "Risk Spread":20.51,
-        "Total Value Score":63.38,
+        "Total Value Score":63.69,
         "Industry Value Score":73.96,
         "Data Completeness %":100.0,
         "⭐ Composite Score":73.9
@@ -28074,7 +28074,7 @@
         "Analyst Rating":5.0,
         "Expected Upside":15.9,
         "Risk Spread":9.22,
-        "Total Value Score":60.19,
+        "Total Value Score":60.68,
         "Industry Value Score":68.26,
         "Data Completeness %":100.0,
         "⭐ Composite Score":76.3
@@ -28083,7 +28083,7 @@
         "Ticker":"KAMUX",
         "Date":"2026-07-21",
         "Industry":"Consumer",
-        "Current Price":1.534,
+        "Current Price":1.524,
         "Liikevaihto":875900000.0,
         "EBIT":600000.0,
         "EPS":-0.0577,
@@ -28104,10 +28104,10 @@
         "Analyst Rating":1.0,
         "Expected Upside":-3.305,
         "Risk Spread":19.55,
-        "Total Value Score":29.85,
+        "Total Value Score":29.82,
         "Industry Value Score":32.08,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":27.5
+        "⭐ Composite Score":26.0
     },
     {
         "Ticker":"HARVIA",
@@ -28134,10 +28134,10 @@
         "Analyst Rating":4.7142857143,
         "Expected Upside":12.93,
         "Risk Spread":23.46,
-        "Total Value Score":43.56,
+        "Total Value Score":43.9,
         "Industry Value Score":55.03,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":55.2
+        "⭐ Composite Score":54.5
     },
     {
         "Ticker":"MUSTI",
@@ -28164,16 +28164,16 @@
         "Analyst Rating":null,
         "Expected Upside":null,
         "Risk Spread":null,
-        "Total Value Score":15.96,
+        "Total Value Score":16.12,
         "Industry Value Score":14.44,
         "Data Completeness %":45.0,
-        "⭐ Composite Score":0.7
+        "⭐ Composite Score":0.0
     },
     {
         "Ticker":"NESTE",
         "Date":"2026-07-21",
         "Industry":"Energy",
-        "Current Price":33.54,
+        "Current Price":33.57,
         "Liikevaihto":18935000000.0,
         "EBIT":293000000.0,
         "EPS":0.1874,
@@ -28194,16 +28194,16 @@
         "Analyst Rating":3.6956521739,
         "Expected Upside":2.84,
         "Risk Spread":125.04,
-        "Total Value Score":55.57,
+        "Total Value Score":55.68,
         "Industry Value Score":82.71,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":52.4
+        "⭐ Composite Score":52.0
     },
     {
         "Ticker":"FORTUM",
         "Date":"2026-07-21",
         "Industry":"Energy",
-        "Current Price":20.33,
+        "Current Price":20.24,
         "Liikevaihto":4989000000.0,
         "EBIT":912000000.0,
         "EPS":0.8526,
@@ -28224,16 +28224,16 @@
         "Analyst Rating":2.0,
         "Expected Upside":-8.9183333333,
         "Risk Spread":53.21,
-        "Total Value Score":42.53,
+        "Total Value Score":42.96,
         "Industry Value Score":72.38,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":44.1
+        "⭐ Composite Score":43.7
     },
     {
         "Ticker":"KEMPOWR",
         "Date":"2026-07-21",
         "Industry":"Energy",
-        "Current Price":12.2,
+        "Current Price":12.23,
         "Liikevaihto":251295300.0,
         "EBIT":-15771100.0,
         "EPS":-0.2239,
@@ -28254,16 +28254,16 @@
         "Analyst Rating":3.5714285714,
         "Expected Upside":30.3033333333,
         "Risk Spread":48.5,
-        "Total Value Score":14.04,
+        "Total Value Score":13.91,
         "Industry Value Score":32.38,
         "Data Completeness %":85.0,
-        "⭐ Composite Score":33.1
+        "⭐ Composite Score":32.6
     },
     {
         "Ticker":"PAMPALO",
         "Date":"2026-07-21",
         "Industry":"Energy",
-        "Current Price":7.97,
+        "Current Price":8.01,
         "Liikevaihto":45500000.0000286028,
         "EBIT":7600000.0,
         "EPS":0.2174,
@@ -28284,10 +28284,10 @@
         "Analyst Rating":1.0,
         "Expected Upside":35.47,
         "Risk Spread":null,
-        "Total Value Score":13.29,
+        "Total Value Score":13.15,
         "Industry Value Score":32.21,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":30.0
+        "⭐ Composite Score":29.5
     },
     {
         "Ticker":"ESENSE",
@@ -28314,16 +28314,16 @@
         "Analyst Rating":3.0,
         "Expected Upside":43.25,
         "Risk Spread":null,
-        "Total Value Score":26.57,
+        "Total Value Score":26.62,
         "Industry Value Score":46.48,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":48.0
+        "⭐ Composite Score":46.6
     },
     {
         "Ticker":"MERUS",
         "Date":"2026-07-21",
         "Industry":"Energy",
-        "Current Price":4.76,
+        "Current Price":4.66,
         "Liikevaihto":54648000.0,
         "EBIT":210000.0,
         "EPS":-0.1403,
@@ -28347,13 +28347,13 @@
         "Total Value Score":29.58,
         "Industry Value Score":40.48,
         "Data Completeness %":60.0,
-        "⭐ Composite Score":37.3
+        "⭐ Composite Score":35.9
     },
     {
         "Ticker":"SOSI1",
         "Date":"2026-07-21",
         "Industry":"Energy",
-        "Current Price":0.3625,
+        "Current Price":0.363,
         "Liikevaihto":null,
         "EBIT":null,
         "EPS":null,
@@ -28374,7 +28374,7 @@
         "Analyst Rating":1.0,
         "Expected Upside":-7.61,
         "Risk Spread":null,
-        "Total Value Score":7.34,
+        "Total Value Score":7.25,
         "Industry Value Score":18.36,
         "Data Completeness %":55.0,
         "⭐ Composite Score":0.0
@@ -28383,7 +28383,7 @@
         "Ticker":"NDA FI",
         "Date":"2026-07-21",
         "Industry":"Finance",
-        "Current Price":17.23,
+        "Current Price":17.215,
         "Liikevaihto":25534000000.0,
         "EBIT":null,
         "EPS":1.3938,
@@ -28404,10 +28404,10 @@
         "Analyst Rating":4.2,
         "Expected Upside":4.1916666667,
         "Risk Spread":40.51,
-        "Total Value Score":57.75,
-        "Industry Value Score":72.0,
+        "Total Value Score":58.0,
+        "Industry Value Score":71.73,
         "Data Completeness %":90.0,
-        "⭐ Composite Score":62.4
+        "⭐ Composite Score":62.1
     },
     {
         "Ticker":"AKTIA",
@@ -28434,10 +28434,10 @@
         "Analyst Rating":3.6666666667,
         "Expected Upside":7.53,
         "Risk Spread":null,
-        "Total Value Score":20.66,
-        "Industry Value Score":26.5,
+        "Total Value Score":20.59,
+        "Industry Value Score":25.68,
         "Data Completeness %":65.0,
-        "⭐ Composite Score":14.0
+        "⭐ Composite Score":11.8
     },
     {
         "Ticker":"OMASP",
@@ -28465,15 +28465,15 @@
         "Expected Upside":1.07,
         "Risk Spread":null,
         "Total Value Score":34.2,
-        "Industry Value Score":43.25,
+        "Industry Value Score":42.7,
         "Data Completeness %":65.0,
-        "⭐ Composite Score":25.5
+        "⭐ Composite Score":24.0
     },
     {
         "Ticker":"MANTA",
         "Date":"2026-07-21",
         "Industry":"Finance",
-        "Current Price":5.585,
+        "Current Price":5.575,
         "Liikevaihto":1268600000.0,
         "EBIT":null,
         "EPS":0.3103,
@@ -28494,40 +28494,40 @@
         "Analyst Rating":2.0,
         "Expected Upside":6.1066666667,
         "Risk Spread":40.3,
-        "Total Value Score":21.74,
-        "Industry Value Score":36.33,
+        "Total Value Score":21.78,
+        "Industry Value Score":34.39,
         "Data Completeness %":90.0,
-        "⭐ Composite Score":25.5
+        "⭐ Composite Score":23.1
     },
     {
         "Ticker":"SAMPO",
         "Date":"2026-07-21",
         "Industry":"Finance",
-        "Current Price":null,
-        "Liikevaihto":null,
+        "Current Price":9.648,
+        "Liikevaihto":11926000000.0,
         "EBIT":null,
-        "EPS":null,
-        "Osinko\/osake":null,
-        "Osinkotuotto":null,
-        "P\/E":null,
-        "P\/B":null,
-        "PEG":null,
-        "P\/S":null,
-        "Omistajia Nordnetissä*":null,
+        "EPS":0.7529,
+        "Osinko\/osake":0.36,
+        "Osinkotuotto":3.7052284891,
+        "P\/E":15.595505618,
+        "P\/B":3.322504531,
+        "PEG":10.112242,
+        "P\/S":2.1957736881,
+        "Omistajia Nordnetissä*":76441.0,
         "Buy":15.0,
-        "Hold":5.0,
+        "Hold":6.0,
         "Sell":0.0,
-        "Worst Case":-1.23,
-        "Probable Case":10.2,
-        "Best Case":19.44,
-        "Total Analysts":20.0,
-        "Analyst Rating":4.5,
-        "Expected Upside":9.835,
-        "Risk Spread":20.67,
-        "Total Value Score":10.52,
-        "Industry Value Score":10.5,
-        "Data Completeness %":15.0,
-        "⭐ Composite Score":20.9
+        "Worst Case":-1.39,
+        "Probable Case":9.5,
+        "Best Case":19.25,
+        "Total Analysts":21.0,
+        "Analyst Rating":4.4285714286,
+        "Expected Upside":9.31,
+        "Risk Spread":20.64,
+        "Total Value Score":43.35,
+        "Industry Value Score":58.0,
+        "Data Completeness %":90.0,
+        "⭐ Composite Score":53.5
     },
     {
         "Ticker":"ALBAV",
@@ -28554,10 +28554,10 @@
         "Analyst Rating":null,
         "Expected Upside":null,
         "Risk Spread":null,
-        "Total Value Score":31.9,
-        "Industry Value Score":35.5,
+        "Total Value Score":31.7,
+        "Industry Value Score":34.09,
         "Data Completeness %":50.0,
-        "⭐ Composite Score":17.4
+        "⭐ Composite Score":15.3
     },
     {
         "Ticker":"EVLI",
@@ -28584,10 +28584,10 @@
         "Analyst Rating":5.0,
         "Expected Upside":4.42,
         "Risk Spread":null,
-        "Total Value Score":45.5,
-        "Industry Value Score":53.0,
+        "Total Value Score":45.25,
+        "Industry Value Score":51.23,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":39.0
+        "⭐ Composite Score":37.3
     },
     {
         "Ticker":"EQV1V",
@@ -28614,10 +28614,10 @@
         "Analyst Rating":1.0,
         "Expected Upside":2.04,
         "Risk Spread":null,
-        "Total Value Score":21.7,
-        "Industry Value Score":20.25,
+        "Total Value Score":21.45,
+        "Industry Value Score":18.98,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":8.8
+        "⭐ Composite Score":7.3
     },
     {
         "Ticker":"ENENTO",
@@ -28644,16 +28644,16 @@
         "Analyst Rating":5.0,
         "Expected Upside":34.1166666667,
         "Risk Spread":45.52,
-        "Total Value Score":48.31,
-        "Industry Value Score":65.17,
+        "Total Value Score":48.65,
+        "Industry Value Score":65.7,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":71.3
+        "⭐ Composite Score":71.1
     },
     {
         "Ticker":"CAPMAN",
         "Date":"2026-07-21",
         "Industry":"Finance",
-        "Current Price":1.742,
+        "Current Price":1.748,
         "Liikevaihto":63062000.0,
         "EBIT":23172000.0,
         "EPS":0.0745,
@@ -28674,16 +28674,16 @@
         "Analyst Rating":3.0,
         "Expected Upside":22.16,
         "Risk Spread":5.68,
-        "Total Value Score":23.25,
-        "Industry Value Score":24.0,
+        "Total Value Score":23.16,
+        "Industry Value Score":23.45,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":38.9
+        "⭐ Composite Score":36.9
     },
     {
         "Ticker":"TAALA",
         "Date":"2026-07-21",
         "Industry":"Finance",
-        "Current Price":7.25,
+        "Current Price":7.27,
         "Liikevaihto":56060000.0,
         "EBIT":27410000.0,
         "EPS":0.5898,
@@ -28704,10 +28704,10 @@
         "Analyst Rating":5.0,
         "Expected Upside":17.24,
         "Risk Spread":null,
-        "Total Value Score":45.7,
-        "Industry Value Score":51.0,
+        "Total Value Score":45.42,
+        "Industry Value Score":49.05,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":46.5
+        "⭐ Composite Score":44.7
     },
     {
         "Ticker":"POSTI",
@@ -28734,16 +28734,16 @@
         "Analyst Rating":4.0,
         "Expected Upside":-4.6533333333,
         "Risk Spread":12.14,
-        "Total Value Score":52.37,
+        "Total Value Score":52.15,
         "Industry Value Score":48.88,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":50.0
+        "⭐ Composite Score":49.1
     },
     {
         "Ticker":"WRT1V",
         "Date":"2026-07-21",
         "Industry":"Industrial",
-        "Current Price":29.58,
+        "Current Price":29.61,
         "Liikevaihto":6914000000.0,
         "EBIT":827000000.0,
         "EPS":1.0633,
@@ -28764,16 +28764,16 @@
         "Analyst Rating":2.7142857143,
         "Expected Upside":7.695,
         "Risk Spread":79.97,
-        "Total Value Score":45.12,
+        "Total Value Score":45.27,
         "Industry Value Score":36.35,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":34.6
+        "⭐ Composite Score":33.6
     },
     {
         "Ticker":"KNEBV",
         "Date":"2026-07-21",
         "Industry":"Industrial",
-        "Current Price":48.3,
+        "Current Price":48.2,
         "Liikevaihto":11245200000.0,
         "EBIT":1327700000.0,
         "EPS":1.8928,
@@ -28794,16 +28794,16 @@
         "Analyst Rating":3.7826086957,
         "Expected Upside":28.5866666667,
         "Risk Spread":78.94,
-        "Total Value Score":51.27,
+        "Total Value Score":51.43,
         "Industry Value Score":44.86,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":55.5
+        "⭐ Composite Score":54.8
     },
     {
         "Ticker":"METSO",
         "Date":"2026-07-21",
         "Industry":"Industrial",
-        "Current Price":14.94,
+        "Current Price":14.93,
         "Liikevaihto":5240000000.0,
         "EBIT":709000000.0,
         "EPS":0.5111,
@@ -28824,16 +28824,16 @@
         "Analyst Rating":4.0909090909,
         "Expected Upside":14.225,
         "Risk Spread":56.33,
-        "Total Value Score":52.71,
+        "Total Value Score":52.63,
         "Industry Value Score":45.11,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":51.9
+        "⭐ Composite Score":51.1
     },
     {
         "Ticker":"UPM",
         "Date":"2026-07-21",
         "Industry":"Industrial",
-        "Current Price":23.62,
+        "Current Price":23.56,
         "Liikevaihto":9622000000.0,
         "EBIT":470000000.0,
         "EPS":0.9081,
@@ -28854,16 +28854,16 @@
         "Analyst Rating":3.7,
         "Expected Upside":19.1933333333,
         "Risk Spread":80.52,
-        "Total Value Score":62.96,
+        "Total Value Score":63.2,
         "Industry Value Score":52.25,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":60.0
+        "⭐ Composite Score":59.8
     },
     {
         "Ticker":"STERV",
         "Date":"2026-07-21",
         "Industry":"Industrial",
-        "Current Price":9.732,
+        "Current Price":9.726,
         "Liikevaihto":9326000000.0,
         "EBIT":142000000.0,
         "EPS":0.8813,
@@ -28884,16 +28884,16 @@
         "Analyst Rating":4.1578947368,
         "Expected Upside":21.3566666667,
         "Risk Spread":64.02,
-        "Total Value Score":75.55,
+        "Total Value Score":75.58,
         "Industry Value Score":69.56,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":73.5
+        "⭐ Composite Score":73.4
     },
     {
         "Ticker":"KCR",
         "Date":"2026-07-21",
         "Industry":"Industrial",
-        "Current Price":27.34,
+        "Current Price":27.28,
         "Liikevaihto":4187800000.0,
         "EBIT":550900000.0,
         "EPS":1.6824,
@@ -28914,16 +28914,16 @@
         "Analyst Rating":4.7142857143,
         "Expected Upside":28.385,
         "Risk Spread":34.25,
-        "Total Value Score":51.92,
+        "Total Value Score":51.8,
         "Industry Value Score":48.12,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":65.9
+        "⭐ Composite Score":65.1
     },
     {
         "Ticker":"VALMT",
         "Date":"2026-07-21",
         "Industry":"Industrial",
-        "Current Price":22.06,
+        "Current Price":22.02,
         "Liikevaihto":5197000000.0,
         "EBIT":464000000.0,
         "EPS":1.5201,
@@ -28944,7 +28944,7 @@
         "Analyst Rating":4.5,
         "Expected Upside":41.5616666667,
         "Risk Spread":61.27,
-        "Total Value Score":80.66,
+        "Total Value Score":80.74,
         "Industry Value Score":79.8,
         "Data Completeness %":100.0,
         "⭐ Composite Score":88.0
@@ -28953,7 +28953,7 @@
         "Ticker":"KEMIRA",
         "Date":"2026-07-21",
         "Industry":"Industrial",
-        "Current Price":16.65,
+        "Current Price":16.64,
         "Liikevaihto":2753500000.0,
         "EBIT":300500000.0,
         "EPS":1.1839,
@@ -28974,16 +28974,16 @@
         "Analyst Rating":3.0,
         "Expected Upside":20.6733333333,
         "Risk Spread":57.54,
-        "Total Value Score":51.82,
+        "Total Value Score":52.39,
         "Industry Value Score":42.04,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":54.0
+        "⭐ Composite Score":53.6
     },
     {
         "Ticker":"OUT1V",
         "Date":"2026-07-21",
         "Industry":"Industrial",
-        "Current Price":5.445,
+        "Current Price":5.44,
         "Liikevaihto":5468000000.0,
         "EBIT":-82000000.0,
         "EPS":-0.3042,
@@ -29004,16 +29004,16 @@
         "Analyst Rating":3.3076923077,
         "Expected Upside":10.04,
         "Risk Spread":70.08,
-        "Total Value Score":27.23,
+        "Total Value Score":27.28,
         "Industry Value Score":28.62,
         "Data Completeness %":60.0,
-        "⭐ Composite Score":22.9
+        "⭐ Composite Score":21.3
     },
     {
         "Ticker":"HUH1V",
         "Date":"2026-07-21",
         "Industry":"Industrial",
-        "Current Price":26.8,
+        "Current Price":26.76,
         "Liikevaihto":3960200000.0,
         "EBIT":307000000.0,
         "EPS":1.828,
@@ -29034,16 +29034,16 @@
         "Analyst Rating":4.5,
         "Expected Upside":28.255,
         "Risk Spread":42.11,
-        "Total Value Score":71.31,
+        "Total Value Score":71.96,
         "Industry Value Score":67.1,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":81.3
+        "⭐ Composite Score":81.2
     },
     {
         "Ticker":"SSABBH",
         "Date":"2026-07-21",
         "Industry":"Industrial",
-        "Current Price":8.874,
+        "Current Price":8.872,
         "Liikevaihto":null,
         "EBIT":null,
         "EPS":null,
@@ -29064,16 +29064,16 @@
         "Analyst Rating":4.2222222222,
         "Expected Upside":4.2916666667,
         "Risk Spread":78.97,
-        "Total Value Score":41.24,
+        "Total Value Score":41.78,
         "Industry Value Score":35.26,
         "Data Completeness %":80.0,
-        "⭐ Composite Score":29.6
+        "⭐ Composite Score":28.7
     },
     {
         "Ticker":"METSB",
         "Date":"2026-07-21",
         "Industry":"Industrial",
-        "Current Price":2.706,
+        "Current Price":2.732,
         "Liikevaihto":1775700000.0,
         "EBIT":-122800000.0,
         "EPS":-0.4409,
@@ -29094,10 +29094,10 @@
         "Analyst Rating":2.75,
         "Expected Upside":9.9,
         "Risk Spread":26.26,
-        "Total Value Score":24.64,
+        "Total Value Score":24.69,
         "Industry Value Score":25.2,
         "Data Completeness %":60.0,
-        "⭐ Composite Score":28.4
+        "⭐ Composite Score":26.7
     },
     {
         "Ticker":"EXEL",
@@ -29124,10 +29124,10 @@
         "Analyst Rating":5.0,
         "Expected Upside":-6.5216666667,
         "Risk Spread":4.35,
-        "Total Value Score":28.65,
+        "Total Value Score":28.82,
         "Industry Value Score":27.59,
         "Data Completeness %":60.0,
-        "⭐ Composite Score":27.2
+        "⭐ Composite Score":25.7
     },
     {
         "Ticker":"SCANFL",
@@ -29154,10 +29154,10 @@
         "Analyst Rating":1.0,
         "Expected Upside":6.47,
         "Risk Spread":null,
-        "Total Value Score":37.82,
+        "Total Value Score":37.71,
         "Industry Value Score":28.86,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":25.9
+        "⭐ Composite Score":24.5
     },
     {
         "Ticker":"CTH1V",
@@ -29184,10 +29184,10 @@
         "Analyst Rating":null,
         "Expected Upside":null,
         "Risk Spread":null,
-        "Total Value Score":32.91,
+        "Total Value Score":32.96,
         "Industry Value Score":29.93,
         "Data Completeness %":60.0,
-        "⭐ Composite Score":16.0
+        "⭐ Composite Score":14.6
     },
     {
         "Ticker":"GLA1V",
@@ -29214,10 +29214,10 @@
         "Analyst Rating":5.0,
         "Expected Upside":20.37,
         "Risk Spread":null,
-        "Total Value Score":45.92,
+        "Total Value Score":45.84,
         "Industry Value Score":48.25,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":47.6
+        "⭐ Composite Score":46.7
     },
     {
         "Ticker":"VIK1V",
@@ -29247,13 +29247,13 @@
         "Total Value Score":47.71,
         "Industry Value Score":46.86,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":62.6
+        "⭐ Composite Score":61.7
     },
     {
         "Ticker":"PON1V",
         "Date":"2026-07-21",
         "Industry":"Industrial",
-        "Current Price":22.4,
+        "Current Price":22.3,
         "Liikevaihto":749874000.0,
         "EBIT":34041000.0,
         "EPS":1.0893,
@@ -29274,16 +29274,16 @@
         "Analyst Rating":3.0,
         "Expected Upside":23.6433333333,
         "Risk Spread":46.88,
-        "Total Value Score":33.94,
+        "Total Value Score":34.09,
         "Industry Value Score":25.57,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":39.6
+        "⭐ Composite Score":38.2
     },
     {
         "Ticker":"YIT",
         "Date":"2026-07-21",
         "Industry":"Industrial",
-        "Current Price":2.65,
+        "Current Price":2.64,
         "Liikevaihto":1757000000.0,
         "EBIT":34000000.0,
         "EPS":-0.1388,
@@ -29304,16 +29304,16 @@
         "Analyst Rating":4.0,
         "Expected Upside":8.5533333333,
         "Risk Spread":18.86,
-        "Total Value Score":36.09,
+        "Total Value Score":36.12,
         "Industry Value Score":34.79,
         "Data Completeness %":60.0,
-        "⭐ Composite Score":40.5
+        "⭐ Composite Score":39.2
     },
     {
         "Ticker":"ORNBV",
         "Date":"2026-07-21",
         "Industry":"Pharma",
-        "Current Price":75.75,
+        "Current Price":75.6,
         "Liikevaihto":1887800000.0,
         "EBIT":625000000.0,
         "EPS":3.5569,
@@ -29334,16 +29334,16 @@
         "Analyst Rating":4.25,
         "Expected Upside":5.2133333333,
         "Risk Spread":37.6,
-        "Total Value Score":55.79,
+        "Total Value Score":55.89,
         "Industry Value Score":72.92,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":62.5
+        "⭐ Composite Score":62.2
     },
     {
         "Ticker":"TTALO",
         "Date":"2026-07-21",
         "Industry":"Pharma",
-        "Current Price":6.94,
+        "Current Price":6.97,
         "Liikevaihto":null,
         "EBIT":null,
         "EPS":null,
@@ -29364,10 +29364,10 @@
         "Analyst Rating":3.0,
         "Expected Upside":20.2966666667,
         "Risk Spread":33.9,
-        "Total Value Score":45.2,
+        "Total Value Score":45.5,
         "Industry Value Score":46.67,
         "Data Completeness %":80.0,
-        "⭐ Composite Score":55.7
+        "⭐ Composite Score":55.0
     },
     {
         "Ticker":"PIHLIS",
@@ -29394,16 +29394,16 @@
         "Analyst Rating":4.6666666667,
         "Expected Upside":26.2533333333,
         "Risk Spread":26.14,
-        "Total Value Score":64.99,
+        "Total Value Score":65.34,
         "Industry Value Score":71.83,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":84.1
+        "⭐ Composite Score":84.2
     },
     {
         "Ticker":"REG1V",
         "Date":"2026-07-21",
         "Industry":"Pharma",
-        "Current Price":12.48,
+        "Current Price":12.46,
         "Liikevaihto":109677000.0,
         "EBIT":25180000.0,
         "EPS":0.6545,
@@ -29424,16 +29424,16 @@
         "Analyst Rating":4.2,
         "Expected Upside":39.885,
         "Risk Spread":39.93,
-        "Total Value Score":41.54,
+        "Total Value Score":41.91,
         "Industry Value Score":44.08,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":63.5
+        "⭐ Composite Score":62.7
     },
     {
         "Ticker":"ORIOLA",
         "Date":"2026-07-21",
         "Industry":"Pharma",
-        "Current Price":0.923,
+        "Current Price":0.922,
         "Liikevaihto":1906200000.0,
         "EBIT":7300000.0,
         "EPS":-0.1476,
@@ -29454,16 +29454,16 @@
         "Analyst Rating":4.0,
         "Expected Upside":6.8483333333,
         "Risk Spread":3.25,
-        "Total Value Score":31.44,
+        "Total Value Score":31.5,
         "Industry Value Score":33.0,
         "Data Completeness %":60.0,
-        "⭐ Composite Score":38.4
+        "⭐ Composite Score":36.9
     },
     {
         "Ticker":"HEALTH",
         "Date":"2026-07-21",
         "Industry":"Pharma",
-        "Current Price":0.852,
+        "Current Price":0.85,
         "Liikevaihto":4693000.0,
         "EBIT":-19403000.0,
         "EPS":-0.3058,
@@ -29487,7 +29487,7 @@
         "Total Value Score":23.32,
         "Industry Value Score":31.5,
         "Data Completeness %":60.0,
-        "⭐ Composite Score":40.1
+        "⭐ Composite Score":38.4
     },
     {
         "Ticker":"TOIVO",
@@ -29514,10 +29514,10 @@
         "Analyst Rating":5.0,
         "Expected Upside":33.33,
         "Risk Spread":null,
-        "Total Value Score":50.94,
+        "Total Value Score":51.02,
         "Industry Value Score":61.67,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":64.4
+        "⭐ Composite Score":63.8
     },
     {
         "Ticker":"INVEST",
@@ -29544,10 +29544,10 @@
         "Analyst Rating":1.0,
         "Expected Upside":-1.69,
         "Risk Spread":null,
-        "Total Value Score":26.52,
+        "Total Value Score":26.32,
         "Industry Value Score":34.17,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":15.0
+        "⭐ Composite Score":13.3
     },
     {
         "Ticker":"CTY1S",
@@ -29574,16 +29574,16 @@
         "Analyst Rating":null,
         "Expected Upside":null,
         "Risk Spread":null,
-        "Total Value Score":35.65,
+        "Total Value Score":35.58,
         "Industry Value Score":46.67,
         "Data Completeness %":60.0,
-        "⭐ Composite Score":24.2
+        "⭐ Composite Score":23.0
     },
     {
         "Ticker":"NOKIA",
         "Date":"2026-07-21",
         "Industry":"Tech",
-        "Current Price":9.24,
+        "Current Price":9.238,
         "Liikevaihto":19889000000.0,
         "EBIT":1647000000.0,
         "EPS":0.1161,
@@ -29604,10 +29604,10 @@
         "Analyst Rating":3.7741935484,
         "Expected Upside":4.655,
         "Risk Spread":121.57,
-        "Total Value Score":50.37,
+        "Total Value Score":50.44,
         "Industry Value Score":50.3,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":41.5
+        "⭐ Composite Score":40.7
     },
     {
         "Ticker":"QTCOM",
@@ -29634,10 +29634,10 @@
         "Analyst Rating":3.8,
         "Expected Upside":9.04,
         "Risk Spread":72.92,
-        "Total Value Score":34.99,
+        "Total Value Score":34.95,
         "Industry Value Score":39.07,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":30.9
+        "⭐ Composite Score":29.6
     },
     {
         "Ticker":"GOFORE",
@@ -29664,16 +29664,16 @@
         "Analyst Rating":3.6666666667,
         "Expected Upside":50.1516666667,
         "Risk Spread":10.01,
-        "Total Value Score":39.69,
+        "Total Value Score":39.59,
         "Industry Value Score":43.55,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":69.8
+        "⭐ Composite Score":68.6
     },
     {
         "Ticker":"BITTI",
         "Date":"2026-07-21",
         "Industry":"Tech",
-        "Current Price":26.15,
+        "Current Price":26.25,
         "Liikevaihto":119277000.0,
         "EBIT":23406000.0,
         "EPS":0.601,
@@ -29694,16 +29694,16 @@
         "Analyst Rating":4.0,
         "Expected Upside":25.595,
         "Risk Spread":32.15,
-        "Total Value Score":23.32,
+        "Total Value Score":23.11,
         "Industry Value Score":31.54,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":38.7
+        "⭐ Composite Score":36.9
     },
     {
         "Ticker":"ELISA",
         "Date":"2026-07-21",
         "Industry":"Tech",
-        "Current Price":34.46,
+        "Current Price":34.42,
         "Liikevaihto":2257100000.0,
         "EBIT":463900000.0,
         "EPS":2.1308,
@@ -29724,16 +29724,16 @@
         "Analyst Rating":3.2727272727,
         "Expected Upside":13.7666666667,
         "Risk Spread":53.18,
-        "Total Value Score":56.64,
+        "Total Value Score":56.66,
         "Industry Value Score":55.48,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":58.9
+        "⭐ Composite Score":58.3
     },
     {
         "Ticker":"TELIA1",
         "Date":"2026-07-21",
         "Industry":"Tech",
-        "Current Price":4.047,
+        "Current Price":4.05,
         "Liikevaihto":null,
         "EBIT":null,
         "EPS":null,
@@ -29754,16 +29754,16 @@
         "Analyst Rating":2.75,
         "Expected Upside":-0.1216666667,
         "Risk Spread":63.41,
-        "Total Value Score":17.29,
+        "Total Value Score":17.78,
         "Industry Value Score":25.66,
         "Data Completeness %":80.0,
-        "⭐ Composite Score":9.8
+        "⭐ Composite Score":8.3
     },
     {
         "Ticker":"TIETO",
         "Date":"2026-07-21",
         "Industry":"Tech",
-        "Current Price":17.59,
+        "Current Price":17.6,
         "Liikevaihto":1852300000.0,
         "EBIT":202300000.0,
         "EPS":0.216,
@@ -29784,16 +29784,16 @@
         "Analyst Rating":3.3636363636,
         "Expected Upside":9.81,
         "Risk Spread":44.86,
-        "Total Value Score":54.43,
+        "Total Value Score":54.56,
         "Industry Value Score":58.77,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":57.8
+        "⭐ Composite Score":57.3
     },
     {
         "Ticker":"FSECURE",
         "Date":"2026-07-21",
         "Industry":"Tech",
-        "Current Price":1.92,
+        "Current Price":1.924,
         "Liikevaihto":145739000.0,
         "EBIT":34866000.0,
         "EPS":0.1281,
@@ -29814,10 +29814,10 @@
         "Analyst Rating":4.2,
         "Expected Upside":2.0366666667,
         "Risk Spread":9.78,
-        "Total Value Score":59.39,
+        "Total Value Score":59.12,
         "Industry Value Score":62.18,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":64.5
+        "⭐ Composite Score":63.9
     },
     {
         "Ticker":"TLT1V",
@@ -29844,10 +29844,10 @@
         "Analyst Rating":5.0,
         "Expected Upside":18.2316666667,
         "Risk Spread":2.85,
-        "Total Value Score":51.82,
+        "Total Value Score":51.6,
         "Industry Value Score":57.05,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":68.7
+        "⭐ Composite Score":67.8
     },
     {
         "Ticker":"VINCIT",
@@ -29874,10 +29874,10 @@
         "Analyst Rating":5.0,
         "Expected Upside":25.82,
         "Risk Spread":null,
-        "Total Value Score":39.75,
+        "Total Value Score":39.76,
         "Industry Value Score":40.57,
         "Data Completeness %":60.0,
-        "⭐ Composite Score":44.0
+        "⭐ Composite Score":42.8
     },
     {
         "Ticker":"SIILI",
@@ -29904,10 +29904,10 @@
         "Analyst Rating":3.0,
         "Expected Upside":24.09,
         "Risk Spread":null,
-        "Total Value Score":37.02,
+        "Total Value Score":36.91,
         "Industry Value Score":37.39,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":39.8
+        "⭐ Composite Score":38.4
     },
     {
         "Ticker":"NETUM",
@@ -29934,10 +29934,10 @@
         "Analyst Rating":1.0,
         "Expected Upside":5.0,
         "Risk Spread":null,
-        "Total Value Score":41.96,
+        "Total Value Score":41.97,
         "Industry Value Score":42.67,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":33.0
+        "⭐ Composite Score":32.0
     },
     {
         "Ticker":"DIGIA",
@@ -29964,10 +29964,10 @@
         "Analyst Rating":5.0,
         "Expected Upside":27.99,
         "Risk Spread":null,
-        "Total Value Score":49.47,
+        "Total Value Score":49.33,
         "Industry Value Score":53.19,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":56.8
+        "⭐ Composite Score":55.9
     },
     {
         "Ticker":"REMEDY",
@@ -29994,16 +29994,16 @@
         "Analyst Rating":5.0,
         "Expected Upside":30.5216666667,
         "Risk Spread":6.69,
-        "Total Value Score":19.09,
+        "Total Value Score":19.03,
         "Industry Value Score":19.76,
         "Data Completeness %":60.0,
-        "⭐ Composite Score":39.7
+        "⭐ Composite Score":38.3
     },
     {
         "Ticker":"ICP1V",
         "Date":"2026-07-21",
         "Industry":"Tech",
-        "Current Price":8.61,
+        "Current Price":8.65,
         "Liikevaihto":214592000.0,
         "EBIT":23512000.0,
         "EPS":0.4744,
@@ -30024,9 +30024,9 @@
         "Analyst Rating":5.0,
         "Expected Upside":39.37,
         "Risk Spread":null,
-        "Total Value Score":67.46,
+        "Total Value Score":67.52,
         "Industry Value Score":70.33,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":82.0
+        "⭐ Composite Score":81.9
     }
 ]
