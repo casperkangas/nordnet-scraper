@@ -18,3 +18,5 @@ GLA1V,https://www.nordnet.fi/osakkeet/kurssit/glaston-gla1v-xhel?details
 VIK1V,https://www.nordnet.fi/osakkeet/kurssit/viking-line-vik1v-xhel?details
 PON1V,https://www.nordnet.fi/osakkeet/kurssit/ponsse-pon1v-xhel?details
 YIT,https://www.nordnet.fi/osakkeet/kurssit/yit-corporation-yit-xhel?details
+HIAB,https://www.nordnet.fi/osakkeet/kurssit/hiab-b-hiab-xhel?details
+TYRES,https://www.nordnet.fi/osakkeet/kurssit/nokian-renkaat-tyres-xhel?details
