@@ -31055,11 +31055,11 @@
         "Analyst Rating":2.4285714286,
         "Expected Upside":-1.7366666667,
         "Risk Spread":16.92,
-        "Total Value Score":52.46,
+        "Total Value Score":52.57,
         "Industry Value Score":60.42,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":55.7,
-        "Adjusted Analyst Rating":3.0620533921
+        "⭐ Composite Score":56.3,
+        "Adjusted Analyst Rating":3.0645006902
     },
     {
         "Ticker":"PUUILO",
@@ -31086,11 +31086,11 @@
         "Analyst Rating":4.7142857143,
         "Expected Upside":2.11,
         "Risk Spread":8.88,
-        "Total Value Score":40.66,
+        "Total Value Score":40.18,
         "Industry Value Score":43.23,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":44.3,
-        "Adjusted Analyst Rating":4.1731645032
+        "⭐ Composite Score":44.8,
+        "Adjusted Analyst Rating":4.1700669091
     },
     {
         "Ticker":"OLVAS",
@@ -31117,11 +31117,11 @@
         "Analyst Rating":3.8,
         "Expected Upside":7.2316666667,
         "Risk Spread":21.25,
-        "Total Value Score":45.17,
+        "Total Value Score":45.67,
         "Industry Value Score":50.07,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":51.0,
-        "Adjusted Analyst Rating":3.7172232941
+        "⭐ Composite Score":52.0,
+        "Adjusted Analyst Rating":3.7162691751
     },
     {
         "Ticker":"HKFOODS",
@@ -31148,11 +31148,11 @@
         "Analyst Rating":3.0,
         "Expected Upside":7.3333333333,
         "Risk Spread":20.0,
-        "Total Value Score":35.43,
+        "Total Value Score":35.47,
         "Industry Value Score":39.38,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":40.0,
-        "Adjusted Analyst Rating":3.5205924305
+        "⭐ Composite Score":40.9,
+        "Adjusted Analyst Rating":3.5208353655
     },
     {
         "Ticker":"KESKOA",
@@ -31179,11 +31179,11 @@
         "Analyst Rating":4.1428571429,
         "Expected Upside":7.53,
         "Risk Spread":20.16,
-        "Total Value Score":66.23,
+        "Total Value Score":65.92,
         "Industry Value Score":73.96,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":74.4,
-        "Adjusted Analyst Rating":3.8953867255
+        "⭐ Composite Score":75.3,
+        "Adjusted Analyst Rating":3.8936753544
     },
     {
         "Ticker":"NOHO",
@@ -31210,11 +31210,11 @@
         "Analyst Rating":5.0,
         "Expected Upside":19.6833333333,
         "Risk Spread":9.52,
-        "Total Value Score":60.67,
+        "Total Value Score":60.16,
         "Industry Value Score":64.51,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":77.9,
-        "Adjusted Analyst Rating":4.0474585429
+        "⭐ Composite Score":77.6,
+        "Adjusted Analyst Rating":4.0440447205
     },
     {
         "Ticker":"KAMUX",
@@ -31241,11 +31241,11 @@
         "Analyst Rating":1.0,
         "Expected Upside":-1.765,
         "Risk Spread":19.87,
-        "Total Value Score":29.43,
+        "Total Value Score":29.44,
         "Industry Value Score":32.08,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":27.2,
-        "Adjusted Analyst Rating":2.8936123891
+        "⭐ Composite Score":28.4,
+        "Adjusted Analyst Rating":2.8981561263
     },
     {
         "Ticker":"HARVIA",
@@ -31272,11 +31272,11 @@
         "Analyst Rating":4.7142857143,
         "Expected Upside":12.6566666667,
         "Risk Spread":23.4,
-        "Total Value Score":46.6,
+        "Total Value Score":45.95,
         "Industry Value Score":56.91,
         "Data Completeness %":100.0,
         "⭐ Composite Score":57.6,
-        "Adjusted Analyst Rating":4.1731645032
+        "Adjusted Analyst Rating":4.1700669091
     },
     {
         "Ticker":"MUSTI",
@@ -31303,7 +31303,7 @@
         "Analyst Rating":null,
         "Expected Upside":null,
         "Risk Spread":null,
-        "Total Value Score":16.06,
+        "Total Value Score":16.16,
         "Industry Value Score":14.44,
         "Data Completeness %":45.0,
         "⭐ Composite Score":0.0,
@@ -31334,11 +31334,11 @@
         "Analyst Rating":3.75,
         "Expected Upside":-0.2216666667,
         "Risk Spread":135.77,
-        "Total Value Score":55.62,
+        "Total Value Score":56.18,
         "Industry Value Score":80.57,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":51.2,
-        "Adjusted Analyst Rating":3.7290945493
+        "⭐ Composite Score":52.0,
+        "Adjusted Analyst Rating":3.7286891965
     },
     {
         "Ticker":"FORTUM",
@@ -31365,11 +31365,11 @@
         "Analyst Rating":2.0,
         "Expected Upside":-11.2733333333,
         "Risk Spread":51.9,
-        "Total Value Score":44.3,
+        "Total Value Score":44.0,
         "Industry Value Score":68.1,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":44.2,
-        "Adjusted Analyst Rating":2.4486703959
+        "⭐ Composite Score":43.4,
+        "Adjusted Analyst Rating":2.4515721533
     },
     {
         "Ticker":"KEMPOWR",
@@ -31396,11 +31396,11 @@
         "Analyst Rating":3.8571428571,
         "Expected Upside":19.2266666667,
         "Risk Spread":44.68,
-        "Total Value Score":15.36,
+        "Total Value Score":15.14,
         "Industry Value Score":34.52,
         "Data Completeness %":85.0,
-        "⭐ Composite Score":26.7,
-        "Adjusted Analyst Rating":3.7564978366
+        "⭐ Composite Score":27.9,
+        "Adjusted Analyst Rating":3.755479577
     },
     {
         "Ticker":"PAMPALO",
@@ -31427,11 +31427,11 @@
         "Analyst Rating":1.0,
         "Expected Upside":36.82,
         "Risk Spread":null,
-        "Total Value Score":14.55,
+        "Total Value Score":14.72,
         "Industry Value Score":34.36,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":30.3,
-        "Adjusted Analyst Rating":3.3444724817
+        "⭐ Composite Score":31.2,
+        "Adjusted Analyst Rating":3.3462454414
     },
     {
         "Ticker":"ESENSE",
@@ -31458,11 +31458,11 @@
         "Analyst Rating":3.0,
         "Expected Upside":45.66,
         "Risk Spread":null,
-        "Total Value Score":27.24,
+        "Total Value Score":27.62,
         "Industry Value Score":46.48,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":47.5,
-        "Adjusted Analyst Rating":3.5205924305
+        "⭐ Composite Score":47.8,
+        "Adjusted Analyst Rating":3.5208353655
     },
     {
         "Ticker":"MERUS",
@@ -31489,11 +31489,11 @@
         "Analyst Rating":5.0,
         "Expected Upside":2.1083333333,
         "Risk Spread":6.31,
-        "Total Value Score":27.78,
+        "Total Value Score":27.62,
         "Industry Value Score":41.9,
         "Data Completeness %":60.0,
-        "⭐ Composite Score":34.9,
-        "Adjusted Analyst Rating":3.9461243454
+        "⭐ Composite Score":35.9,
+        "Adjusted Analyst Rating":3.9431227555
     },
     {
         "Ticker":"SOSI1",
@@ -31520,11 +31520,11 @@
         "Analyst Rating":1.0,
         "Expected Upside":-9.34,
         "Risk Spread":null,
-        "Total Value Score":9.01,
+        "Total Value Score":8.97,
         "Industry Value Score":19.07,
         "Data Completeness %":55.0,
         "⭐ Composite Score":0.0,
-        "Adjusted Analyst Rating":3.3444724817
+        "Adjusted Analyst Rating":3.3462454414
     },
     {
         "Ticker":"NDA FI",
@@ -31551,11 +31551,11 @@
         "Analyst Rating":4.04,
         "Expected Upside":2.485,
         "Risk Spread":38.83,
-        "Total Value Score":62.94,
+        "Total Value Score":62.34,
         "Industry Value Score":74.73,
         "Data Completeness %":90.0,
-        "⭐ Composite Score":66.4,
-        "Adjusted Analyst Rating":3.9535052113
+        "⭐ Composite Score":66.3,
+        "Adjusted Analyst Rating":3.9526132247
     },
     {
         "Ticker":"AKTIA",
@@ -31582,11 +31582,11 @@
         "Analyst Rating":3.6666666667,
         "Expected Upside":7.14,
         "Risk Spread":null,
-        "Total Value Score":20.43,
+        "Total Value Score":20.49,
         "Industry Value Score":25.68,
         "Data Completeness %":65.0,
-        "⭐ Composite Score":11.5,
-        "Adjusted Analyst Rating":3.6628431583
+        "⭐ Composite Score":12.9,
+        "Adjusted Analyst Rating":3.6620818558
     },
     {
         "Ticker":"OMASP",
@@ -31613,11 +31613,11 @@
         "Analyst Rating":1.0,
         "Expected Upside":0.95,
         "Risk Spread":null,
-        "Total Value Score":35.88,
+        "Total Value Score":36.16,
         "Industry Value Score":44.95,
         "Data Completeness %":65.0,
-        "⭐ Composite Score":26.6,
-        "Adjusted Analyst Rating":3.3444724817
+        "⭐ Composite Score":27.7,
+        "Adjusted Analyst Rating":3.3462454414
     },
     {
         "Ticker":"MANTA",
@@ -31644,11 +31644,11 @@
         "Analyst Rating":2.0,
         "Expected Upside":3.515,
         "Risk Spread":39.35,
-        "Total Value Score":21.11,
+        "Total Value Score":21.22,
         "Industry Value Score":31.39,
         "Data Completeness %":90.0,
-        "⭐ Composite Score":20.2,
-        "Adjusted Analyst Rating":2.7982836913
+        "⭐ Composite Score":21.6,
+        "Adjusted Analyst Rating":2.8018040568
     },
     {
         "Ticker":"SAMPO",
@@ -31675,11 +31675,11 @@
         "Analyst Rating":4.4285714286,
         "Expected Upside":10.0383333333,
         "Risk Spread":20.77,
-        "Total Value Score":47.68,
+        "Total Value Score":47.65,
         "Industry Value Score":61.0,
         "Data Completeness %":90.0,
-        "⭐ Composite Score":59.0,
-        "Adjusted Analyst Rating":4.2286467904
+        "⭐ Composite Score":59.3,
+        "Adjusted Analyst Rating":4.2269315704
     },
     {
         "Ticker":"ALBAV",
@@ -31706,10 +31706,10 @@
         "Analyst Rating":null,
         "Expected Upside":null,
         "Risk Spread":null,
-        "Total Value Score":31.7,
+        "Total Value Score":31.66,
         "Industry Value Score":34.09,
         "Data Completeness %":50.0,
-        "⭐ Composite Score":15.9,
+        "⭐ Composite Score":16.0,
         "Adjusted Analyst Rating":null
     },
     {
@@ -31737,11 +31737,11 @@
         "Analyst Rating":5.0,
         "Expected Upside":11.57,
         "Risk Spread":null,
-        "Total Value Score":43.27,
+        "Total Value Score":42.96,
         "Industry Value Score":48.23,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":39.8,
-        "Adjusted Analyst Rating":3.9461243454
+        "⭐ Composite Score":40.2,
+        "Adjusted Analyst Rating":3.9431227555
     },
     {
         "Ticker":"EQV1V",
@@ -31752,11 +31752,11 @@
         "EBIT":27391000.0,
         "EPS":0.5215,
         "Osinko\/osake":0.59,
-        "Osinkotuotto":6.0950413223,
-        "P\/E":18.7053140097,
-        "P\/B":7.6681163209,
+        "Osinkotuotto":6.1458333333,
+        "P\/E":18.5507246377,
+        "P\/B":7.6047434587,
         "PEG":null,
-        "P\/S":6.7094354978,
+        "P\/S":6.6539856177,
         "Omistajia Nordnetissä*":3020.0,
         "Buy":0.0,
         "Hold":0.0,
@@ -31768,11 +31768,11 @@
         "Analyst Rating":1.0,
         "Expected Upside":4.17,
         "Risk Spread":null,
-        "Total Value Score":21.36,
+        "Total Value Score":21.55,
         "Industry Value Score":19.73,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":9.0,
-        "Adjusted Analyst Rating":3.0950605156
+        "⭐ Composite Score":9.9,
+        "Adjusted Analyst Rating":3.0985479754
     },
     {
         "Ticker":"ENENTO",
@@ -31799,11 +31799,11 @@
         "Analyst Rating":5.0,
         "Expected Upside":23.12,
         "Risk Spread":29.64,
-        "Total Value Score":49.08,
+        "Total Value Score":48.71,
         "Industry Value Score":67.2,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":68.7,
-        "Adjusted Analyst Rating":4.3120533921
+        "⭐ Composite Score":68.5,
+        "Adjusted Analyst Rating":4.3082626864
     },
     {
         "Ticker":"CAPMAN",
@@ -31830,11 +31830,11 @@
         "Analyst Rating":3.0,
         "Expected Upside":23.28,
         "Risk Spread":5.74,
-        "Total Value Score":23.59,
+        "Total Value Score":23.77,
         "Industry Value Score":23.45,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":37.7,
-        "Adjusted Analyst Rating":3.5205924305
+        "⭐ Composite Score":38.9,
+        "Adjusted Analyst Rating":3.5208353655
     },
     {
         "Ticker":"TAALA",
@@ -31861,11 +31861,11 @@
         "Analyst Rating":5.0,
         "Expected Upside":16.44,
         "Risk Spread":null,
-        "Total Value Score":40.84,
+        "Total Value Score":40.75,
         "Industry Value Score":44.55,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":39.6,
-        "Adjusted Analyst Rating":3.8206629579
+        "⭐ Composite Score":40.1,
+        "Adjusted Analyst Rating":3.8183765889
     },
     {
         "Ticker":"POSTI",
@@ -31892,11 +31892,11 @@
         "Analyst Rating":4.0,
         "Expected Upside":-5.7083333333,
         "Risk Spread":12.01,
-        "Total Value Score":51.86,
-        "Industry Value Score":48.49,
+        "Total Value Score":52.02,
+        "Industry Value Score":49.37,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":49.8,
-        "Adjusted Analyst Rating":3.7801376181
+        "⭐ Composite Score":50.3,
+        "Adjusted Analyst Rating":3.7787042606
     },
     {
         "Ticker":"WRT1V",
@@ -31923,11 +31923,11 @@
         "Analyst Rating":2.7142857143,
         "Expected Upside":7.7716666667,
         "Risk Spread":80.03,
-        "Total Value Score":45.44,
-        "Industry Value Score":36.49,
+        "Total Value Score":44.94,
+        "Industry Value Score":35.88,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":34.5,
-        "Adjusted Analyst Rating":2.9610411566
+        "⭐ Composite Score":34.7,
+        "Adjusted Analyst Rating":2.9625413265
     },
     {
         "Ticker":"KNEBV",
@@ -31954,11 +31954,11 @@
         "Analyst Rating":3.7826086957,
         "Expected Upside":30.8583333333,
         "Risk Spread":80.91,
-        "Total Value Score":52.71,
-        "Industry Value Score":44.86,
+        "Total Value Score":52.21,
+        "Industry Value Score":44.13,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":57.2,
-        "Adjusted Analyst Rating":3.7530779226
+        "⭐ Composite Score":56.8,
+        "Adjusted Analyst Rating":3.7526024244
     },
     {
         "Ticker":"METSO",
@@ -31985,11 +31985,11 @@
         "Analyst Rating":4.0909090909,
         "Expected Upside":13.8866666667,
         "Risk Spread":52.56,
-        "Total Value Score":57.41,
-        "Industry Value Score":48.27,
+        "Total Value Score":57.39,
+        "Industry Value Score":49.04,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":57.1,
-        "Adjusted Analyst Rating":3.9827744506
+        "⭐ Composite Score":57.7,
+        "Adjusted Analyst Rating":3.9817199431
     },
     {
         "Ticker":"UPM",
@@ -32016,11 +32016,11 @@
         "Analyst Rating":3.7,
         "Expected Upside":17.14,
         "Risk Spread":80.1,
-        "Total Value Score":62.3,
-        "Industry Value Score":52.25,
+        "Total Value Score":62.24,
+        "Industry Value Score":53.24,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":58.8,
-        "Adjusted Analyst Rating":3.6895463083
+        "⭐ Composite Score":59.3,
+        "Adjusted Analyst Rating":3.6891859046
     },
     {
         "Ticker":"STERV",
@@ -32047,11 +32047,11 @@
         "Analyst Rating":4.1,
         "Expected Upside":16.7533333333,
         "Risk Spread":61.7,
-        "Total Value Score":79.69,
-        "Industry Value Score":71.14,
+        "Total Value Score":79.78,
+        "Industry Value Score":72.27,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":71.3,
-        "Adjusted Analyst Rating":3.9815171112
+        "⭐ Composite Score":72.4,
+        "Adjusted Analyst Rating":3.9803891402
     },
     {
         "Ticker":"KCR",
@@ -32078,11 +32078,11 @@
         "Analyst Rating":4.7142857143,
         "Expected Upside":22.9616666667,
         "Risk Spread":32.79,
-        "Total Value Score":54.65,
-        "Industry Value Score":49.7,
+        "Total Value Score":54.52,
+        "Industry Value Score":49.73,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":65.1,
-        "Adjusted Analyst Rating":4.1731645032
+        "⭐ Composite Score":65.3,
+        "Adjusted Analyst Rating":4.1700669091
     },
     {
         "Ticker":"VALMT",
@@ -32109,11 +32109,11 @@
         "Analyst Rating":4.5,
         "Expected Upside":35.8016666667,
         "Risk Spread":58.77,
-        "Total Value Score":83.73,
-        "Industry Value Score":81.77,
+        "Total Value Score":83.84,
+        "Industry Value Score":82.28,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":84.2,
-        "Adjusted Analyst Rating":4.09698499
+        "⭐ Composite Score":84.6,
+        "Adjusted Analyst Rating":4.094443195
     },
     {
         "Ticker":"KEMIRA",
@@ -32140,11 +32140,11 @@
         "Analyst Rating":3.0,
         "Expected Upside":18.5066666667,
         "Risk Spread":56.72,
-        "Total Value Score":51.28,
-        "Industry Value Score":40.86,
+        "Total Value Score":51.57,
+        "Industry Value Score":42.9,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":51.7,
-        "Adjusted Analyst Rating":3.3177642108
+        "⭐ Composite Score":53.2,
+        "Adjusted Analyst Rating":3.3188597121
     },
     {
         "Ticker":"OUT1V",
@@ -32171,11 +32171,11 @@
         "Analyst Rating":3.1538461538,
         "Expected Upside":6.1416666667,
         "Risk Spread":67.83,
-        "Total Value Score":24.35,
-        "Industry Value Score":27.04,
+        "Total Value Score":24.58,
+        "Industry Value Score":27.54,
         "Data Completeness %":60.0,
-        "⭐ Composite Score":16.9,
-        "Adjusted Analyst Rating":3.3379200415
+        "⭐ Composite Score":18.5,
+        "Adjusted Analyst Rating":3.3386768787
     },
     {
         "Ticker":"HUH1V",
@@ -32202,11 +32202,11 @@
         "Analyst Rating":4.5,
         "Expected Upside":24.43,
         "Risk Spread":40.92,
-        "Total Value Score":76.33,
-        "Industry Value Score":70.65,
+        "Total Value Score":75.87,
+        "Industry Value Score":69.79,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":79.9,
-        "Adjusted Analyst Rating":4.1800808684
+        "⭐ Composite Score":80.1,
+        "Adjusted Analyst Rating":4.1777530094
     },
     {
         "Ticker":"SSABBH",
@@ -32233,11 +32233,11 @@
         "Analyst Rating":4.2222222222,
         "Expected Upside":4.8766666667,
         "Risk Spread":72.66,
-        "Total Value Score":45.97,
-        "Industry Value Score":37.62,
+        "Total Value Score":45.98,
+        "Industry Value Score":38.58,
         "Data Completeness %":80.0,
-        "⭐ Composite Score":35.0,
-        "Adjusted Analyst Rating":4.0588019231
+        "⭐ Composite Score":36.2,
+        "Adjusted Analyst Rating":4.0573662591
     },
     {
         "Ticker":"METSB",
@@ -32264,11 +32264,11 @@
         "Analyst Rating":2.75,
         "Expected Upside":7.2466666667,
         "Risk Spread":25.62,
-        "Total Value Score":23.45,
-        "Industry Value Score":24.41,
+        "Total Value Score":23.71,
+        "Industry Value Score":25.16,
         "Data Completeness %":60.0,
-        "⭐ Composite Score":24.2,
-        "Adjusted Analyst Rating":3.1878940809
+        "⭐ Composite Score":26.0,
+        "Adjusted Analyst Rating":3.1895957982
     },
     {
         "Ticker":"EXEL",
@@ -32296,10 +32296,10 @@
         "Expected Upside":-6.9283333333,
         "Risk Spread":4.33,
         "Total Value Score":27.02,
-        "Industry Value Score":23.64,
+        "Industry Value Score":23.97,
         "Data Completeness %":60.0,
-        "⭐ Composite Score":23.3,
-        "Adjusted Analyst Rating":3.9461243454
+        "⭐ Composite Score":23.8,
+        "Adjusted Analyst Rating":3.9431227555
     },
     {
         "Ticker":"SCANFL",
@@ -32326,11 +32326,11 @@
         "Analyst Rating":3.0,
         "Expected Upside":2.29,
         "Risk Spread":null,
-        "Total Value Score":40.29,
-        "Industry Value Score":31.27,
+        "Total Value Score":40.65,
+        "Industry Value Score":33.33,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":25.2,
-        "Adjusted Analyst Rating":3.5205924305
+        "⭐ Composite Score":27.3,
+        "Adjusted Analyst Rating":3.5208353655
     },
     {
         "Ticker":"CTH1V",
@@ -32357,10 +32357,10 @@
         "Analyst Rating":null,
         "Expected Upside":null,
         "Risk Spread":null,
-        "Total Value Score":33.11,
-        "Industry Value Score":29.93,
+        "Total Value Score":33.47,
+        "Industry Value Score":31.46,
         "Data Completeness %":60.0,
-        "⭐ Composite Score":15.2,
+        "⭐ Composite Score":16.3,
         "Adjusted Analyst Rating":null
     },
     {
@@ -32388,11 +32388,11 @@
         "Analyst Rating":5.0,
         "Expected Upside":15.56,
         "Risk Spread":null,
-        "Total Value Score":41.48,
-        "Industry Value Score":42.18,
+        "Total Value Score":41.58,
+        "Industry Value Score":42.52,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":38.6,
-        "Adjusted Analyst Rating":3.8206629579
+        "⭐ Composite Score":39.4,
+        "Adjusted Analyst Rating":3.8183765889
     },
     {
         "Ticker":"VIK1V",
@@ -32419,11 +32419,11 @@
         "Analyst Rating":5.0,
         "Expected Upside":485.37,
         "Risk Spread":null,
-        "Total Value Score":43.71,
-        "Industry Value Score":41.72,
+        "Total Value Score":43.98,
+        "Industry Value Score":42.84,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":57.6,
-        "Adjusted Analyst Rating":3.8206629579
+        "⭐ Composite Score":58.1,
+        "Adjusted Analyst Rating":3.8183765889
     },
     {
         "Ticker":"PON1V",
@@ -32450,11 +32450,11 @@
         "Analyst Rating":3.0,
         "Expected Upside":5.38,
         "Risk Spread":null,
-        "Total Value Score":36.09,
-        "Industry Value Score":27.5,
+        "Total Value Score":36.34,
+        "Industry Value Score":29.21,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":22.6,
-        "Adjusted Analyst Rating":3.5825677198
+        "⭐ Composite Score":24.5,
+        "Adjusted Analyst Rating":3.5823110151
     },
     {
         "Ticker":"YIT",
@@ -32481,11 +32481,73 @@
         "Analyst Rating":4.0,
         "Expected Upside":9.5866666667,
         "Risk Spread":19.04,
-        "Total Value Score":36.25,
-        "Industry Value Score":35.18,
+        "Total Value Score":36.12,
+        "Industry Value Score":34.91,
         "Data Completeness %":60.0,
-        "⭐ Composite Score":40.5,
-        "Adjusted Analyst Rating":3.812952899
+        "⭐ Composite Score":41.2,
+        "Adjusted Analyst Rating":3.8115564116
+    },
+    {
+        "Ticker":"HIAB",
+        "Date":"2026-07-22",
+        "Industry":"Industrial",
+        "Current Price":59.2,
+        "Liikevaihto":1552600000.0,
+        "EBIT":207500000.0,
+        "EPS":2.548,
+        "Osinko\/osake":1.17,
+        "Osinkotuotto":2.1971830986,
+        "P\/E":24.5052922227,
+        "P\/B":3.5433361658,
+        "PEG":1.8152764,
+        "P\/S":2.2488828122,
+        "Omistajia Nordnetissä*":11102.0,
+        "Buy":7.0,
+        "Hold":1.0,
+        "Sell":0.0,
+        "Worst Case":-3.72,
+        "Probable Case":12.33,
+        "Best Case":18.24,
+        "Total Analysts":8.0,
+        "Analyst Rating":4.75,
+        "Expected Upside":10.64,
+        "Risk Spread":21.96,
+        "Total Value Score":65.46,
+        "Industry Value Score":58.39,
+        "Data Completeness %":100.0,
+        "⭐ Composite Score":71.2,
+        "Adjusted Analyst Rating":4.2237071088
+    },
+    {
+        "Ticker":"TYRES",
+        "Date":"2026-07-22",
+        "Industry":"Industrial",
+        "Current Price":15.3,
+        "Liikevaihto":1373600000.0,
+        "EBIT":35700000.0,
+        "EPS":-0.1088,
+        "Osinko\/osake":0.25,
+        "Osinkotuotto":1.5984654731,
+        "P\/E":111.158493248,
+        "P\/B":1.9014480913,
+        "PEG":null,
+        "P\/S":1.5191500752,
+        "Omistajia Nordnetissä*":36056.0,
+        "Buy":2.0,
+        "Hold":5.0,
+        "Sell":5.0,
+        "Worst Case":-49.67,
+        "Probable Case":-15.16,
+        "Best Case":17.65,
+        "Total Analysts":12.0,
+        "Analyst Rating":2.5,
+        "Expected Upside":-15.4433333333,
+        "Risk Spread":67.32,
+        "Total Value Score":21.4,
+        "Industry Value Score":15.94,
+        "Data Completeness %":75.0,
+        "⭐ Composite Score":6.0,
+        "Adjusted Analyst Rating":2.9452280451
     },
     {
         "Ticker":"ORNBV",
@@ -32512,11 +32574,11 @@
         "Analyst Rating":3.5,
         "Expected Upside":-1.915,
         "Risk Spread":40.49,
-        "Total Value Score":52.92,
+        "Total Value Score":52.57,
         "Industry Value Score":67.92,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":54.3,
-        "Adjusted Analyst Rating":3.5775044706
+        "⭐ Composite Score":54.4,
+        "Adjusted Analyst Rating":3.5773875397
     },
     {
         "Ticker":"TTALO",
@@ -32543,11 +32605,11 @@
         "Analyst Rating":3.0,
         "Expected Upside":28.5383333333,
         "Risk Spread":34.53,
-        "Total Value Score":59.26,
+        "Total Value Score":59.14,
         "Industry Value Score":61.67,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":76.3,
-        "Adjusted Analyst Rating":3.4292604251
+        "⭐ Composite Score":76.1,
+        "Adjusted Analyst Rating":3.4300359797
     },
     {
         "Ticker":"PIHLIS",
@@ -32574,11 +32636,11 @@
         "Analyst Rating":4.6666666667,
         "Expected Upside":26.7316666667,
         "Risk Spread":29.13,
-        "Total Value Score":54.72,
+        "Total Value Score":54.82,
         "Industry Value Score":54.58,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":70.1,
-        "Adjusted Analyst Rating":4.1114603617
+        "⭐ Composite Score":70.3,
+        "Adjusted Analyst Rating":4.1084636281
     },
     {
         "Ticker":"REG1V",
@@ -32605,11 +32667,11 @@
         "Analyst Rating":4.2,
         "Expected Upside":40.785,
         "Risk Spread":40.19,
-        "Total Value Score":35.07,
+        "Total Value Score":35.01,
         "Industry Value Score":40.83,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":56.9,
-        "Adjusted Analyst Rating":3.8785136167
+        "⭐ Composite Score":57.2,
+        "Adjusted Analyst Rating":3.8766255225
     },
     {
         "Ticker":"ORIOLA",
@@ -32636,11 +32698,11 @@
         "Analyst Rating":4.0,
         "Expected Upside":7.4283333333,
         "Risk Spread":3.27,
-        "Total Value Score":31.46,
+        "Total Value Score":31.34,
         "Industry Value Score":34.17,
         "Data Completeness %":60.0,
-        "⭐ Composite Score":38.1,
-        "Adjusted Analyst Rating":3.7801376181
+        "⭐ Composite Score":39.1,
+        "Adjusted Analyst Rating":3.7787042606
     },
     {
         "Ticker":"HEALTH",
@@ -32667,11 +32729,11 @@
         "Analyst Rating":5.0,
         "Expected Upside":69.9,
         "Risk Spread":null,
-        "Total Value Score":19.28,
+        "Total Value Score":19.22,
         "Industry Value Score":25.83,
         "Data Completeness %":60.0,
-        "⭐ Composite Score":33.6,
-        "Adjusted Analyst Rating":3.8206629579
+        "⭐ Composite Score":33.9,
+        "Adjusted Analyst Rating":3.8183765889
     },
     {
         "Ticker":"TOIVO",
@@ -32698,11 +32760,11 @@
         "Analyst Rating":5.0,
         "Expected Upside":29.03,
         "Risk Spread":null,
-        "Total Value Score":47.5,
+        "Total Value Score":47.63,
         "Industry Value Score":61.67,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":58.9,
-        "Adjusted Analyst Rating":3.8206629579
+        "⭐ Composite Score":59.1,
+        "Adjusted Analyst Rating":3.8183765889
     },
     {
         "Ticker":"INVEST",
@@ -32729,11 +32791,11 @@
         "Analyst Rating":1.0,
         "Expected Upside":0.57,
         "Risk Spread":null,
-        "Total Value Score":27.95,
+        "Total Value Score":28.25,
         "Industry Value Score":34.17,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":16.3,
-        "Adjusted Analyst Rating":3.3444724817
+        "⭐ Composite Score":17.8,
+        "Adjusted Analyst Rating":3.3462454414
     },
     {
         "Ticker":"CTY1S",
@@ -32760,7 +32822,7 @@
         "Analyst Rating":null,
         "Expected Upside":null,
         "Risk Spread":null,
-        "Total Value Score":35.56,
+        "Total Value Score":35.78,
         "Industry Value Score":46.67,
         "Data Completeness %":60.0,
         "⭐ Composite Score":23.7,
@@ -32791,11 +32853,11 @@
         "Analyst Rating":3.7741935484,
         "Expected Upside":24.545,
         "Risk Spread":132.75,
-        "Total Value Score":50.33,
+        "Total Value Score":50.65,
         "Industry Value Score":52.38,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":54.6,
-        "Adjusted Analyst Rating":3.7524366887
+        "⭐ Composite Score":55.0,
+        "Adjusted Analyst Rating":3.7520612705
     },
     {
         "Ticker":"QTCOM",
@@ -32822,11 +32884,11 @@
         "Analyst Rating":3.8,
         "Expected Upside":7.8733333333,
         "Risk Spread":72.14,
-        "Total Value Score":33.85,
+        "Total Value Score":33.98,
         "Industry Value Score":37.07,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":27.9,
-        "Adjusted Analyst Rating":3.7172232941
+        "⭐ Composite Score":29.0,
+        "Adjusted Analyst Rating":3.7162691751
     },
     {
         "Ticker":"GOFORE",
@@ -32853,11 +32915,11 @@
         "Analyst Rating":4.0,
         "Expected Upside":49.77,
         "Risk Spread":10.06,
-        "Total Value Score":41.36,
+        "Total Value Score":41.69,
         "Industry Value Score":45.55,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":71.4,
-        "Adjusted Analyst Rating":3.7801376181
+        "⭐ Composite Score":71.5,
+        "Adjusted Analyst Rating":3.7787042606
     },
     {
         "Ticker":"BITTI",
@@ -32884,11 +32946,11 @@
         "Analyst Rating":4.0,
         "Expected Upside":31.4633333333,
         "Risk Spread":33.64,
-        "Total Value Score":22.86,
+        "Total Value Score":22.78,
         "Industry Value Score":32.58,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":40.3,
-        "Adjusted Analyst Rating":3.812952899
+        "⭐ Composite Score":41.0,
+        "Adjusted Analyst Rating":3.8115564116
     },
     {
         "Ticker":"ELISA",
@@ -32915,11 +32977,11 @@
         "Analyst Rating":3.2857142857,
         "Expected Upside":17.575,
         "Risk Spread":48.63,
-        "Total Value Score":56.32,
+        "Total Value Score":55.73,
         "Industry Value Score":59.8,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":63.9,
-        "Adjusted Analyst Rating":3.3835763678
+        "⭐ Composite Score":63.6,
+        "Adjusted Analyst Rating":3.3840047411
     },
     {
         "Ticker":"TELIA1",
@@ -32946,11 +33008,11 @@
         "Analyst Rating":2.8333333333,
         "Expected Upside":2.9383333333,
         "Risk Spread":65.45,
-        "Total Value Score":16.75,
+        "Total Value Score":16.91,
         "Industry Value Score":27.78,
         "Data Completeness %":80.0,
-        "⭐ Composite Score":10.1,
-        "Adjusted Analyst Rating":3.0284576066
+        "⭐ Composite Score":11.6,
+        "Adjusted Analyst Rating":3.0296600703
     },
     {
         "Ticker":"TIETO",
@@ -32977,11 +33039,11 @@
         "Analyst Rating":3.3333333333,
         "Expected Upside":10.4483333333,
         "Risk Spread":45.25,
-        "Total Value Score":28.81,
+        "Total Value Score":29.28,
         "Industry Value Score":32.77,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":29.5,
-        "Adjusted Analyst Rating":3.4584313838
+        "⭐ Composite Score":30.9,
+        "Adjusted Analyst Rating":3.4587801136
     },
     {
         "Ticker":"FSECURE",
@@ -33011,8 +33073,8 @@
         "Total Value Score":60.3,
         "Industry Value Score":67.3,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":72.2,
-        "Adjusted Analyst Rating":3.8953867255
+        "⭐ Composite Score":72.3,
+        "Adjusted Analyst Rating":3.8936753544
     },
     {
         "Ticker":"TLT1V",
@@ -33042,8 +33104,8 @@
         "Total Value Score":51.77,
         "Industry Value Score":60.14,
         "Data Completeness %":100.0,
-        "⭐ Composite Score":69.4,
-        "Adjusted Analyst Rating":3.9461243454
+        "⭐ Composite Score":69.6,
+        "Adjusted Analyst Rating":3.9431227555
     },
     {
         "Ticker":"VINCIT",
@@ -33054,11 +33116,11 @@
         "EBIT":-215000.0,
         "EPS":-0.1675,
         "Osinko\/osake":0.0,
-        "Osinkotuotto":12.9411764706,
+        "Osinkotuotto":13.1264916468,
         "P\/E":null,
-        "P\/B":0.4624466146,
+        "P\/B":0.4559179565,
         "PEG":null,
-        "P\/S":0.2268212471,
+        "P\/S":0.2236190648,
         "Omistajia Nordnetissä*":3915.0,
         "Buy":2.0,
         "Hold":0.0,
@@ -33070,11 +33132,11 @@
         "Analyst Rating":5.0,
         "Expected Upside":19.33,
         "Risk Spread":null,
-        "Total Value Score":37.81,
-        "Industry Value Score":41.57,
+        "Total Value Score":37.86,
+        "Industry Value Score":42.57,
         "Data Completeness %":60.0,
-        "⭐ Composite Score":38.0,
-        "Adjusted Analyst Rating":3.9461243454
+        "⭐ Composite Score":39.0,
+        "Adjusted Analyst Rating":3.9431227555
     },
     {
         "Ticker":"SIILI",
@@ -33101,11 +33163,11 @@
         "Analyst Rating":3.0,
         "Expected Upside":13.33,
         "Risk Spread":null,
-        "Total Value Score":37.27,
-        "Industry Value Score":39.39,
+        "Total Value Score":37.29,
+        "Industry Value Score":38.39,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":33.0,
-        "Adjusted Analyst Rating":3.5205924305
+        "⭐ Composite Score":33.4,
+        "Adjusted Analyst Rating":3.5208353655
     },
     {
         "Ticker":"NETUM",
@@ -33132,11 +33194,11 @@
         "Analyst Rating":1.0,
         "Expected Upside":5.0,
         "Risk Spread":null,
-        "Total Value Score":43.52,
+        "Total Value Score":43.78,
         "Industry Value Score":43.67,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":34.1,
-        "Adjusted Analyst Rating":3.3444724817
+        "⭐ Composite Score":35.1,
+        "Adjusted Analyst Rating":3.3462454414
     },
     {
         "Ticker":"DIGIA",
@@ -33163,11 +33225,11 @@
         "Analyst Rating":5.0,
         "Expected Upside":27.55,
         "Risk Spread":null,
-        "Total Value Score":44.86,
+        "Total Value Score":45.07,
         "Industry Value Score":50.69,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":51.8,
-        "Adjusted Analyst Rating":3.8206629579
+        "⭐ Composite Score":52.2,
+        "Adjusted Analyst Rating":3.8183765889
     },
     {
         "Ticker":"REMEDY",
@@ -33194,11 +33256,11 @@
         "Analyst Rating":5.0,
         "Expected Upside":30.5216666667,
         "Risk Spread":6.69,
-        "Total Value Score":17.1,
+        "Total Value Score":16.96,
         "Industry Value Score":20.76,
         "Data Completeness %":60.0,
-        "⭐ Composite Score":36.7,
-        "Adjusted Analyst Rating":3.9461243454
+        "⭐ Composite Score":37.2,
+        "Adjusted Analyst Rating":3.9431227555
     },
     {
         "Ticker":"ICP1V",
@@ -33225,10 +33287,10 @@
         "Analyst Rating":5.0,
         "Expected Upside":38.41,
         "Risk Spread":null,
-        "Total Value Score":44.28,
+        "Total Value Score":44.5,
         "Industry Value Score":51.05,
         "Data Completeness %":75.0,
-        "⭐ Composite Score":58.2,
-        "Adjusted Analyst Rating":3.8206629579
+        "⭐ Composite Score":58.4,
+        "Adjusted Analyst Rating":3.8183765889
     }
 ]
