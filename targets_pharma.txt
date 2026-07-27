@@ -4,3 +4,9 @@ PIHLIS,https://www.nordnet.fi/osakkeet/kurssit/pihlajalinna-pihlis-xhel?details
 REG1V,https://www.nordnet.fi/osakkeet/kurssit/revenio-group-reg1v-xhel?details
 ORIOLA,https://www.nordnet.fi/osakkeet/kurssit/oriola-xhel?details
 HEALTH,https://www.nordnet.fi/osakkeet/kurssit/nightingale-health-health-xhel?details
+FARON,https://www.nordnet.fi/osakkeet/kurssit/faron-pharmaceuticals-faron-fsme?details
+NXTMH,https://www.nordnet.fi/osakkeet/kurssit/nexstim-nxtmh-fsme?details
+BRETEC,https://www.nordnet.fi/osakkeet/kurssit/bioretec-bretec-fsme?details
+MODU,https://www.nordnet.fi/osakkeet/kurssit/modulight-modu-fsme?details
+BIOBV,https://www.nordnet.fi/osakkeet/kurssit/biohit-b-biobv-xhel?details
+NANOFH,https://www.nordnet.fi/osakkeet/kurssit/nanoform-finland-nanofh-fsme?details

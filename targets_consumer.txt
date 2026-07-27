@@ -7,3 +7,14 @@ NOHO,https://www.nordnet.fi/osakkeet/kurssit/no-ho-partners-noho-xhel?details
 KAMUX,https://www.nordnet.fi/osakkeet/kurssit/kamux-xhel?details
 HARVIA,https://www.nordnet.fi/osakkeet/kurssit/harvia-xhel?details
 MUSTI,https://www.nordnet.fi/osakkeet/kurssit/musti-group-musti-xhel?details
+FSKRS,https://www.nordnet.fi/osakkeet/kurssit/fiskars-a-fskrs-xhel?details
+MEKKO,https://www.nordnet.fi/osakkeet/kurssit/marimekko-mekko-xhel?details
+LINDEX,https://www.nordnet.fi/osakkeet/kurssit/lindex-group-lindex-xhel?details
+VERK,https://www.nordnet.fi/osakkeet/kurssit/verkkokauppa0com-verk-xhel?details
+RAP1V,https://www.nordnet.fi/osakkeet/kurssit/rapala-vmc-rap1v-xhel?details
+RAIVV,https://www.nordnet.fi/osakkeet/kurssit/raisio-vaihto-osake-raivv-xhel?details
+ANORA,https://www.nordnet.fi/osakkeet/kurssit/anora-group-anora-xhel?details
+ATRAV,https://www.nordnet.fi/osakkeet/kurssit/atria-a-atrav-xhel?details
+APETIT,https://www.nordnet.fi/osakkeet/kurssit/apetit-xhel?details
+RELAIS,https://www.nordnet.fi/osakkeet/kurssit/relais-group-relais-xhel?details
+SANOMA,https://www.nordnet.fi/osakkeet/kurssit/sanoma-xhel?details

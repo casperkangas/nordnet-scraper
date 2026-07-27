@@ -9,3 +9,5 @@ EQV1V,https://www.nordnet.fi/osakkeet/kurssit/e-q-eqv1v-xhel?details
 ENENTO,https://www.nordnet.fi/osakkeet/kurssit/enento-group-enento-xhel?details
 CAPMAN,https://www.nordnet.fi/osakkeet/kurssit/cap-man-capman-xhel?details
 TAALA,https://www.nordnet.fi/osakkeet/kurssit/taaleri-taala-xhel?details
+UNITED,https://www.nordnet.fi/osakkeet/kurssit/united-bankers-united-xhel?details
+PNA1V,https://www.nordnet.fi/osakkeet/kurssit/panostaja-pna1v-xhel?details

@@ -1,3 +1,5 @@
 TOIVO,https://www.nordnet.fi/osakkeet/kurssit/toivo-group-toivo-xhel?details
 INVEST,https://www.nordnet.fi/osakkeet/kurssit/investors-house-invest-xhel?details
 CTY1S,https://www.nordnet.fi/osakkeet/kurssit/citycon-cty1s-xhel?details
+LUMO,https://www.nordnet.fi/osakkeet/kurssit/lumo-kodit-lumo-xhel?details
+OVARO,https://www.nordnet.fi/osakkeet/kurssit/ovaro-kiinteistosijoitus-ovaro-xhel?details

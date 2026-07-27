@@ -5,3 +5,5 @@ PAMPALO,https://www.nordnet.fi/osakkeet/kurssit/endomines-finland-pampalo-xhel?d
 ESENSE,https://www.nordnet.fi/osakkeet/kurssit/enersense-international-esense-xhel?details
 MERUS,https://www.nordnet.fi/osakkeet/kurssit/merus-power-merus-fsme?details
 SOSI1,https://www.nordnet.fi/osakkeet/kurssit/sotkamo-silver-sosi1-xhel?details
+FIA1S,https://www.nordnet.fi/osakkeet/kurssit/finnair-fia1s-xhel?details
+LAMOR,https://www.nordnet.fi/osakkeet/kurssit/lamor-xhel?details

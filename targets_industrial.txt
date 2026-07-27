@@ -20,3 +20,13 @@ PON1V,https://www.nordnet.fi/osakkeet/kurssit/ponsse-pon1v-xhel?details
 YIT,https://www.nordnet.fi/osakkeet/kurssit/yit-corporation-yit-xhel?details
 HIAB,https://www.nordnet.fi/osakkeet/kurssit/hiab-b-hiab-xhel?details
 TYRES,https://www.nordnet.fi/osakkeet/kurssit/nokian-renkaat-tyres-xhel?details
+KALMAR,https://www.nordnet.fi/osakkeet/kurssit/kalmar-xhel?details
+ALMA,https://www.nordnet.fi/osakkeet/kurssit/alma-media-alma-xhel?details
+SUY1V,https://www.nordnet.fi/osakkeet/kurssit/suominen-suy1v-xhel?details
+KREATE,https://www.nordnet.fi/osakkeet/kurssit/kreate-group-kreate-xhel?details
+SRV1V,https://www.nordnet.fi/osakkeet/kurssit/srv-group-srv1v-xhel?details
+ROBIT,https://www.nordnet.fi/osakkeet/kurssit/robit-xhel?details
+NLG1V,https://www.nordnet.fi/osakkeet/kurssit/nurminen-logistics-nlg1v-xhel?details
+BOREO,https://www.nordnet.fi/osakkeet/kurssit/boreo-xhel?details
+EEZY,https://www.nordnet.fi/osakkeet/kurssit/eezy-xhel?details
+KOSKI,https://www.nordnet.fi/osakkeet/kurssit/koskisen-koski-xhel?details

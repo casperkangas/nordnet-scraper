@@ -13,3 +13,12 @@ NETUM,https://www.nordnet.fi/osakkeet/kurssit/netum-fsme?details
 DIGIA,https://www.nordnet.fi/osakkeet/kurssit/digia-xhel?details
 REMEDY,https://www.nordnet.fi/osakkeet/kurssit/remedy-entertainment-remedy-xhel?details
 ICP1V,https://www.nordnet.fi/osakkeet/kurssit/incap-icp1v-xhel?details
+ADMCM,https://www.nordnet.fi/osakkeet/kurssit/admicom-admcm-fsme?details
+SOLTEQ,https://www.nordnet.fi/osakkeet/kurssit/solteq-xhel?details
+SSH1V,https://www.nordnet.fi/osakkeet/kurssit/ssh-communications-security-ssh1v-xhel?details
+DETEC,https://www.nordnet.fi/osakkeet/kurssit/detection-technology-detec-fsme?details
+LEMON,https://www.nordnet.fi/osakkeet/kurssit/lemonsoft-lemon-fsme?details
+LEADD,https://www.nordnet.fi/osakkeet/kurssit/lead-desk-leadd-fsme?details
+TEM1V,https://www.nordnet.fi/osakkeet/kurssit/tecnotree-tem1v-xhel?details
+LOIHDE,https://www.nordnet.fi/osakkeet/kurssit/loihde-fsme?details
+AIFORIA,https://www.nordnet.fi/osakkeet/kurssit/aiforia-technologies-aiforia-fsme?details
