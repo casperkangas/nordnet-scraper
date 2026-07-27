@@ -89,15 +89,24 @@ with sync_playwright() as p:
             print(f"Scraping data for: {ticker}...")
             
             try:
-                # 1. Instruct the browser to go to the URL (Wait until the skeleton loads)
-                page.goto(url, wait_until="domcontentloaded", timeout=15000)
+                # 1. Instruct the browser to go to the URL (Wait until DOM is loaded, generous 30s timeout)
+                page.goto(url, wait_until="domcontentloaded", timeout=30000)
                 
-                # 2. THE HARD PAUSE: Tell the open browser to simply wait 3 seconds.
-                # This gives Nordnet's JavaScript plenty of time to paint the financial numbers.
-                # Use speed_test.py to experiment with this number and find the optimal balance between speed and data completeness.
-                page.wait_for_timeout(2300)
-                
-                # 3. Grab ALL buttons immediately, whether they are hidden menus or financial data
+                # 2. DYNAMIC WAIT: Wait dynamically for price & metric elements to render.
+                # Playwright proceeds IMMEDIATELY once painted, avoiding wasted time locally
+                # while giving GitHub Actions runners up to 30s during network/CPU spikes.
+                price_locator = page.locator("span[class*='typography-title2'][class*='font-extrabold']")
+                try:
+                    price_locator.first.wait_for(state="attached", timeout=30000)
+                except Exception as e:
+                    print(f"  -> Notice: Price locator wait timed out for {ticker}. Error: {e}")
+
+                try:
+                    page.locator("button[aria-label*=':']").first.wait_for(state="attached", timeout=30000)
+                except Exception as e:
+                    print(f"  -> Notice: Financial metric locator wait timed out for {ticker}. Error: {e}")
+
+                # 3. Grab ALL buttons immediately once metrics are painted
                 buttons = page.query_selector_all('button')
                 
                 stock_data = {}
@@ -111,12 +120,6 @@ with sync_playwright() as p:
                 stock_data["Current Price"] = None  
                 
                 try:
-                    # --- UPDATED LOCATOR: Adapting to Nordnet's new Tailwind/Utility CSS frontend ---
-                    price_locator = page.locator("span[class*='typography-title2'][class*='font-extrabold']")
-                    
-                    # --- THE FIX: A cost-free generous timeout for slow-rendering cross-listed stocks ---
-                    price_locator.first.wait_for(state="attached", timeout=6000)
-                    
                     element_count = price_locator.count()
                     
                     for i in range(element_count):
