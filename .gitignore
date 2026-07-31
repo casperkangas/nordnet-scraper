@@ -1,6 +1,7 @@
-# .xlsx files
+# .xlsx and root images
 *.xlsx
 *.png
+!web_dashboard/data/*.png
 
 # Logs
 scraper_log.txt
