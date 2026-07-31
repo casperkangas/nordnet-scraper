@@ -455,7 +455,7 @@ plt.grid(True, linestyle='--', alpha=0.5)
 # 7. Add a "Zero Line" to instantly see negative upside stocks
 plt.axhline(0, color='red', linestyle='-', linewidth=1.5, alpha=0.8)
 
-# 8. Save the chart as a static image file
+# 8. Save the chart as a static image file securely into the anchored folder
 plot_filename = os.path.join(data_dir, "Risk_Reward_Latest.png")
 plt.savefig(plot_filename, bbox_inches='tight', dpi=150)
 plt.close() # Free up computer memory
