@@ -17,6 +17,7 @@ const hiddenForever = [
   "Analyst Rating",
   "Omistajia Nordnetissä*",
   "Osinko/osake",
+  "Previous Rank",
 ]; // Never show in table
 
 // Columns to hide by default on first load

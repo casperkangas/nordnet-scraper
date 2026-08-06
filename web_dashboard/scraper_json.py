@@ -402,6 +402,13 @@ print("Generating Risk vs. Reward visualization...")
 # 1. Isolate the data: Drop any stocks missing these metrics so the math doesn't crash
 plot_df = today_df.dropna(subset=['Risk Spread', 'Expected Upside']).copy()
 
+# Filter out extreme outliers in Expected Upside to make the matrix readable
+Q1 = plot_df['Expected Upside'].quantile(0.25)
+Q3 = plot_df['Expected Upside'].quantile(0.75)
+IQR = Q3 - Q1
+upper_bound = Q3 + 2.0 * IQR
+plot_df = plot_df[plot_df['Expected Upside'] <= upper_bound]
+
 # 2. Define our axes
 x = plot_df['Risk Spread']       # X-axis: Risk (Volatility / Uncertainty)
 y = plot_df['Expected Upside']   # Y-axis: Reward (Potential Growth)
