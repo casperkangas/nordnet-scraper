@@ -1,6 +1,6 @@
 from playwright.sync_api import sync_playwright
 import pandas as pd
-from datetime import date
+from datetime import date, datetime, timedelta
 import os
 import numpy as np
 import glob
@@ -68,7 +68,7 @@ with sync_playwright() as p:
     for file_path in target_files:
         
         filename = os.path.basename(file_path)
-        industry_name = filename.replace("targets_", "").replace(".txt", "").capitalize()
+        industry_name = filename.replace("targets_", "").replace(".txt", "").replace("_", " ").title()
         
         print(f"\n--- Processing Industry: {industry_name} ---")
         
@@ -421,6 +421,25 @@ today_df['Rank Change Value'] = today_df.apply(
     lambda row: 0 if pd.isna(row['Previous Rank']) else int(row['Previous Rank']) - int(row['Current Rank']),
     axis=1
 )
+
+target_date_7d = str(datetime.strptime(today_str, "%Y-%m-%d").date() - timedelta(days=7))
+valid_7d_dates = [d for d in past_dates if d <= target_date_7d]
+date_7d = valid_7d_dates[-1] if valid_7d_dates else None
+previous_7d_ranks = rankings_by_date.get(date_7d, {}) if date_7d else {}
+
+today_df['Previous Rank 7d'] = today_df['Ticker'].map(previous_7d_ranks)
+
+today_df['7-Day Rank Change'] = today_df.apply(
+    lambda row: format_rank_change(row['Current Rank'], row['Previous Rank 7d']),
+    axis=1
+)
+
+today_df['7-Day Rank Change Value'] = today_df.apply(
+    lambda row: 0 if pd.isna(row['Previous Rank 7d']) else int(row['Previous Rank 7d']) - int(row['Current Rank']),
+    axis=1
+)
+
+today_df = today_df.drop(columns=['Previous Rank 7d'], errors='ignore')
 
 
 # =========================================================

@@ -9,7 +9,15 @@ let trendChartInstance = null;
 // --- DYNAMIC COLUMN STATE ---
 let allColumns = [];
 let visibleColumns = [];
-const hiddenForever = ["Date", "Rank Change Value"]; // Never show in table
+const hiddenForever = [
+  "Date",
+  "Rank Change Value",
+  "7-Day Rank Change Value",
+  "Total Analysts",
+  "Analyst Rating",
+  "Omistajia Nordnetissä*",
+  "Osinko/osake",
+]; // Never show in table
 
 // Columns to hide by default on first load
 const defaultHidden = [
@@ -61,7 +69,6 @@ function getThemeColor(name) {
     .trim();
 }
 
-
 // --- NEW: TREND MODAL LOGIC ---
 function openTrendModal(ticker) {
   const modal = document.getElementById("trendModal");
@@ -81,21 +88,26 @@ function openTrendModal(ticker) {
   // Extract dates (exclude Ticker, Current Score, and Diff % columns)
   let dates = [];
   if (scoreRow) {
-    dates = Object.keys(scoreRow).filter(k => k.match(/^\d{4}-\d{2}-\d{2}$/)).sort();
+    dates = Object.keys(scoreRow)
+      .filter((k) => k.match(/^\d{4}-\d{2}-\d{2}$/))
+      .sort();
   } else if (priceRow) {
-    dates = Object.keys(priceRow).filter(k => k.match(/^\d{4}-\d{2}-\d{2}$/)).sort();
+    dates = Object.keys(priceRow)
+      .filter((k) => k.match(/^\d{4}-\d{2}-\d{2}$/))
+      .sort();
   }
-  
+
   // Also add today's date using "Current Score" / "Current Price" if it doesn't already exist in the list
-  const todayDateStr = masterData.length > 0 && masterData[0].Date ? masterData[0].Date : "Today";
+  const todayDateStr =
+    masterData.length > 0 && masterData[0].Date ? masterData[0].Date : "Today";
   dates.push(todayDateStr);
 
-  const scores = dates.map(d => {
+  const scores = dates.map((d) => {
     if (d === todayDateStr) return scoreRow ? scoreRow["Current Score"] : null;
     return scoreRow ? scoreRow[d] : null;
   });
 
-  const prices = dates.map(d => {
+  const prices = dates.map((d) => {
     if (d === todayDateStr) return priceRow ? priceRow["Current Price"] : null;
     return priceRow ? priceRow[d] : null;
   });
@@ -108,7 +120,9 @@ function closeTrendModal() {
   modal.classList.add("hidden");
 }
 
-document.getElementById("closeModalBtn").addEventListener("click", closeTrendModal);
+document
+  .getElementById("closeModalBtn")
+  .addEventListener("click", closeTrendModal);
 
 document.getElementById("trendModal").addEventListener("click", (e) => {
   if (e.target.id === "trendModal") {
@@ -121,7 +135,9 @@ function renderTrendChart(labels, scoreData, priceData) {
   const isDarkMode = document.body.classList.contains("dark");
 
   const textColor = isDarkMode ? "#e5e7eb" : "#374151";
-  const gridColor = isDarkMode ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)";
+  const gridColor = isDarkMode
+    ? "rgba(255, 255, 255, 0.1)"
+    : "rgba(0, 0, 0, 0.1)";
 
   if (trendChartInstance) {
     trendChartInstance.destroy();
@@ -138,7 +154,7 @@ function renderTrendChart(labels, scoreData, priceData) {
           borderColor: "#22c55e",
           backgroundColor: "#22c55e",
           tension: 0.2,
-          yAxisID: 'y',
+          yAxisID: "y",
         },
         {
           label: "Current Price",
@@ -146,40 +162,40 @@ function renderTrendChart(labels, scoreData, priceData) {
           borderColor: "#3b82f6",
           backgroundColor: "#3b82f6",
           tension: 0.2,
-          yAxisID: 'y1',
-        }
-      ]
+          yAxisID: "y1",
+        },
+      ],
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
       interaction: {
-        mode: 'index',
+        mode: "index",
         intersect: false,
       },
       plugins: {
-        legend: { labels: { color: textColor } }
+        legend: { labels: { color: textColor } },
       },
       scales: {
         x: { ticks: { color: textColor }, grid: { color: gridColor } },
         y: {
-          type: 'linear',
+          type: "linear",
           display: true,
-          position: 'left',
-          title: { display: true, text: 'Score', color: textColor },
+          position: "left",
+          title: { display: true, text: "Score", color: textColor },
           ticks: { color: textColor },
-          grid: { color: gridColor }
+          grid: { color: gridColor },
         },
         y1: {
-          type: 'linear',
+          type: "linear",
           display: true,
-          position: 'right',
-          title: { display: true, text: 'Price (€)', color: textColor },
+          position: "right",
+          title: { display: true, text: "Price (€)", color: textColor },
           ticks: { color: textColor },
-          grid: { drawOnChartArea: false } // only want the grid lines for one axis
-        }
-      }
-    }
+          grid: { drawOnChartArea: false }, // only want the grid lines for one axis
+        },
+      },
+    },
   });
 }
 
@@ -188,9 +204,9 @@ async function initDashboard() {
     const [snapRes, scoreRes, priceRes] = await Promise.all([
       fetch("data/web_today_snapshot.json").catch(() => null),
       fetch("data/web_score_trend.json").catch(() => null),
-      fetch("data/web_price_trend.json").catch(() => null)
+      fetch("data/web_price_trend.json").catch(() => null),
     ]);
-    
+
     if (snapRes && snapRes.ok) masterData = await snapRes.json();
     if (scoreRes && scoreRes.ok) scoreTrendData = await scoreRes.json();
     if (priceRes && priceRes.ok) priceTrendData = await priceRes.json();
@@ -208,7 +224,12 @@ async function initDashboard() {
       (col) => !hiddenForever.includes(col),
     );
 
-    const priorityColumns = ["Current Rank", "Rank Change", "Ticker"];
+    const priorityColumns = [
+      "Current Rank",
+      "Rank Change",
+      "7-Day Rank Change",
+      "Ticker",
+    ];
 
     allColumns = [
       ...priorityColumns.filter((col) => allColumns.includes(col)),
@@ -363,8 +384,11 @@ function renderTable(dataToRender) {
       let cellValue = stock[header];
       let cellClass = "table-cell";
 
-      if (header === "Rank Change") {
-        const rawChange = stock["Rank Change Value"] ?? 0;
+      if (header === "Rank Change" || header === "7-Day Rank Change") {
+        const rawChange =
+          header === "Rank Change"
+            ? (stock["Rank Change Value"] ?? 0)
+            : (stock["7-Day Rank Change Value"] ?? 0);
 
         if (cellValue === null || cellValue === undefined || cellValue === "") {
           cellValue = "-";
