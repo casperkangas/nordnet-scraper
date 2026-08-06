@@ -234,8 +234,12 @@ async function initDashboard() {
 
     allColumns = [
       ...priorityColumns.filter((col) => allColumns.includes(col)),
-      ...allColumns.filter((col) => !priorityColumns.includes(col)),
+      ...allColumns.filter((col) => !priorityColumns.includes(col) && col !== "⭐ Composite Score"),
     ];
+
+    if (Object.keys(masterData[0]).includes("⭐ Composite Score")) {
+      allColumns.push("⭐ Composite Score");
+    }
 
     // Initialize visible columns (exclude the default hidden ones)
     visibleColumns = allColumns.filter(
@@ -417,6 +421,10 @@ function renderTable(dataToRender) {
         cellValue = `<button onclick="openTrendModal('${stock.Ticker}')" class="text-blue-600 dark:text-blue-400 font-bold hover:underline" title="View historical trend">${cellValue} 📈</button>`;
       }
 
+      if (header === "⭐ Composite Score") {
+        cellClass += " font-bold";
+      }
+
       rowsHTML += `<td class="${cellClass}">${cellValue}</td>`;
     });
 
@@ -443,10 +451,8 @@ function updateChart(filteredData) {
   const momentumScores = top10.map((stock) => stock["📈 Momentum Score"] ?? 0);
 
   const analystRatings = top10.map((stock) => {
-    return stock["Analyst Rating"] !== null &&
-      stock["Analyst Rating"] !== undefined
-      ? stock["Analyst Rating"] * 20
-      : null;
+    const val = stock["Adjusted Analyst Rating"] ?? stock["Analyst Rating"];
+    return val !== null && val !== undefined ? val * 20 : null;
   });
 
   const chartGrid = getThemeColor("--chart-grid");
