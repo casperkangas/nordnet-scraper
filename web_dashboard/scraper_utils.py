@@ -31,17 +31,29 @@ def _calc_composite_for_group(group):
     W_RISK     = 0.15
 
     score_parts = []
+    weight_parts = []
+
     if 'Total Value Score' in group.columns:
-        score_parts.append(_normalize_series(group['Total Value Score']) * W_TOTAL)
+        norm = _normalize_series(group['Total Value Score'])
+        score_parts.append(norm * W_TOTAL)
+        weight_parts.append(norm.notna().astype(float) * W_TOTAL)
     if 'Industry Value Score' in group.columns:
-        score_parts.append(_normalize_series(group['Industry Value Score']) * W_INDUSTRY)
+        norm = _normalize_series(group['Industry Value Score'])
+        score_parts.append(norm * W_INDUSTRY)
+        weight_parts.append(norm.notna().astype(float) * W_INDUSTRY)
     if 'Expected Upside' in group.columns:
-        score_parts.append(_normalize_series(group['Expected Upside']) * W_UPSIDE)
+        norm = _normalize_series(group['Expected Upside'])
+        score_parts.append(norm * W_UPSIDE)
+        weight_parts.append(norm.notna().astype(float) * W_UPSIDE)
     if 'Risk Spread' in group.columns:
-        score_parts.append(_normalize_series(group['Risk Spread'], invert=True) * W_RISK)
+        norm = _normalize_series(group['Risk Spread'], invert=True)
+        score_parts.append(norm * W_RISK)
+        weight_parts.append(norm.notna().astype(float) * W_RISK)
     
     if score_parts:
-        return pd.concat(score_parts, axis=1).sum(axis=1).round(1)
+        raw_sum = pd.concat(score_parts, axis=1).sum(axis=1)
+        total_weight = pd.concat(weight_parts, axis=1).sum(axis=1)
+        return (raw_sum / total_weight.replace(0, np.nan)).round(1)
     else:
         return pd.Series(np.nan, index=group.index)
 
