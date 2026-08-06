@@ -29,16 +29,7 @@ headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 }
 
-def build_rankings_by_date(df):
-    rankings = {}
-
-    for run_date in sorted(df['Date'].dropna().unique()):
-        day_df = df[df['Date'] == run_date].copy()
-        day_df = day_df.sort_values(by='⭐ Composite Score', ascending=False).reset_index(drop=True)
-        day_df['Rank'] = day_df.index + 1
-        rankings[run_date] = dict(zip(day_df['Ticker'], day_df['Rank']))
-
-    return rankings
+from scraper_utils import build_rankings_by_date, _normalize_series, _calc_composite_for_group, format_rank_change
 
 # 3. Use glob to find all text files that start with "targets_"
 target_files = sorted(glob.glob(os.path.join(project_root, "targets_*.txt")))
@@ -227,38 +218,7 @@ final_df = final_df.drop_duplicates(subset=['Date', 'Ticker'], keep='last')
 # ------------------------------------
 
 # --- Calculate Composite Score for the entire history ---
-def _normalize_series(s, invert=False, clip_pct=(5, 95)):
-    clean_s = s.dropna()
-    if clean_s.empty:
-        return pd.Series(np.nan, index=s.index)
-    lo = np.nanpercentile(clean_s, clip_pct[0])
-    hi = np.nanpercentile(clean_s, clip_pct[1])
-    if hi == lo:
-        return pd.Series(50.0, index=s.index)
-    clipped = s.clip(lower=lo, upper=hi)
-    scaled  = (clipped - lo) / (hi - lo) * 100
-    return (100 - scaled) if invert else scaled
 
-def _calc_composite_for_group(group):
-    W_TOTAL    = 0.35
-    W_INDUSTRY = 0.20
-    W_UPSIDE   = 0.30
-    W_RISK     = 0.15
-
-    score_parts = []
-    if 'Total Value Score' in group.columns:
-        score_parts.append(_normalize_series(group['Total Value Score']) * W_TOTAL)
-    if 'Industry Value Score' in group.columns:
-        score_parts.append(_normalize_series(group['Industry Value Score']) * W_INDUSTRY)
-    if 'Expected Upside' in group.columns:
-        score_parts.append(_normalize_series(group['Expected Upside']) * W_UPSIDE)
-    if 'Risk Spread' in group.columns:
-        score_parts.append(_normalize_series(group['Risk Spread'], invert=True) * W_RISK)
-    
-    if score_parts:
-        return pd.concat(score_parts, axis=1).sum(axis=1).round(1)
-    else:
-        return pd.Series(np.nan, index=group.index)
 
 final_df['⭐ Composite Score'] = final_df.groupby('Date', group_keys=False).apply(_calc_composite_for_group)
 
@@ -402,15 +362,7 @@ today_df = today_df.reset_index(drop=True)
 today_df['Current Rank'] = today_df.index + 1
 today_df['Previous Rank'] = today_df['Ticker'].map(previous_ranks)
 
-def format_rank_change(current_rank, previous_rank):
-    if pd.isna(previous_rank):
-        return '-'
-    delta = int(previous_rank) - int(current_rank)
-    if delta > 0:
-        return f'↑ {delta}'
-    if delta < 0:
-        return f'↓ {abs(delta)}'
-    return '-'
+
 
 today_df['Rank Change'] = today_df.apply(
     lambda row: format_rank_change(row['Current Rank'], row['Previous Rank']),
