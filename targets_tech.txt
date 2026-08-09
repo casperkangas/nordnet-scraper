@@ -22,3 +22,4 @@ LEADD,https://www.nordnet.fi/osakkeet/kurssit/lead-desk-leadd-fsme?details
 TEM1V,https://www.nordnet.fi/osakkeet/kurssit/tecnotree-tem1v-xhel?details
 LOIHDE,https://www.nordnet.fi/osakkeet/kurssit/loihde-fsme?details
 AIFORIA,https://www.nordnet.fi/osakkeet/kurssit/aiforia-technologies-aiforia-fsme?details
+IQMX,https://www.nordnet.fi/osakkeet/kurssit/iqm-quantum-computers-iqmx-xhel?details
