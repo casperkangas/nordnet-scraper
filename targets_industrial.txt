@@ -31,3 +31,4 @@ BOREO,https://www.nordnet.fi/osakkeet/kurssit/boreo-xhel?details
 EEZY,https://www.nordnet.fi/osakkeet/kurssit/eezy-xhel?details
 KOSKI,https://www.nordnet.fi/osakkeet/kurssit/koskisen-koski-xhel?details
 LAPWALL,https://www.nordnet.fi/osakkeet/kurssit/lap-wall-lapwall-fsme?details
+SENSO,https://www.nordnet.fi/osakkeet/kurssit/sensofusion-senso-xhel?details
